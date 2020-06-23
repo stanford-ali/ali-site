@@ -1,0 +1,10 @@
+# redirect to https
+RewriteCond %{SERVER_PORT} 80
+RewriteRule ^(.*)$ https://ali.stanford.edu/$1 [R,L]
+
+# remove .php extensions, check for clashing directory/file names
+RewriteEngine on
+RewriteCond %{REQUEST_FILENAME} !-d [NC]
+RewriteCond %{REQUEST_FILENAME} !-f [NC]
+RewriteCond %{REQUEST_FILENAME}\.php -f
+RewriteRule ^(.*)$ $1.php [NC, L]
