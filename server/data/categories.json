@@ -1,0 +1,38 @@
+[
+  {
+    "name": "Biology",
+    "project_ids": []
+  },
+  {
+    "name": "Biomedical Engineering",
+    "project_ids": []
+  },
+  {
+    "name": "Chemistry",
+    "project_ids": []
+  },
+  {
+    "name": "Computer Vision",
+    "project_ids": []
+  },
+  {
+    "name": "Data Science",
+    "project_ids": []
+  },
+  {
+    "name": "Immunology",
+    "project_ids": []
+  },
+  {
+    "name": "Machine Learning",
+    "project_ids": []
+  },
+  {
+    "name": "Medicine",
+    "project_ids": []
+  },
+  {
+    "name": "Physics",
+    "project_ids": []
+  }
+]

@@ -1,0 +1,1 @@
+IMPORTANT: make sure to run any of these scripts **from the man project directory,** NOT the <code>scripts/</code> directory.
