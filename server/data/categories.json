@@ -1,38 +1,29 @@
 [
   {
-    "name": "Biology",
-    "project_ids": []
+    "name": "Biology"
   },
   {
-    "name": "Biomedical Engineering",
-    "project_ids": []
+    "name": "Biomedical Engineering"
   },
   {
-    "name": "Chemistry",
-    "project_ids": []
+    "name": "Chemistry"
   },
   {
-    "name": "Computer Vision",
-    "project_ids": []
+    "name": "Computer Vision"
   },
   {
-    "name": "Data Science",
-    "project_ids": []
+    "name": "Data Science"
   },
   {
-    "name": "Immunology",
-    "project_ids": []
+    "name": "Immunology"
   },
   {
-    "name": "Machine Learning",
-    "project_ids": []
+    "name": "Machine Learning"
   },
   {
-    "name": "Medicine",
-    "project_ids": []
+    "name": "Medicine"
   },
   {
-    "name": "Physics",
-    "project_ids": []
+    "name": "Physics"
   }
 ]

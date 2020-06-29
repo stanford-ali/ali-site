@@ -25,6 +25,7 @@ export default class CategoryController {
   public addCategory(req: Request, res: Response, next: NextFunction) {
     Category.insertMany(req.body, (error, data) => {
       if (error) {
+        console.log(JSON.parse(JSON.stringify(req.body)));
         next(error);
         return;
       }

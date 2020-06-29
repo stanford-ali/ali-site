@@ -19,9 +19,12 @@ const projectSchema = new Schema(
     }],
     faculty_id: {
       type: Schema.Types.ObjectId,
-      ref: 'Faculty',
-      required: true
+      ref: 'Faculty'
     },
+    departments: [{
+      type: String,
+      required: true
+    }],
     website: String,
     category: [{
       type: Schema.Types.ObjectId,
@@ -34,7 +37,8 @@ const projectSchema = new Schema(
     application_ids: [{
       type: Schema.Types.ObjectId,
       ref: 'Application'
-    }]
+    }],
+    self_designed: Boolean 
   }, 
   {
     timestamps: true
