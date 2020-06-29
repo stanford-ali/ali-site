@@ -1,0 +1,86 @@
+$navbar-font-family: "Montserrat", sans-serif;
+$navbar-item-color: #f2f2f2;
+
+.navbar {
+  position: relative;
+  display: flex;
+  align-items: center;
+}
+
+.navbar-item {
+  margin: 0 10px;
+  font-family: $navbar-font-family;
+  padding: 15px 5px;
+  font-size: 1rem;
+  text-decoration: none;
+  color: $navbar-item-color;
+}
+
+.page {
+  &:hover {
+    z-index: 1;
+    border-bottom: 1px solid white;
+    text-decoration: none;
+  }
+}
+
+.navbar-title {
+  font-family: $navbar-font-family;
+  text-decoration: none;
+  color: $navbar-item-color;
+  font-size: 2rem;
+
+  &:hover {
+    opacity: 0.90;
+    transition: 0.5s;
+  }
+}
+
+.astext {
+  background: none;
+  border: none;
+  margin: 0;
+  padding: 15px 5px;
+  cursor: pointer;
+}
+.first-page {
+  margin-left: auto;
+}
+
+.last-page {
+  margin-right: 4.5vw;
+}
+
+#login {
+  font-family: $navbar-font-family;
+  border: none;
+  background-color: #2b3da1;
+  color: white;
+  cursor: pointer;
+
+  &:hover {
+    background-color: #1e2a71;
+  }
+}
+
+input {
+  background-color: $navbar-item-color;
+  border: none;
+  border-radius: 0.5rem;
+  font-size: 1rem;
+  margin-right: 5px;
+  padding: 1px 5px;
+
+  &:focus {
+    background-color: white;
+    outline: none;
+  }
+}
+
+#logo {
+  max-width: 40px;
+}
+
+#profile-icon {
+  font-size: 1.6em;
+}

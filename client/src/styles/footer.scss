@@ -1,0 +1,30 @@
+#footer {
+  position: absolute;
+  bottom: -1;
+  width: 100%;
+  background-color: #f1f1f1;
+}
+
+.footer-content {
+  padding: 0 5vw;
+  display: flex;
+}
+
+.contact {
+  width: 20%;
+}
+
+.partners {
+  width: 60%;
+}
+
+.partners {
+  img {
+    max-width: 80%;
+    padding: 0 5vw;
+  }
+}
+
+.people {
+  width: 20%;
+}
