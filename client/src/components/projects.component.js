@@ -21,64 +21,79 @@ export default class Projects extends Component {
       displayed_projects: [],
       search: '',
       categories: [],
+      query_categories: [],
       tags: [],
-      sort: [
-        'Alphabetical',
-        'Uploaded'
-      ]
+      query_tags: [],
+      sort: [],
     }
   }
 
   componentDidMount() {
-    axios.get('http://localhost:5000/projects')
-      .then(res => {
-        if (res.data > 0) {
-          this.setState({
-            projects: res.data
-          })
-        }
-      }) // maybe find some way to say "no projects founds" in render()
-      .catch(error => {
-        console.log(error);
-      })
+    // get projects, categories, and tags
+    const projectRequest = axios.get('http://localhost:5000/projects');
+    const categoryRequest = axios.get('http://localhost:5000/categories');
+    const tagRequest = axios.get('http://localhost:5000/tags');
 
+    axios.all([projectRequest, categoryRequest, tagRequest])
+      .then(axios.spread((...res) => {
+        const projectResponse = res[0];
+        const categoryResponse = res[1];
+        const tagResponse = res[2];
+
+        this.setState({
+          projects: projectResponse.data,
+          categories: categoryResponse.data,
+          tags: tagResponse.data
+        }, () => {
+          // do this here (asynchronous method) so it only runs when res.data is loaded
+          this.setDisplayedProjects();
+        });
+      }))
+      .catch(errors => {
+        console.log(errors);
+      })
+      
     if (this.props.location.search) {
       let params = qs.parse(this.props.location.search.substring(1), {
         encode: false,
         indices: false
       });
+
       this.setState({
-        search: params.search,
-        categories: params.category,
-        tags: params.tag
+        search: params.search ? params.search : [],
+        categories: params.category ? params.category : [],
+        tags: params.tag ? params.tag : []
+      }, () => {
+        this.setDisplayedProjects();
       })
-      this.setDisplayedProjects();
     }
-    // axios: get all tags and categories for filtering on left panel
   }
 
   onSearchChange(event) {
     this.setState({
       search: event.target.value
+    }, () => {
+      this.setDisplayedProjects();
+      this.setQueryString();
     })
-    this.setDisplayedProjects();
-    this.setQueryString();
   } 
 
   onCategoryFilterChange() {
     this.setState({
-      categories: []
+      query_categories: []
+    }, () => {
+      this.setDisplayedProjects();
+      this.setQueryString();
     })
-    this.setDisplayedProjects();
-    this.setQueryString();
   }
   
   onTagFilterChange(event) {
     this.setState({
-      filters: []
+      query_tags: []
+    }, () => {
+      this.setDisplayedProjects();
+      this.setQueryString();
     })
-    this.setDisplayedProjects();
-    this.setQueryString();
   }
 
   onSortChange(event) {
@@ -90,17 +105,17 @@ export default class Projects extends Component {
 
   // TODO: add sort by relevance...
   sortByAlphabet = (a, b) => {
-    return a.name < b.name ? -1 : 1;
+    return a.title < b.title ? -1 : 1;
   }
   sortByTime = (a, b) => {
-    return a.created_at < b.created_at ? -1 : 1;
+    return a.createdAt < b.created_at ? -1 : 1;
   }
 
   setQueryString() {
     let query_string = qs.stringify({
-      search: this.state.search, 
-      categories: this.state.categories,
-      tags: this.state.tags
+      search: this.state.search !== '' ? this.state.search : [], 
+      categories: this.state.query_categories,
+      tags: this.state.query_tags
     }, {
       encode: false,
       indices: false
@@ -109,7 +124,7 @@ export default class Projects extends Component {
       query_string = '?' + query_string;
     }
     // change url without reloading or pushing to browser history
-    this.context.history.replaceState({}, '', `/projects/${query_string}`);
+    window.history.replaceState({}, '', `/projects/${query_string}`);
   }
 
   setDisplayedProjects() {
@@ -139,6 +154,11 @@ export default class Projects extends Component {
       // do something
     }
   }
+  filterByTag() {
+    if (this.state.tags.length > 0) {
+      // do something
+    }
+  }
 
   render() {
     return(
@@ -148,12 +168,12 @@ export default class Projects extends Component {
         </div>
         <div className='projects'>
           <div className='input-icon'>
-            <i class='fa fa-search icon'></i>
+            <i className='fa fa-search icon'></i>
             <label>Search Projects:</label>
             <input type='text' className='search-bar' onChange={this.onSearchChange}/>
           </div>
-          {this.state.displayed_projects.sort(this.onSortChange).map(project => (
-            <div className='project'>
+          {this.state.displayed_projects.map(project => (
+            <div className='project' key={project._id}>
               <h1>{project.title}</h1>
               <p>{project.description}</p>
             </div>

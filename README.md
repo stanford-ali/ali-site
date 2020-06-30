@@ -9,6 +9,7 @@
   * [Run Front End Server Only](#Run-Front-End-Server-Only)
   * [Run Back End Server Only](#Run-Back-End-Server-Only)
 * [Automatically Populating the Database](#Automatically-Populating-the-Database)
+* [Setting Up Google Authorization](#Setting-Up-Google-Authorization)
 
 # Setting Up the Database
 
@@ -78,7 +79,7 @@ This will translate all of the Typescript files into Javascript files and make t
 
 # Automatically Populating the Database
 
-The controllers in the routing are configured to accept both JSON objects and JSON arrays, so you can quickly import information to the database by sending a POST request to the appropriate route with the JSON array. There are JSON arrays included in the <code>server/data</code> folder so that you can quickly populate your database with examples. You can send the post requests individually, through a program such as [Insomnia]() or [Postman]() (which are helpful to download if you're going to continue sending requests), or you can use the following command **from the main project directory:**
+The controllers in the routing are configured to accept both JSON objects and JSON arrays, so you can quickly import information to the database by sending a POST request to the appropriate route with the JSON array. There are JSON arrays included in the <code>server/data</code> folder so that you can quickly populate your database with examples. You can send the post requests individually, through a program such as [Insomnia (Core)](https://insomnia.rest/download/) or [Postman](https://www.postman.com/) (which are helpful to download if you're going to continue sending requests), or you can use the following command **from the main project directory:**
 
 ~~~
 ./scripts/setup-db.sh
@@ -87,3 +88,9 @@ The controllers in the routing are configured to accept both JSON objects and JS
 You must make sure that [your back end server is running](#Run-Back-End-Server-Only) before running the script or sending requests. This script will automatically send the post requests to the database. 
 
 *Important to note: if you run this specific script more than once, you may run into uniqueness issues unless you clear the database beforehand.*
+
+# Setting Up Google Authorization
+
+The final step in ensuring that the web app works is to set up the Google sign in and authorization. You will need to use the Google Developers Console to create a project and get a client ID to use for the authorization. You can use the first few minutes of [this tutorial](https://youtu.be/KwOmVpd1DUA?t=231) to get your own client ID. 
+
+Once you have your client ID, make sure that your front end server is whitelisted as an authorized JavaScript origin, and then replace the "client_id" field in <code>initializeGoogleSiginIn()</code> in <code>/client/src/App.js</code> to be your own client ID. And that's it!

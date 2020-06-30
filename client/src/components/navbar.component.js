@@ -7,6 +7,7 @@ export default class Navbar extends Component {
     
     this.onSignOut = this.onSignOut.bind(this);
   }
+
   componentDidUpdate(props) {
     if (this.props.userIsSignedIn === null) return; // handle async
 
@@ -30,7 +31,7 @@ export default class Navbar extends Component {
                 <img id='logo' src={require('../assets/logo.svg')} alt=''/>
               </Link>
               <Link to='/' className='navbar-item navbar-title'>Applied Learning Initiative</Link>
-              <Link to='/categories' className='navbar-item page first-page'>Projects</Link>
+              <Link to='projects' className='navbar-item page first-page'>Projects</Link>
               <div id='login-button' className='navbar-item last-page'/>
               <Link to='/profile' id='profile-icon' className='navbar-item hidden'>
                 <i className='fa fa-user-circle-o'/>

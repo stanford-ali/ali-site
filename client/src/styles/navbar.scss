@@ -1,10 +1,22 @@
 $navbar-font-family: "Montserrat", sans-serif;
 $navbar-item-color: #f2f2f2;
 
+$bg-dark-gradient-1: #020036ff 0%;
+$bg-dark-gradient-2: #2f0098ea 57%;
+$bg-dark-gradient-3: #5500ffd8 100%;
+$bg-default: #2f0098;
+$offset-angle: 3deg;
+
 .navbar {
   position: relative;
   display: flex;
   align-items: center;
+  background: linear-gradient(
+    $offset-angle + 90deg,
+    $bg-dark-gradient-1,
+    $bg-dark-gradient-2,
+    $bg-dark-gradient-3
+  ); 
 }
 
 .navbar-item {

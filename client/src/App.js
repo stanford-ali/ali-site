@@ -69,14 +69,18 @@ export default class App extends Component {
     })
   }
 
+
+
   render() {
     return (
       <React.Fragment>
         <BrowserRouter>
           <Components.Navbar userIsSignedIn={this.state.userIsSignedIn} authInstance={this.state.authInstance}/>
-          <br/>
           <Switch>
-            <Route exact path='/' component={Components.Home}/>
+            <Route exact path='/'>
+              <Components.Background/>
+              <Components.Home/>
+            </Route>
             <Route exact path='/projects' component={Components.Projects}/>
             <Route exact path='/projects/:projectid' component={Components.ProjectView}/>
             <Route exact path='/profile' component={Components.Profile}/>

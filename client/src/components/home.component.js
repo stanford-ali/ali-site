@@ -6,12 +6,11 @@ export default class Home extends Component {
   render() {
     return(
       <section id='home-box'>
-        <div className='background'/>
         <div className='hb-content'>
           <div className='hb-container hb-text'>
             <h1>CONNECTING STUDENTS TO HIGH-IMPACT PROJECTS</h1>
             <p>
-              We draw students with quantitive backgrounds from computer science,
+              We draw students with quantitative backgrounds from computer science,
               mathematics, physics, statistics, and other departments across
               Stanford. Students provide much needed expertise while gaining
               valuable experience working on real-world projects.
