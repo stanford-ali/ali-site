@@ -1,0 +1,53 @@
+$breakpoint-tablet: 768px;
+$breakpoint-mobile: 600px; // if we want phone-responsive elements
+
+// canon: all columns have 100% width
+@media screen and (max-width: $breakpoint-tablet) {
+  // navbar
+  .navbar-title[abbreviation]::after {
+    content: attr(abbreviation);
+  }
+  .navbar-title span {
+    display: none;
+  }
+
+  // home
+  .home-content {
+    display: flex;
+    flex-direction: column;
+
+    .home-image {
+      width: 100%;
+      margin-bottom: 30px;
+      order: 1;
+    }
+
+    .home-text {
+      width: 100%;
+      padding-bottom: 10px;
+      order: 2;
+    }
+  } 
+
+  // projects
+
+  // profile
+  .profile-content {
+    display: flex;
+    flex-direction: column;
+  }
+  
+  .profile-info, .profile-following {
+    width: 100%;
+  }
+
+  // footer
+  .footer-content {
+    display: flex;
+    flex-direction: column;
+  }
+
+  .footer-contact, .footer-partners, .footer-people {
+    width: 100%;
+  }
+}
