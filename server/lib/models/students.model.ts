@@ -17,6 +17,10 @@ const studentSchema = new Schema(
       required: true,
       unique: true
     },
+    google_id: {
+      type: String,
+      unique: true
+    },
     major: String,
     gpa: Number,
     classes: [{

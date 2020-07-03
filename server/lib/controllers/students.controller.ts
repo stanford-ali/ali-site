@@ -22,6 +22,16 @@ export default class StudentController {
     })
   }
 
+  public getStudentByGoogleID(req: Request, res: Response, next: NextFunction) {
+    Student.find({google_id: req.params.googleid}, (error, data) => {
+      if (error) {
+        next(error);
+        return;
+      }
+      res.json(data);
+    })
+  }
+
   public addStudent(req: Request, res: Response, next: NextFunction) {
     Student.insertMany(req.body, (error, data) => {
       if (error) {

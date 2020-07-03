@@ -13,5 +13,8 @@ export default class StudentRouter {
       .get(this.studentController.getStudentByID)
       .put(this.studentController.updateStudent)
       .delete(this.studentController.removeStudent)
+
+    app.route('/students/oauth/:googleid')
+      .get(this.studentController.getStudentByGoogleID)
   }
 }
