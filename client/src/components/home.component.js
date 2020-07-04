@@ -5,9 +5,9 @@ import React, {Component} from 'react';
 export default class Home extends Component {
   render() {
     return(
-      <section id='home-box'>
-        <div className='hb-content'>
-          <div className='hb-container hb-text'>
+      <section id='home'>
+        <div className='home-content'>
+          <div className='home-container home-text'>
             <h1>CONNECTING STUDENTS TO HIGH-IMPACT PROJECTS</h1>
             <p>
               We draw students with quantitative backgrounds from computer science,
@@ -25,7 +25,7 @@ export default class Home extends Component {
               </li>
             </ul>
           </div>
-          <div className='hb-container hb-image'>
+          <div className='home-container home-image'>
             <img src={require('../assets/banner.png')} alt='' />
           </div>
         </div>

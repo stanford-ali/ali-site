@@ -30,13 +30,13 @@ export default class Navbar extends Component {
               <Link to='/' className='navbar-item'> 
                 <img id='logo' src={require('../assets/logo.svg')} alt=''/>
               </Link>
-              <Link to='/' className='navbar-item navbar-title'>Applied Learning Initiative</Link>
-              <Link to='projects' className='navbar-item page first-page'>Projects</Link>
+              <Link to='/' className='navbar-item navbar-title' abbreviation='ALI'><span>Applied Learning Initiative</span></Link>
+              <Link to='/projects' className='navbar-item page first-page'>Projects</Link>
               <div id='login-button' className='navbar-item last-page'/>
-              <Link to='/profile' id='profile-icon' className='navbar-item hidden'>
+              <button id='signout' className='navbar-item page astext hidden' onClick={this.onSignOut}>Logout</button>
+              <Link to='/profile' id='profile-icon' className='navbar-item last-page hidden'>
                 <i className='fa fa-user-circle-o'/>
               </Link>
-              <button id='signout' className='navbar-item page last-page astext hidden' onClick={this.onSignOut}>Logout</button>
             </div>
           </nav>
         </div>

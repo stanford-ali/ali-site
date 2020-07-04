@@ -15,7 +15,6 @@ export default class Projects extends Component {
     this.filterByCategory = this.filterByCategory.bind(this);
     this.filterByTag = this.filterByTag.bind(this);
     
-    // sorts: relevance, date uploaded (low to high, high to low), alphabetical
     this.state = {
       projects: [],
       displayed_projects: [],
@@ -45,8 +44,7 @@ export default class Projects extends Component {
           categories: categoryResponse.data,
           tags: tagResponse.data
         }, () => {
-          // do this here (asynchronous method) so it only runs when res.data is loaded
-          this.setDisplayedProjects();
+          this.setDisplayedProjects(); // do this here (asynchronous method) so it only runs when res.data is loaded
         });
       }))
       .catch(errors => {
@@ -103,12 +101,21 @@ export default class Projects extends Component {
     return this.sortByTime;
   }
 
-  // TODO: add sort by relevance...
   sortByAlphabet = (a, b) => {
     return a.title < b.title ? -1 : 1;
   }
   sortByTime = (a, b) => {
     return a.createdAt < b.created_at ? -1 : 1;
+  }
+  sortByRelevance = (a, b) => {
+    // use two values: a_value and b_value
+    // keyword = this.state.search (should be updated by function call in render())
+    // ^ --> this.sortByRelevance = this.sortByRelevance.bind(this), or pass keyword as parameter?
+    // keyword in title: value += 3 points
+    // keyword in tag: value += 2 points
+    // keyword in description: value += 1 point
+    // compare sum of values
+    // ???: faculty? department?  
   }
 
   setQueryString() {
@@ -154,6 +161,7 @@ export default class Projects extends Component {
       // do something
     }
   }
+  
   filterByTag() {
     if (this.state.tags.length > 0) {
       // do something
@@ -172,6 +180,7 @@ export default class Projects extends Component {
             <label>Search Projects:</label>
             <input type='text' className='search-bar' onChange={this.onSearchChange}/>
           </div>
+          {/* last step: add sort before call to map, associate with button in filter */ }
           {this.state.displayed_projects.map(project => (
             <div className='project' key={project._id}>
               <h1>{project.title}</h1>

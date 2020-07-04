@@ -9,8 +9,9 @@ export default class Login extends Component {
       )
     } else {
       return(
-        <div className='container'>
-          <p>This is a placeholder...once logged in, redirect to profile</p>
+        <div className='container' style={{padding: '10px'}}>
+          <h3>Oops! You're not logged in!</h3>
+          <p>Click the <strong>Sign In</strong> button at the top right of the screen to log in with Google.</p>
         </div>
       )
     }

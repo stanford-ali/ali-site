@@ -7,6 +7,7 @@ $breakpoint-mobile: 600px; // if we want phone-responsive elements
   .navbar-title[abbreviation]::after {
     content: attr(abbreviation);
   }
+  
   .navbar-title span {
     display: none;
   }
@@ -36,9 +37,10 @@ $breakpoint-mobile: 600px; // if we want phone-responsive elements
     display: flex;
     flex-direction: column;
   }
-  
+
   .profile-info, .profile-following {
     width: 100%;
+    margin: 10px 0px 10px 0px;
   }
 
   // footer

@@ -5,12 +5,24 @@ $bg-dark-gradient-1: #020036ff 0%;
 $bg-dark-gradient-2: #2f0098ea 57%;
 $bg-dark-gradient-3: #5500ffd8 100%;
 $bg-default: #2f0098;
-$offset-angle: 3deg;
+$offset-angle: 0deg;
 
 .navbar {
   position: relative;
   display: flex;
   align-items: center;
+  background: -webkit-linear-gradient(
+    $offset-angle,
+    $bg-dark-gradient-1,
+    $bg-dark-gradient-2,
+    $bg-dark-gradient-3
+  );
+  background: -o-linear-gradient(
+    $offset-angle,
+    $bg-dark-gradient-1,
+    $bg-dark-gradient-2,
+    $bg-dark-gradient-3
+  );
   background: linear-gradient(
     $offset-angle + 90deg,
     $bg-dark-gradient-1,
@@ -40,7 +52,7 @@ $offset-angle: 3deg;
   font-family: $navbar-font-family;
   text-decoration: none;
   color: $navbar-item-color;
-  font-size: 2rem;
+  font-size: 1.6rem;
 
   &:hover {
     opacity: 0.90;

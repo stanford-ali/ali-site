@@ -1,18 +1,18 @@
-.prof-info {
+.profile-content {
   display: flex;
-  padding: 1vh 5vw 5vh 5vw;
+  padding: 1vh 2vw 5vh 2vw;
 }
 
-.prof-box {
+.profile-box {
   margin: 10px;
   background-color: rgba(242, 242, 242, 0.8);
 }
 
-.prof-left {
-  width: 50%;
+.profile-info {
+  width: 40%;
 }
 
-.prof-left-head {
+.profile-info-banner {
   color: #f2f2f2;
   text-align: center;
   background-color: #adadad;
@@ -42,11 +42,11 @@
   }
 }
 
-.prof-right {
-  width: 50%;
+.profile-following {
+  width: 60%;
 }
 
-.prof-right-head {
+.profile-following-banner {
   background-color: #adadad;
   padding: 10px;
   box-shadow: 0 20px 15px -15px gray;

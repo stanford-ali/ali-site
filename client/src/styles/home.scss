@@ -1,15 +1,13 @@
-
-
-#home-box {
+#home {
   position: relative;
   padding: 1vh 5vw 10vh 5vw;
 }
 
-.hb-content {
+.home-content {
   display: flex;
 }
 
-.hb-text {
+.home-text {
   box-shadow: -5px 5px 20px #2e1683aa;
   background-color: #f1f1f1;
   width: 40%;
@@ -36,7 +34,7 @@
   }
 }
 
-.hb-image {
+.home-image {
   box-shadow: -5px 5px 20px #2e1683aa;
   background-color: black;
   width: 60%;
@@ -46,27 +44,6 @@
     width: 100%;
     object-fit: cover;
   }
-}
-
-/* responsive: stack image on TOP of text */
-/* 972px: width of "applied learning initiative" box before wrapping */
-@media screen and (max-width: 972px) {
-  .hb-content {
-    display: flex;
-    flex-direction: column;
-
-    .hb-image {
-      width: 100%;
-      margin-bottom: 30px;
-      order: 1; /* add webkit and o */
-    }
-
-    .hb-text {
-      width: 100%;
-      padding-bottom: 10px;
-      order: 2; /* add webkit and o */
-    }
-  } 
 }
 
 .index-bullet {

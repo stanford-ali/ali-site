@@ -2,12 +2,12 @@ $bg-dark-gradient-1: #020036ff 0%;
 $bg-dark-gradient-2: #2f0098ea 57%;
 $bg-dark-gradient-3: #5500ffd8 100%;
 $bg-default: #2f0098;
-$offset-angle: 3deg;
+$offset-angle: 0deg;
 
 .background {
   position: absolute;
   width: 100vw;
-  height: 30vh;
+  height: 200px; //30vh;
   background: $bg-default;
   background: -webkit-linear-gradient(
     $offset-angle,
@@ -27,5 +27,5 @@ $offset-angle: 3deg;
     $bg-dark-gradient-2,
     $bg-dark-gradient-3
   );
-  clip-path: polygon(0 0, 100% 0, 100% 20vh, 0 100%);
+  clip-path: polygon(0 0, 100% 0, 100% 120px, 0 100%);
 }
