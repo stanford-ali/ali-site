@@ -55,6 +55,8 @@ More often than not, you're going to want to run both the front end and back end
 
 This script will open a new terminal session; this extra session is just for maintaining open connections to both servers.
 
+If the script doesn't work, you can follow the instructions in the next two sections to start the front end and back end separately.
+
 ## Run Front End Server Only
 
 If for any reason you want only to run the front end (though, many of the front end elements are displayed through requests to the back end, so if the back end is not running, there may be elements that aren't present...), then you can use the following commands from the main project directory: 

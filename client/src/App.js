@@ -68,8 +68,6 @@ export default class App extends Component {
   }
 
   loadOrCreateUser() { // assumption: all calls will have already checked if user is signed in
-    // check if the user exists already based on google ID 
-    // all additions to student collection in database will be added through google signin...
     // note: students/oauth/:googleid !== students/:studentid, but serve similar purposes
     let currentUser = this.state.authInstance.currentUser.get().getBasicProfile();
     let user_id = currentUser.getId();
