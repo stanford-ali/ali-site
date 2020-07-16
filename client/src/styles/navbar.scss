@@ -29,6 +29,22 @@ $offset-angle: 0deg;
     $bg-dark-gradient-2,
     $bg-dark-gradient-3
   ); 
+
+  .btn-primary, 
+  .btn-primary:hover, 
+  .btn-primary:focus, 
+  .show > .btn-primary.dropdown-toggle,
+  .show > .btn-primary.dropdown-toggle:focus {
+    border-color: $navbar-item-color;
+    color: $navbar-item-color !important;
+    background: none;
+    box-shadow: none;
+  }
+
+  .dropdown-item:hover {
+    /* TODO: find a good color for this */
+    background-color: #7e61ff75;
+  }
 }
 
 .navbar-item {
@@ -38,6 +54,11 @@ $offset-angle: 0deg;
   font-size: 1rem;
   text-decoration: none;
   color: $navbar-item-color;
+
+  &:hover {
+    color: $navbar-item-color !important;
+    text-decoration: none;
+  }
 }
 
 .page {
@@ -60,19 +81,8 @@ $offset-angle: 0deg;
   }
 }
 
-.astext {
-  background: none;
-  border: none;
-  margin: 0;
-  padding: 15px 5px;
-  cursor: pointer;
-}
 .first-page {
   margin-left: auto;
-}
-
-.last-page {
-  margin-right: 4.5vw;
 }
 
 #login {

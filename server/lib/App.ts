@@ -8,7 +8,7 @@ dotenv.config();
 
 class App {
   public app: express.Application;
-  public MONGO_URI: string = process.env.MONGO_URI;
+  public MONGODB_URI: string = process.env.MONGODB_URI;
 
   // routers 
   public studentRouter: Routes.StudentRouter = new Routes.StudentRouter();
@@ -39,7 +39,7 @@ class App {
   }
 
   private setupMongo(): void {
-    mongoose.connect(this.MONGO_URI, {
+    mongoose.connect(this.MONGODB_URI, {
       useNewUrlParser: true,
       useCreateIndex: true,
       useUnifiedTopology: true

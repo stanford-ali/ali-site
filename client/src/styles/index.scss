@@ -1,9 +1,10 @@
-/* TODO: compare with @use statements */
-@import 'navbar', 'background', 'home', 'projects', 'profile', 'footer', 'responsive';
-
-/* google fonts and font awesome */
+/* bootstrap, google fonts, and font awesome */
+@import '~bootstrap/scss/bootstrap';
 @import url(https://fonts.googleapis.com/css2?family=Lato:wght@300&family=Montserrat:wght@800&display=swap);
 @import url(https://maxcdn.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css);
+
+/* TODO: compare with @use statements */
+@import 'navbar', 'responsive';
 
 $font-family: "Lato", sans-serif;
 $bg-dark: #020036;
