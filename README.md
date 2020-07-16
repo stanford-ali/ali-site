@@ -30,7 +30,7 @@ PORT=5000
 MONGODB_URI=<insert_your_uri_here>
 ~~~
 
-Now, the code (specifically the <code>dotenv</code> package as used in <code>server/app.ts</code>) will read your environment variables and connect to the MongoDB Atlas cluster.
+Now, the code (specifically the <code>dotenv</code> package as used in <code>server/lib/App.ts</code>) will read your environment variables and connect to the MongoDB Atlas cluster.
 
 # Installing Node Dependencies
 
@@ -95,4 +95,4 @@ You must make sure that [your back end server is running](#Run-Back-End-Server-O
 
 The final step in ensuring that the web app works is to set up the Google sign in and authorization. You will need to use the Google Developers Console to create a project and get a client ID to use for the authorization. You can use the first few minutes of [this tutorial](https://youtu.be/KwOmVpd1DUA?t=231) to get your own client ID. 
 
-Once you have your client ID, make sure that your front end server is whitelisted as an authorized JavaScript origin, and then replace the "client_id" field in <code>initializeGoogleSiginIn()</code> in <code>/client/src/App.js</code> to be your own client ID. And that's it!
+Once you have your client ID, make sure that your front end server is whitelisted as an authorized origin, and then replace the "client_id" field in the action creator <code>initializeGoogleSiginIn()</code> in <code>/client/src/store/actions/auth.actions.ts</code> to be your own client ID. And that's it!
