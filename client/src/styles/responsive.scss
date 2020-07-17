@@ -1,0 +1,14 @@
+$breakpoint-tablet: 992px;
+$breakpoint-mobile: 600px; // if we want phone-responsive elements
+
+// canon: all columns have 100% width
+@media screen and (max-width: $breakpoint-tablet) {
+  // navbar
+  .navbar-title::after {
+    content: 'ALI';
+  }
+  
+  .navbar-title span {
+    display: none;
+  }
+}
