@@ -30,8 +30,14 @@ const App = () => {
       <Switch>
         <Route exact path='/' component={Pages.Home}/>
         <Route exact path='/projects' component={Pages.Projects}/>
-        <Route exact path='/login' component={Pages.Login}/>
         {/* PROTECTED ROUTING */}
+        <Route exact path='/login' component={() =>
+          !loggedIn
+            ? <Pages.Login/>
+            : admin
+              ? <Redirect to='/admin'/>
+              : <Redirect to='/profile'/>
+        }/>
         <Route exact path='/profile' component={() =>
           loggedIn 
             ? <Pages.Profile/> 
