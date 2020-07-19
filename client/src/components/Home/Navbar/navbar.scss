@@ -1,9 +1,10 @@
 $navbar-font-family: "Montserrat", sans-serif;
 $navbar-item-color: #f2f2f2;
+$header-color: #5f574f;
 
-$bg-dark-gradient-1: #020036ff 0%;
-$bg-dark-gradient-2: #2f0098ea 57%;
-$bg-dark-gradient-3: #5500ffd8 100%;
+$bg-dark-gradient-1: rgb(50, 70, 187) 0%;
+$bg-dark-gradient-2: rgba(64, 81, 182, 0.93) 55%;
+$bg-dark-gradient-3: rgba(96, 108, 182, 0.44) 100%;
 $bg-default: #2f0098;
 $offset-angle: 0deg;
 
@@ -28,11 +29,11 @@ $offset-angle: 0deg;
     $bg-dark-gradient-1,
     $bg-dark-gradient-2,
     $bg-dark-gradient-3
-  ); 
+  );
 
-  .btn-primary, 
-  .btn-primary:hover, 
-  .btn-primary:focus, 
+  .btn-primary,
+  .btn-primary:hover,
+  .btn-primary:focus,
   .show > .btn-primary.dropdown-toggle,
   .show > .btn-primary.dropdown-toggle:focus {
     border-color: $navbar-item-color;
@@ -41,14 +42,14 @@ $offset-angle: 0deg;
     box-shadow: none;
   }
 
-  
   .dropdown-menu {
-    .dropdown-item:hover, .dropdown-item:focus {
+    .dropdown-item:hover,
+    .dropdown-item:focus {
       /* TODO: find a good color for this */
       background-color: #7e61ff75;
     }
 
-    > a:hover {
+    a:hover {
       text-decoration: none;
     }
   }
@@ -84,7 +85,7 @@ $offset-angle: 0deg;
   font-size: 1.6rem;
 
   &:hover {
-    opacity: 0.90;
+    opacity: 0.9;
     transition: 0.5s;
   }
 }
@@ -125,4 +126,9 @@ input {
 
 #profile-icon {
   font-size: 1.6em;
+}
+
+// ActiveClassName property for NavLink
+.active {
+  border-bottom: 1px rgba(255, 255, 255, 0.75) solid;
 }
