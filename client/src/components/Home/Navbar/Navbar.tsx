@@ -55,7 +55,7 @@ const Navbar = (props) => {
       <nav id="navbar">
         <div className="navbar">
           <Link to="/" className="navbar-item">
-            <img id="logo" src={require("../../assets/logo.svg")} alt="" />
+            <img id="logo" src={require("../../../assets/logo.svg")} alt="" />
           </Link>
           <Link to="/" className="navbar-item navbar-title">
             <span>Applied Learning Initiative</span>
