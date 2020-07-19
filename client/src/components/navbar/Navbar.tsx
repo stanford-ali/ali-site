@@ -34,7 +34,10 @@ const Navbar = () => {
             <Link to='/projects' className='navbar-item page'>Projects</Link>
             {loggedIn 
               ? <DropdownButton id='dropdown-basic-button' className='navbar-item' title={`${firstname} ${lastname} `}>
-                  <Dropdown.Item href='/profile'>My Profile</Dropdown.Item>
+                  {/* use Link wrapper instead of Dropdown href='/profile' to avoid unnecessary reload/redirect */}
+                  <Link to='/profile'>
+                    <Dropdown.Item as='button'>My Profile</Dropdown.Item>
+                  </Link>
                   <Dropdown.Item as='button' id='signout' onClick={() => dispatch(logout())}>Logout</Dropdown.Item>
                 </DropdownButton>
               : <div id='login-button' className='navbar-item last-page'/>
