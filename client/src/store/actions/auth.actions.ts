@@ -1,8 +1,10 @@
 import store from '../../store';
+import {loadingStart, loadingEnd} from './base.actions';
 import {INITIALIZE_GAPI, SIGN_IN, SIGN_OUT} from '../types/auth.types';
 import axios from 'axios';
 
 export const initializeGoogleSignIn = () => dispatch => {
+  dispatch(loadingStart());
   window.gapi.load('auth2', () => {
     window.gapi.auth2.init({
       client_id: '206518429834-qpmlbht0e0t0gqa1kos5bmv9tt16f64g.apps.googleusercontent.com'
@@ -14,7 +16,7 @@ export const initializeGoogleSignIn = () => dispatch => {
         });
       })
       .then(() => {
-        dispatch(signIn());
+        dispatch(signIn())
 
         store.getState().auth.authInstance.isSignedIn.listen(isSignedIn => {
           if (isSignedIn) {
@@ -29,6 +31,7 @@ export const initializeGoogleSignIn = () => dispatch => {
 };
 
 export const signIn = () => dispatch => {
+  dispatch(loadingStart());
   const authInstance = store.getState().auth.authInstance;
   if (authInstance.isSignedIn.get()) {
     const currentUser = authInstance.currentUser.get().getBasicProfile();
@@ -56,7 +59,12 @@ export const signIn = () => dispatch => {
       })
       .catch(error => {
         console.log(error);
+      })
+      .then(() => {
+        dispatch(loadingEnd());
       });
+  } else {
+    dispatch(loadingEnd());
   }
 };
 
