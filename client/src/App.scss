@@ -1,0 +1,43 @@
+/* bootstrap, google fonts, and font awesome */
+@import '~bootstrap/scss/bootstrap';
+@import url(https://fonts.googleapis.com/css2?family=Lato:wght@300&family=Montserrat:wght@800&display=swap);
+@import url(https://maxcdn.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css);
+
+@import './global';
+@import './components/Admin/Admin';
+@import './components/Footer/Footer';
+@import './components/Home/Home';
+@import './components/Login/Login';
+@import './components/Navbar/Navbar';
+@import './components/Profile/Profile';
+@import './components/Projects/Projects';
+@import './components/Unauthorized/Unauthorized';
+
+body {
+  margin: 0;
+}
+
+h1, h3 {
+  color: $base-dark;
+  font-family: $base-font-family;
+}
+
+p {
+  font-family: $base-font-family;
+}
+
+.hidden {
+  display: none !important;
+}
+
+// reponsive elements
+@media screen and (max-width: $breakpoint-tablet) {
+  // navbar
+  .navbar-title::after {
+    content: 'ALI';
+  }
+  
+  .navbar-title span {
+    display: none;
+  }
+}

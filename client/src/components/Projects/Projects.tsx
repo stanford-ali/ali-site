@@ -1,7 +1,7 @@
 import React from 'react';
-import Navbar from '../components/navbar/Navbar';
+import Navbar from '../Navbar/Navbar';
 
-const Admin = () => (
+const Projects = () => (
   <>
     <Navbar/>
     <div>
@@ -10,4 +10,4 @@ const Admin = () => (
   </>
 )
 
-export default Admin;
+export default Projects;

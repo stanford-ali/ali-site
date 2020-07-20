@@ -1,12 +1,19 @@
 import React, {useEffect} from 'react';
 import {ConnectedRouter} from 'connected-react-router';
 import {Switch, Route, Redirect} from 'react-router-dom';
-import * as Pages from './pages';
-
 import history from './history';
 
 import {useSelector, useDispatch} from 'react-redux';
 import {initializeGoogleSignIn} from './store/actions/auth.actions';
+
+import Admin from './components/Admin/Admin';
+import Home from './components/Home/Home';
+import Login from './components/Login/Login';
+import Profile from './components/Profile/Profile';
+import Projects from './components/Projects/Projects';
+import Unauthorized from './components/Unauthorized/Unauthorized';
+
+import './App.scss';
 
 const App = () => {
   const dispatch = useDispatch();
@@ -28,26 +35,26 @@ const App = () => {
   return (
     <ConnectedRouter history={history}>
       <Switch>
-        <Route exact path='/' component={Pages.Home}/>
-        <Route exact path='/projects' component={Pages.Projects}/>
+        <Route exact path='/' component={Home}/>
+        <Route exact path='/projects' component={Projects}/>
         {/* PROTECTED ROUTING */}
         <Route exact path='/login' component={() =>
           !loggedIn
-            ? <Pages.Login/>
+            ? <Login/>
             : admin
               ? <Redirect to='/admin'/>
               : <Redirect to='/profile'/>
         }/>
         <Route exact path='/profile' component={() =>
           loggedIn 
-            ? <Pages.Profile/> 
+            ? <Profile/> 
             : <Redirect to='login'/>
         }/>
         <Route exact path='/admin' component={() =>
           loggedIn 
             ? admin 
-              ? <Pages.Admin/>
-              : <Pages.Unauthorized/>
+              ? <Admin/>
+              : <Unauthorized/>
             : <Redirect to='/login'/>
         }/>
       </Switch>

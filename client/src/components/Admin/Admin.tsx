@@ -1,7 +1,7 @@
 import React from 'react';
-import Navbar from '../components/navbar/Navbar';
+import Navbar from '../Navbar/Navbar';
 
-const Unauthorized = () => (
+const Admin = () => (
   <>
     <Navbar/>
     <div>
@@ -10,4 +10,4 @@ const Unauthorized = () => (
   </>
 )
 
-export default Unauthorized;
+export default Admin;

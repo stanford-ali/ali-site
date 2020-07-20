@@ -1,7 +1,7 @@
 import React from 'react';
-import Navbar from '../components/navbar/Navbar';
+import Navbar from '../Navbar/Navbar';
 
-const Projects = () => (
+const Unauthorized = () => (
   <>
     <Navbar/>
     <div>
@@ -10,4 +10,4 @@ const Projects = () => (
   </>
 )
 
-export default Projects;
+export default Unauthorized;

@@ -1,7 +1,7 @@
 import React from 'react';
-import Navbar from '../components/navbar/Navbar';
+import Navbar from '../Navbar/Navbar';
 
-const Login = () => (
+const Profile = () => (
   <>
     <Navbar/>
     <div>
@@ -10,4 +10,4 @@ const Login = () => (
   </>
 )
 
-export default Login;
+export default Profile;
