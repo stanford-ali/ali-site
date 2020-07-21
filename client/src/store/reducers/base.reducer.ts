@@ -5,8 +5,8 @@ const initialState: IBaseState = {
   loading: false
 };
 
-const base: Reducer<any> = (state: any = initialState, actions) => {
-  switch (actions.type) {
+const base: Reducer<any> = (state: any = initialState, action) => {
+  switch (action.type) {
     case LOADING_START:
       return {
         ...state,

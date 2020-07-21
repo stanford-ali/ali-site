@@ -7,12 +7,12 @@ const initialState: IAdminState = {
   projectSubmissions: null
 }
 
-const admin: Reducer<any> = (state: any = initialState, actions) => {
-  switch (actions.type) {
+const admin: Reducer<any> = (state: any = initialState, action) => {
+  switch (action.type) {
     case SET_APPLICATIONS:
       return {
         ...state,
-        applications: actions.application
+        applications: action.application
       }
     default:
       return state
