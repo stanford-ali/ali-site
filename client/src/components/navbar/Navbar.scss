@@ -1,11 +1,9 @@
-$navbar-font-family: "Montserrat", sans-serif;
-$navbar-item-color: #f2f2f2;
-$header-color: #5f574f;
+@import "../../global";
+@import "./NavbarLoginButton/NavbarLoginButton";
 
 $bg-dark-gradient-1: rgb(50, 70, 187) 0%;
 $bg-dark-gradient-2: rgba(64, 81, 182, 0.93) 55%;
 $bg-dark-gradient-3: rgba(96, 108, 182, 0.44) 100%;
-$bg-default: #2f0098;
 $offset-angle: 0deg;
 
 .navbar {
@@ -36,8 +34,8 @@ $offset-angle: 0deg;
   .btn-primary:focus,
   .show > .btn-primary.dropdown-toggle,
   .show > .btn-primary.dropdown-toggle:focus {
-    border-color: $navbar-item-color;
-    color: $navbar-item-color !important;
+    border-color: $base-light;
+    color: $base-light !important;
     background: none;
     box-shadow: none;
   }
@@ -57,14 +55,14 @@ $offset-angle: 0deg;
 
 .navbar-item {
   margin: 0 10px;
-  font-family: $navbar-font-family;
+  font-family: $title-font-family;
   padding: 15px 5px;
   font-size: 1rem;
   text-decoration: none;
-  color: $navbar-item-color;
+  color: $base-light;
 
   &:hover {
-    color: $navbar-item-color !important;
+    color: $base-light !important;
     text-decoration: none;
   }
 }
@@ -72,16 +70,16 @@ $offset-angle: 0deg;
 .page {
   &:hover {
     z-index: 1;
-    border-bottom: 1px solid white;
+    border-bottom: 1px solid $base-light;
     transition: 0.5s;
     text-decoration: none;
   }
 }
 
 .navbar-title {
-  font-family: $navbar-font-family;
+  font-family: $title-font-family;
   text-decoration: none;
-  color: $navbar-item-color;
+  color: $base-light;
   font-size: 1.6rem;
 
   &:hover {
@@ -95,28 +93,14 @@ $offset-angle: 0deg;
 }
 
 #login {
-  font-family: $navbar-font-family;
+  font-family: $title-font-family;
   border: none;
   background-color: #2b3da1;
-  color: white;
+  color: $base-light;
   cursor: pointer;
 
   &:hover {
     background-color: #1e2a71;
-  }
-}
-
-input {
-  background-color: $navbar-item-color;
-  border: none;
-  border-radius: 0.5rem;
-  font-size: 1rem;
-  margin-right: 5px;
-  padding: 1px 5px;
-
-  &:focus {
-    background-color: white;
-    outline: none;
   }
 }
 

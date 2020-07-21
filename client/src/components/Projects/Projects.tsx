@@ -1,7 +1,7 @@
 import React from "react";
-import Navbar from "../components/Home/Navbar/Navbar";
+import Navbar from "../Navbar/Navbar";
 
-const Home = () => (
+const Projects = () => (
   <>
     <Navbar />
     <div>
@@ -10,4 +10,4 @@ const Home = () => (
   </>
 );
 
-export default Home;
+export default Projects;

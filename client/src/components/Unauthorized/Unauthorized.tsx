@@ -1,5 +1,5 @@
 import React from "react";
-import Navbar from "../components/Home/Navbar/Navbar";
+import Navbar from "../Navbar/Navbar";
 
 const Unauthorized = () => (
   <>
