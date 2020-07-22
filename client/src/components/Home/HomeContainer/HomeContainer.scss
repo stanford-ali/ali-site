@@ -62,3 +62,28 @@ $logo-color: #c4c4c4;
     }
   }
 }
+
+@media only screen and (min-device-width: 320px) and (max-device-width: 480px) {
+  .HomeContainer {
+    flex-direction: column;
+    padding: 5vh 7vw;
+    .LeftContainer {
+      width: 100%;
+    }
+
+    .RightContainer {
+      width: 100%;
+      margin: 50px 0 0 0;
+    }
+
+    .HomeMessage1,
+    .HomeMessage2 {
+      font-size: 50px;
+    }
+
+    .HomeLogo {
+      left: -20px;
+      top: 100px;
+    }
+  }
+}

@@ -116,3 +116,13 @@ $offset-angle: 0deg;
 .active {
   border-bottom: 1px rgba(255, 255, 255, 0.75) solid;
 }
+
+@media only screen and (min-device-width: 320px) and (max-device-width: 480px) {
+  #logo {
+    display: none;
+  }
+
+  .navbar-item {
+    margin: 0;
+  }
+}
