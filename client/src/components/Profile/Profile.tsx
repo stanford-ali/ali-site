@@ -1,13 +1,24 @@
-import React from "react";
+import React, { Component } from "react";
+import { connect } from "react-redux";
 import Navbar from "../Navbar/Navbar";
+import ProfileContainer from "./ProfileContainer/ProfileContainer";
+import { IUser } from "../../store/types/auth.types";
 
-const Profile = () => (
-  <>
-    <Navbar />
-    <div>
-      <h3>This is test information.</h3>
-    </div>
-  </>
-);
+class Profile extends Component<{ auth: IUser }, { auth: IUser }> {
+  render() {
+    return (
+      <React.Fragment>
+        <Navbar />
+        <ProfileContainer />
+      </React.Fragment>
+    );
+  }
+}
 
-export default Profile;
+const mapStateToProps = (state) => {
+  return {
+    auth: state.auth.user,
+  };
+};
+
+export default connect(mapStateToProps)(Profile);
