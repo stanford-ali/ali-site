@@ -1,12 +1,17 @@
-import {Reducer} from "redux";
-import {IAuthState, INITIALIZE_GAPI, SIGN_IN, SIGN_OUT} from "../types/auth.types";
+import { Reducer } from "redux";
+import {
+  IAuthState,
+  INITIALIZE_GAPI,
+  SIGN_IN,
+  SIGN_OUT,
+} from "../types/auth.types";
 
 const initialState: IAuthState = {
   authInstance: null,
   loggedIn: null,
   user: null,
   userId: null,
-  admin: null
+  admin: null,
 };
 
 const auth: Reducer<any> = (state: any = initialState, action): any => {
@@ -24,9 +29,10 @@ const auth: Reducer<any> = (state: any = initialState, action): any => {
           firstname: action.payload.getGivenName(),
           lastname: action.payload.getFamilyName(),
           email: action.payload.getEmail(),
+          image: action.payload.getImageUrl(),
         },
         userId: action.payload.getId(),
-        admin: false
+        admin: false,
       };
     case SIGN_OUT:
       return {
@@ -34,7 +40,7 @@ const auth: Reducer<any> = (state: any = initialState, action): any => {
         loggedIn: false,
         user: null,
         userId: null,
-        admin: null
+        admin: null,
       };
     default:
       return state;

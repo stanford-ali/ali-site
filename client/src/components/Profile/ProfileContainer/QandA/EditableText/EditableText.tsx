@@ -1,10 +1,27 @@
 import React, { Component } from "react";
 import { FaPencilAlt } from "react-icons/fa";
 import "./EditableText.scss";
+import { IUser } from "../../../../../store/types/auth.types";
 
-export default class EditableText extends Component {
-  state = {
-    value: "",
+interface EditableTextProps {
+  value: string;
+}
+
+interface EditableTextState {
+  editable: boolean;
+  value: string;
+}
+
+export default class EditableText extends Component<
+  EditableTextProps,
+  EditableTextState
+> {
+  constructor(props) {
+    super(props);
+  }
+
+  state: EditableTextState = {
+    value: this.props.value,
     editable: false,
   };
 
@@ -29,6 +46,7 @@ export default class EditableText extends Component {
         onChange={this.inputEditHandler}
         value={this.state.value}
         type="text"
+        autoFocus
       />
     );
 
