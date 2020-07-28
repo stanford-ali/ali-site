@@ -1,7 +1,9 @@
+// QandA is the left container of the Profile page
+
 import React, { Component } from "react";
 import { connect } from "react-redux";
 import EditableText from "./EditableText/EditableText";
-import { IUser } from "../../../../store/types/auth.types";
+import Question from "./Question/Question";
 import "./QandA.scss";
 
 class QandA extends Component<any, any> {
@@ -12,12 +14,14 @@ class QandA extends Component<any, any> {
           <img
             src={this.props.auth.image}
             style={{ borderRadius: "50%", margin: "10px 0" }}
-            alt="profile-image"
+            alt="profile"
           />
-          <EditableText value={this.props.auth.firstname} />
-          <EditableText value={this.props.auth.email} />
+          <EditableText size="20px" value={this.props.auth.firstname} />
+          <EditableText size="20px" value={this.props.auth.email} />
         </div>
-        <div className="ProfileLeftContent"></div>
+        <div className="ProfileLeftContent">
+          <Question />
+        </div>
       </div>
     );
   }

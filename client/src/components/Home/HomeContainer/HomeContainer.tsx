@@ -19,7 +19,7 @@ export default function HomeContainer() {
           <h1 className="HomeMessage1">We connect</h1>
           <h1 className="HomeMessage2">
             <Typed
-              strings={["Students", "Undergrads", "Graduates"]}
+              strings={["Students", "Undergrads", "Graduates", "You"]}
               typeSpeed={60}
               backSpeed={50}
               loop={true}

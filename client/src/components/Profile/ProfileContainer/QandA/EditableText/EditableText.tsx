@@ -1,10 +1,10 @@
 import React, { Component } from "react";
 import { FaPencilAlt } from "react-icons/fa";
 import "./EditableText.scss";
-import { IUser } from "../../../../../store/types/auth.types";
 
 interface EditableTextProps {
   value: string;
+  size?: string;
 }
 
 interface EditableTextState {
@@ -16,10 +16,6 @@ export default class EditableText extends Component<
   EditableTextProps,
   EditableTextState
 > {
-  constructor(props) {
-    super(props);
-  }
-
   state: EditableTextState = {
     value: this.props.value,
     editable: false,
@@ -52,7 +48,11 @@ export default class EditableText extends Component<
 
     return (
       <div className="editableText">
-        {this.state.editable ? editableInput : <span>{this.state.value}</span>}
+        {this.state.editable ? (
+          editableInput
+        ) : (
+          <span style={{ fontSize: this.props.size }}>{this.state.value}</span>
+        )}
         <FaPencilAlt
           onClick={this.clickEditHandler}
           style={{ cursor: "pointer" }}
