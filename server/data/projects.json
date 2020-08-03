@@ -32,19 +32,13 @@
   {
     "title": "Prostate Cancer Grading on Histopathology Images",
     "description": "Although radiology images, such as MRI, are very useful to identify suspicious lesions, tissue samples from biopsy or surgery, remain the only way to diagnose cancer. A pathologist visually inspects the histopathology images of the tissue sample and assesses the presence of cancer, thereby diagnosing the disease, and categorizes its aggressiveness by providing a grade. There is a need to automate the diagnosis and grading of prostate cancer on histopathology images to limit the subject interpretation of images and allow for high throughput annotation of histopathology images. This project will use public data release as part of a MICCAI challenge and will focus on developing deep learning methods to distinguish different grades of prostate cancer based on histopathology images. The dataset includes 244 images with Gleason grades regional labels provided by 6 pathologists. Data and additional information: https://gleason2019.grand-challenge.org/",
-    "departments": [
-      "Department of Radiology",
-      "Stanford"
-    ],
+    "departments": ["Department of Radiology", "Stanford"],
     "self-designed": false
   },
   {
     "title": "Prostate Cancer Detection on MRI",
     "description": "Despite technical advancements in the diagnosis and treatment of prostate cancer, it remains the most common and the second most deadly cancer in men in US [1]. MRI plays an essential role in the diagnosis of prostate cancer, yet the radiologists’ interpretation of the MRI images has a relatively high sensitivity, 0.85-0.95, yet a reduced specificity, 0.71-0.75, to detect prostate cancer. There is a need to develop advanced machine learning methods to accurately detect cancer on MRI. This project will use public data released as part of the prostateX challenge and will focus on developing deep learning methods to distinguish benign conditions (non-cancer) from cancer on multi-parametric MRI. The training dataset includes 204 patients with 331 findings categorized as cancer or benign. Data and additional information: https://wiki.cancerimagingarchive.net/display/Public/SPIE-AAPM-NCI+PROSTATEx+Challenges#28ab80368ed440fb9a26afa8bbef487a",
-    "departments": [
-      "Department of Radiology",
-      "Stanford"
-    ],
+    "departments": ["Department of Radiology", "Stanford"],
     "self-designed": false
   }
 ]

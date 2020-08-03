@@ -13,8 +13,11 @@ props: {
 export default function Question(props) {
   return (
     <div className="Question">
-      <h3 style={{ fontSize: "20px", color: "#5F574F" }}>Experience:</h3>
-      <EditableText value="" />
+      <EditableText
+        value=""
+        textarea={props.textarea}
+        question={props.question}
+      />
     </div>
   );
 }
