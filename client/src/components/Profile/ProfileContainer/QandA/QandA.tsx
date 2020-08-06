@@ -10,30 +10,56 @@ import "./QandA.scss";
 class QandA extends Component<any, any> {
   state = {
     questions: [],
+    qna: {},
+    user: {},
   };
 
-  componentDidMount() {
-    const userRequest = axios
-      .get(`http://localhost:5000/questions`)
-      .then((res) => {
-        this.setState({
-          ...this.state,
-          questions: res.data,
-        });
-      })
+  /**
+   * Make user and questions request to backend and populate state
+   */
+  loadQuestionsAndUser() {
+    let questionsRequest = axios.get(`http://localhost:5000/questions`);
+    let userRequest = axios.get(
+      `http://localhost:5000/students/auth/${this.props.userid}`
+    );
+
+    axios
+      .all([questionsRequest, userRequest])
+      .then(
+        axios.spread((...responses) => {
+          const questionsResponse = responses[0];
+          const userResponse = responses[1];
+          this.setState({
+            ...this.state,
+            questions: questionsResponse.data,
+            qna: userResponse.data[0].qna,
+            user: userResponse.data[0],
+          });
+        })
+      )
       .catch((errors) => {
         console.log(errors);
       });
   }
 
+  componentDidMount() {
+    this.loadQuestionsAndUser();
+  }
+
   render() {
     const questions = this.state.questions.map((elem, id) => {
       return (
-        <Question key={id} question={elem.question} textarea={elem.textarea} />
+        <Question
+          key={id}
+          questionid={elem.id}
+          question={elem.question}
+          value={this.state.qna[elem.id]}
+          textarea={elem.textarea}
+          user={this.state.user}
+          onEdit={this.loadQuestionsAndUser}
+        />
       );
     });
-    console.log(this.state.questions);
-
     return (
       <div className="QandA">
         <div className="ProfileLeftHead">
@@ -42,16 +68,9 @@ class QandA extends Component<any, any> {
             style={{ borderRadius: "50%", margin: "10px 0" }}
             alt="profile"
           />
-          <EditableText
-            size="20px"
-            value={this.props.auth.firstname}
-            header={true}
-          />
-          <EditableText
-            size="20px"
-            value={this.props.auth.email}
-            header={true}
-          />
+          <h3
+            style={{ color: "white" }}
+          >{`${this.props.auth.firstname} ${this.props.auth.lastname}`}</h3>
         </div>
         <div className="ProfileLeftContent">{questions}</div>
       </div>
@@ -63,6 +82,7 @@ class QandA extends Component<any, any> {
 const mapStateToProps = (state) => {
   return {
     auth: state.auth.user,
+    userid: state.auth.userId,
   };
 };
 

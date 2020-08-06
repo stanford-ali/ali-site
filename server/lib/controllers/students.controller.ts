@@ -1,5 +1,5 @@
-import Student from '../models/students.model';
-import {Request, Response, NextFunction} from 'express';
+import Student from "../models/students.model";
+import { Request, Response, NextFunction } from "express";
 
 export default class StudentController {
   public getStudents(req: Request, res: Response, next: NextFunction) {
@@ -9,7 +9,7 @@ export default class StudentController {
         return;
       }
       res.json(data);
-    })
+    });
   }
 
   public getStudentByID(req: Request, res: Response, next: NextFunction) {
@@ -18,18 +18,18 @@ export default class StudentController {
         next(error);
         return;
       }
-      res.json(data)
-    })
+      res.json(data);
+    });
   }
 
   public getStudentByGoogleID(req: Request, res: Response, next: NextFunction) {
-    Student.find({google_id: req.params.googleid}, (error, data) => {
+    Student.find({ google_id: req.params.googleid }, (error, data) => {
       if (error) {
         next(error);
         return;
       }
       res.json(data);
-    })
+    });
   }
 
   public addStudent(req: Request, res: Response, next: NextFunction) {
@@ -39,26 +39,30 @@ export default class StudentController {
         return;
       }
       res.json(data);
-    })
+    });
   }
 
   public updateStudent(req: Request, res: Response, next: NextFunction) {
-    Student.findOneAndUpdate({_id: req.params.studentid}, req.body, (error, data) => {
-      if (error) {
-        next(error);
-        return;
+    Student.replaceOne(
+      { google_id: req.params.googleid },
+      req.body,
+      (error, data) => {
+        if (error) {
+          next(error);
+          return;
+        }
+        res.json(data);
       }
-      res.json(data);
-    })
+    );
   }
 
   public removeStudent(req: Request, res: Response, next: NextFunction) {
-    Student.remove({_id: req.params.studentid}, (error, data) => {
+    Student.remove({ _id: req.params.studentid }, (error, data) => {
       if (error) {
         next(error);
         return;
       }
-      res.json({message: 'Successfully removed student.'});
-    })
+      res.json({ message: "Successfully removed student." });
+    });
   }
 }

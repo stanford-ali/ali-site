@@ -1,20 +1,23 @@
-import {/*Request, Response,*/ Application} from 'express';
-import StudentController from '../controllers/students.controller';
+import { /*Request, Response,*/ Application } from "express";
+import StudentController from "../controllers/students.controller";
 
 export default class StudentRouter {
   public studentController: StudentController = new StudentController();
 
   public routes(app: Application): void {
-    app.route('/students')
+    app
+      .route("/students")
       .get(this.studentController.getStudents)
-      .post(this.studentController.addStudent)
+      .post(this.studentController.addStudent);
 
-    app.route('/students/:studentid')
+    app
+      .route("/students/:studentid")
       .get(this.studentController.getStudentByID)
-      .put(this.studentController.updateStudent)
-      .delete(this.studentController.removeStudent)
+      .delete(this.studentController.removeStudent);
 
-    app.route('/students/auth/:googleid')
+    app
+      .route("/students/auth/:googleid")
       .get(this.studentController.getStudentByGoogleID)
+      .patch(this.studentController.updateStudent);
   }
 }
