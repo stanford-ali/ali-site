@@ -1,0 +1,16 @@
+.Apply {
+  padding: 0.3rem 2rem;
+  font-size: 1rem;
+  font-weight: bold;
+  border: none;
+  border-radius: 0.75rem;
+  background-color: #6e7ed8;
+  color: white;
+  cursor: pointer;
+  margin-top: 10px;
+  margin-bottom: 50px;
+
+  &:hover {
+    background-color: #2b3da1;
+  }
+}

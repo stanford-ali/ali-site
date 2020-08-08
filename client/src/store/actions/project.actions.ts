@@ -7,6 +7,12 @@ export const selectProject = (project) => {
   };
 };
 
+export const fetchProjectStart = () => {
+  return {
+    type: "FETCH_PROJECT_START",
+  };
+};
+
 export const fetchProjectFailed = () => {
   return {
     type: "FETCH_PROJECT_FAIL",
@@ -16,6 +22,7 @@ export const fetchProjectFailed = () => {
 export const fetchProject = (projectid) => {
   return (dispatch) => {
     // Execute async code
+    dispatch(fetchProjectStart());
     axios
       .get(`http://localhost:5000/projects/${projectid}`)
       .then((res) => {

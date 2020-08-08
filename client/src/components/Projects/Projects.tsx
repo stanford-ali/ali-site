@@ -7,6 +7,7 @@ import {
   selectProject,
   fetchProject,
 } from "../../store/actions/project.actions";
+import CircleLoader from "react-spinners/CircleLoader";
 import { connect } from "react-redux";
 
 class Projects extends Component<any, any> {
@@ -35,6 +36,22 @@ class Projects extends Component<any, any> {
   }
 
   render() {
+    console.log(this.props.details);
+
+    const focusFiller = (
+      <div className="FocusFiller">
+        <div
+          style={{
+            display: "flex",
+            flexFlow: "column",
+            alignItems: "center",
+          }}
+        >
+          <GrProjects color={"gray"} size={25} />
+          <p>Select a project...</p>
+        </div>
+      </div>
+    );
     return (
       <div>
         <Navbar />
@@ -43,22 +60,11 @@ class Projects extends Component<any, any> {
             <ProjectsList click={this.changeProjSelected} />
           </div>
           <div className="ProjectsContainerRight">
-            <div className="FocusFiller">
-              {this.state.projSelected ? (
-                <ProjectFocus {...this.props.details} />
-              ) : (
-                <div
-                  style={{
-                    display: "flex",
-                    flexFlow: "column",
-                    alignItems: "center",
-                  }}
-                >
-                  <GrProjects color={"gray"} size={25} />
-                  <p>Select a project...</p>
-                </div>
-              )}
-            </div>
+            {this.state.projSelected ? (
+              <ProjectFocus {...this.props.details} />
+            ) : (
+              focusFiller
+            )}
           </div>
         </div>
       </div>
