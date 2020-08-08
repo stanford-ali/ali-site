@@ -1,0 +1,21 @@
+$outline: #3246bb;
+
+.ProjectListTitle {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+}
+
+.ProjectCard {
+  cursor: pointer;
+  margin-bottom: 10px;
+
+  &:hover {
+    border: 1px solid;
+    border-color: $outline;
+  }
+}
+
+.ProjectCardButtons {
+  display: flex;
+}

@@ -2,12 +2,16 @@
 
 import React, { Component } from "react";
 import { connect } from "react-redux";
-import EditableText from "./EditableText/EditableText";
 import Question from "./Question/Question";
 import axios from "axios";
 import "./QandA.scss";
 
 class QandA extends Component<any, any> {
+  constructor(props) {
+    super(props);
+
+    this.loadQuestionsAndUser = this.loadQuestionsAndUser.bind(this);
+  }
   state = {
     questions: [],
     qna: {},

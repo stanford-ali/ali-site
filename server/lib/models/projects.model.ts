@@ -1,4 +1,4 @@
-import * as mongoose from 'mongoose';
+import * as mongoose from "mongoose";
 
 const Schema = mongoose.Schema;
 
@@ -7,42 +7,56 @@ const projectSchema = new Schema(
     title: {
       type: String,
       required: true,
-      unique: true
+      unique: true,
+    },
+    id: {
+      type: String,
+      required: true,
     },
     description: {
       type: String,
-      required: true
+      required: true,
     },
     timeframe: String,
-    questions: [{
-      type: String
-    }],
+    questions: [
+      {
+        type: String,
+      },
+    ],
     faculty_id: {
       type: Schema.Types.ObjectId,
-      ref: 'Faculty'
+      ref: "Faculty",
     },
-    departments: [{
-      type: String,
-      required: true
-    }],
+    departments: [
+      {
+        type: String,
+        required: true,
+      },
+    ],
     website: String,
-    category: [{
-      type: Schema.Types.ObjectId,
-      rel: 'Category'
-    }],
-    tag_ids: [{
-      type: Schema.Types.ObjectId,
-      ref: 'Tag'
-    }],
-    application_ids: [{
-      type: Schema.Types.ObjectId,
-      ref: 'Application'
-    }],
-    self_designed: Boolean 
-  }, 
+    category: [
+      {
+        type: Schema.Types.ObjectId,
+        rel: "Category",
+      },
+    ],
+    tag_ids: [
+      {
+        type: Schema.Types.ObjectId,
+        ref: "Tag",
+      },
+    ],
+    application_ids: [
+      {
+        type: Schema.Types.ObjectId,
+        ref: "Application",
+      },
+    ],
+    self_designed: Boolean,
+  },
   {
-    timestamps: true
+    timestamps: true,
   }
 );
 
-export default mongoose.model('Project', projectSchema);
+export default mongoose.model("Project", projectSchema);

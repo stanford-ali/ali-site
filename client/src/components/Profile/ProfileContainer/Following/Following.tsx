@@ -5,17 +5,15 @@ import { connect } from "react-redux";
 import "./Following.scss";
 
 class Following extends Component<any, any> {
-  constructor(props) {
-    super(props);
-  }
   state = {
     following: [],
   };
 
   componentDidMount() {
-    const userRequest = axios
+    axios
       .get(`http://localhost:5000/students/auth/${this.props.userid}`)
       .then((res) => {
+        console.log(res.data);
         this.setState({
           ...this.state,
           following: res.data[0].following,
@@ -33,6 +31,7 @@ class Following extends Component<any, any> {
           key={id}
           title={elem.title}
           department={elem.department}
+          category={elem.category}
         />
       );
     });
@@ -43,7 +42,7 @@ class Following extends Component<any, any> {
           <h1>Following</h1>
         </div>
         {/* Insert all projects user is following */}
-        {}
+        {following}
       </div>
     );
   }

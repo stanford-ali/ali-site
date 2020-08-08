@@ -1,5 +1,5 @@
-import Project from '../models/projects.model';
-import {Request, Response, NextFunction} from 'express';
+import Project from "../models/projects.model";
+import { Request, Response, NextFunction } from "express";
 
 export default class ProjectController {
   public getProjects(req: Request, res: Response, next: NextFunction) {
@@ -9,17 +9,17 @@ export default class ProjectController {
         return;
       }
       res.json(data);
-    })
+    });
   }
 
   public getProjectByID(req: Request, res: Response, next: NextFunction) {
-    Project.findById(req.params.projectid, (error, data) => {
+    Project.find({ id: req.params.projectid }, (error, data) => {
       if (error) {
         next(error);
         return;
       }
       res.json(data);
-    })
+    });
   }
 
   public addProject(req: Request, res: Response, next: NextFunction) {
@@ -29,26 +29,30 @@ export default class ProjectController {
         return;
       }
       res.json(data);
-    }) 
+    });
   }
 
   public updateProject(req: Request, res: Response, next: NextFunction) {
-    Project.findOneAndUpdate({_id: req.params.projectid}, req.body, (error, data) => {
-      if (error) {
-        next(error);
-        return;
+    Project.findOneAndUpdate(
+      { _id: req.params.projectid },
+      req.body,
+      (error, data) => {
+        if (error) {
+          next(error);
+          return;
+        }
+        res.json(data);
       }
-      res.json(data);
-    })
+    );
   }
 
   public removeProject(req: Request, res: Response, next: NextFunction) {
-    Project.remove({_id: req.params.projectid}, (error, data) => {
+    Project.remove({ _id: req.params.projectid }, (error, data) => {
       if (error) {
         next(error);
         return;
       }
-      res.json({message: 'Successfully removed faculty member.'});
-    })
+      res.json({ message: "Successfully removed faculty member." });
+    });
   }
 }
