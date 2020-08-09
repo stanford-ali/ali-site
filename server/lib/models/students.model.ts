@@ -53,8 +53,22 @@ const studentSchema = new Schema(
     },
     application_ids: [
       {
-        type: Schema.Types.ObjectId,
-        ref: "Application",
+        id: {
+          type: String,
+        },
+        title: {
+          type: String,
+        },
+        department: {
+          type: String,
+        },
+        desc: {
+          type: String,
+        },
+        category: [{ type: String }],
+        answers: {
+          type: Schema.Types.ObjectId,
+        },
       },
     ],
     following: [

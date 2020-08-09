@@ -3,11 +3,7 @@ import Navbar from "../Navbar/Navbar";
 import ProjectsList from "./ProjectsList/ProjectsList";
 import ProjectFocus from "./ProjectFocus/ProjectFocus";
 import { GrProjects } from "react-icons/gr";
-import {
-  selectProject,
-  fetchProject,
-} from "../../store/actions/project.actions";
-import CircleLoader from "react-spinners/CircleLoader";
+import { fetchProject } from "../../store/actions/project.actions";
 import { connect } from "react-redux";
 
 class Projects extends Component<any, any> {
@@ -36,8 +32,6 @@ class Projects extends Component<any, any> {
   }
 
   render() {
-    console.log(this.props.details);
-
     const focusFiller = (
       <div className="FocusFiller">
         <div
@@ -82,7 +76,7 @@ const mapStateToProps = (state) => {
 // Actions
 const mapDispatchToProps = (dispatch) => {
   return {
-    onProjectSelected: (project) => dispatch(selectProject(project)),
+    // onProjectSelected: (project) => dispatch(selectProject(project)),
     onFetchProject: (projectid) => dispatch(fetchProject(projectid)),
   };
 };
