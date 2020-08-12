@@ -31,7 +31,7 @@ const App = () => {
       });
     };
     document.body.appendChild(script);
-  }, []);
+  }, [dispatch]);
 
   return (
     <ConnectedRouter history={history}>

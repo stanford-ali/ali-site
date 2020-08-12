@@ -8,6 +8,10 @@ const studentSchema = new Schema(
       type: String,
       required: true,
     },
+    image: {
+      type: String,
+      required: true,
+    },
     lastname: {
       type: String,
       required: true,
@@ -51,7 +55,7 @@ const studentSchema = new Schema(
         default: "",
       },
     },
-    application_ids: [
+    applications: [
       {
         id: {
           type: String,

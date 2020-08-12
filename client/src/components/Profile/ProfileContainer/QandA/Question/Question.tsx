@@ -11,7 +11,6 @@ export default function Question(props) {
         textarea={props.textarea}
         questionid={props.questionid}
         question={props.question}
-        user={props.user}
         onEdit={props.onEdit}
       />
       <hr />

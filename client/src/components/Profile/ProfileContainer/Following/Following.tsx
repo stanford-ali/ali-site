@@ -1,6 +1,5 @@
 import React, { Component } from "react";
 import FollowProject from "./FollowProject/FollowProject";
-import axios from "axios";
 import { connect } from "react-redux";
 import "./Following.scss";
 
@@ -8,21 +7,6 @@ class Following extends Component<any, any> {
   state = {
     following: [],
   };
-
-  componentDidMount() {
-    axios
-      .get(`http://localhost:5000/students/auth/${this.props.userid}`)
-      .then((res) => {
-        console.log(res.data);
-        this.setState({
-          ...this.state,
-          following: res.data[0].following,
-        });
-      })
-      .catch((errors) => {
-        console.log(errors);
-      });
-  }
 
   render() {
     const following = this.state.following.map((elem, id) => {
@@ -50,7 +34,7 @@ class Following extends Component<any, any> {
 
 const mapStateToProps = (state) => {
   return {
-    userid: state.auth.userId,
+    user: state.auth.user,
   };
 };
 

@@ -1,6 +1,6 @@
 import store from "../../store";
 import { loadingStart, loadingEnd } from "./base.actions";
-import { INITIALIZE_GAPI, SIGN_IN, SIGN_OUT } from "../types/auth.types";
+import { INITIALIZE_GAPI, SIGN_OUT } from "../types/auth.types";
 import axios from "axios";
 
 export const initializeGoogleSignIn = () => (dispatch) => {
@@ -37,10 +37,6 @@ export const signIn = () => (dispatch) => {
   const authInstance = store.getState().auth.authInstance;
   if (authInstance.isSignedIn.get()) {
     const currentUser = authInstance.currentUser.get().getBasicProfile();
-    dispatch({
-      type: SIGN_IN,
-      payload: currentUser,
-    });
 
     axios
       .get(`http://localhost:5000/students/auth/${currentUser.getId()}`)
@@ -52,9 +48,13 @@ export const signIn = () => (dispatch) => {
               google_id: currentUser.getId(),
               firstname: currentUser.getGivenName(),
               lastname: currentUser.getFamilyName(),
+              image: currentUser.getImageUrl(),
               email: currentUser.getEmail(),
+              qna: {},
+              applications: [],
+              following: [],
             })
-            .then((res) => {
+            .then(() => {
               dispatch(fetchUser(`${currentUser.getId()}`));
             })
             .catch((error) => {

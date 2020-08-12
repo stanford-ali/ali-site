@@ -1,7 +1,6 @@
 import React, { Component } from "react";
 import { BsPencil } from "react-icons/bs";
 import { connect } from "react-redux";
-import axios from "axios";
 import "./EditableText.scss";
 
 interface EditableTextProps {
@@ -35,16 +34,7 @@ class EditableText extends Component<EditableTextProps, EditableTextState> {
     event.preventDefault();
     this.setState({ editable: false });
     // Save Answer Change
-    axios
-      .patch(`http://localhost:5000/students/auth/${this.props.userid}`, {
-        ...this.props.user,
-        qna: {
-          ...this.props.user.qna,
-          [event.target.id]: this.state.value,
-        },
-      })
-      .then(() => this.props.onEdit) // reload the questionairre
-      .catch((error) => console.log(error));
+    this.props.onEdit(event.target);
   };
 
   inputEditHandler = (event) => {
@@ -112,8 +102,7 @@ class EditableText extends Component<EditableTextProps, EditableTextState> {
 // Get state from store
 const mapStateToProps = (state) => {
   return {
-    auth: state.auth.user,
-    userid: state.auth.userId,
+    user: state.auth.user,
   };
 };
 

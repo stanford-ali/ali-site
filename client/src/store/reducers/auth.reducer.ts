@@ -1,10 +1,5 @@
 import { Reducer } from "redux";
-import {
-  IAuthState,
-  INITIALIZE_GAPI,
-  SIGN_IN,
-  SIGN_OUT,
-} from "../types/auth.types";
+import { IAuthState, INITIALIZE_GAPI, SIGN_OUT } from "../types/auth.types";
 
 const initialState: IAuthState = {
   authInstance: null,
@@ -21,26 +16,14 @@ const auth: Reducer<any> = (state: any = initialState, action): any => {
         ...state,
         authInstance: action.payload,
       };
-    case SIGN_IN:
+    case "LOAD_USER":
       return {
         ...state,
         loggedIn: true,
         user: {
-          firstname: action.payload.getGivenName(),
-          lastname: action.payload.getFamilyName(),
-          // email: action.payload.getEmail(),
-          image: action.payload.getImageUrl(),
-        },
-        userId: action.payload.getId(),
-        admin: false,
-      };
-    case "LOAD_USER":
-      return {
-        ...state,
-        user: {
-          ...state.user,
           ...action.payload,
         },
+        admin: false,
       };
     case "LOAD_USER_FAILED":
       return {
