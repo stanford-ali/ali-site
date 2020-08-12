@@ -7,6 +7,7 @@ import "./Profile.scss";
 
 class Profile extends Component<{ auth: IUser }, { auth: IUser }> {
   render() {
+    console.log(this.props.auth);
     return (
       <React.Fragment>
         <Navbar />

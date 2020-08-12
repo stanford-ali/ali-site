@@ -19,14 +19,12 @@ interface EditableTextProps {
 interface EditableTextState {
   editable: boolean;
   value: string;
-  user: any;
 }
 
 class EditableText extends Component<EditableTextProps, EditableTextState> {
   state: EditableTextState = {
     value: this.props.value,
     editable: false,
-    user: this.props.user,
   };
 
   clickEditHandler = () => {
@@ -39,10 +37,10 @@ class EditableText extends Component<EditableTextProps, EditableTextState> {
     // Save Answer Change
     axios
       .patch(`http://localhost:5000/students/auth/${this.props.userid}`, {
-        ...this.state.user,
+        ...this.props.user,
         qna: {
-          ...this.state.user.qna,
-          [event.target.id]: event.target.value,
+          ...this.props.user.qna,
+          [event.target.id]: this.state.value,
         },
       })
       .then(() => this.props.onEdit) // reload the questionairre

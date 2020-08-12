@@ -28,11 +28,23 @@ const auth: Reducer<any> = (state: any = initialState, action): any => {
         user: {
           firstname: action.payload.getGivenName(),
           lastname: action.payload.getFamilyName(),
-          email: action.payload.getEmail(),
+          // email: action.payload.getEmail(),
           image: action.payload.getImageUrl(),
         },
         userId: action.payload.getId(),
         admin: false,
+      };
+    case "LOAD_USER":
+      return {
+        ...state,
+        user: {
+          ...state.user,
+          ...action.payload,
+        },
+      };
+    case "LOAD_USER_FAILED":
+      return {
+        // TODO: ERROR/FAIL CHECKING
       };
     case SIGN_OUT:
       return {

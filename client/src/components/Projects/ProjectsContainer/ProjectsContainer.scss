@@ -1,0 +1,27 @@
+.ProjectsContainer {
+  display: flex;
+  padding: 3vh 5vw;
+}
+
+.ProjectsContainerLeft {
+  position: relative;
+  width: 40%;
+  margin-right: 30px;
+}
+
+.ProjectsContainerRight {
+  width: 60%;
+  position: relative;
+}
+
+.FocusFiller {
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+}
+
+.ProjectFocus {
+  border: 1px solid;
+  border-color: #3246bb;
+}

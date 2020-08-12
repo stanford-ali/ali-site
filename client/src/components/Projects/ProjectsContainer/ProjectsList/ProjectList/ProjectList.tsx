@@ -1,9 +1,10 @@
 import React, { Component } from "react";
 import { AiOutlinePlus, AiOutlineCheck } from "react-icons/ai";
 import { Card, Tooltip, OverlayTrigger } from "react-bootstrap";
+import { connect } from "react-redux";
+import { fetchProject } from "../../../../../store/actions/project.actions";
 import "./ProjectList.scss";
-
-export default class ProjectList extends Component<any, any> {
+class ProjectList extends Component<any, any> {
   render() {
     const renderTooltip = (props) => {
       const { pid, ...rest } = props;
@@ -14,11 +15,17 @@ export default class ProjectList extends Component<any, any> {
       );
     };
 
+    const followProject = (event) => {
+      event.stopPropagation();
+
+      // Need the user to update their following array, then send PATCH req
+      console.log(event);
+    };
+
     const description = `${this.props.desc
       .split(" ")
       .slice(0, 20)
       .join(" ")}. . .`;
-
     return (
       <Card
         className="ProjectCard"
@@ -29,7 +36,14 @@ export default class ProjectList extends Component<any, any> {
         </Card.Header>
         <Card.Body>
           <div className="ProjectListTitle">
-            <Card.Title style={{ display: "flex", alignItems: "center" }}>
+            <Card.Title
+              style={{
+                display: "flex",
+                alignItems: "center",
+                justifyContent: "space-between",
+                width: "100%",
+              }}
+            >
               {this.props.title}
               <div className="ProjectCardButtons">
                 <OverlayTrigger
@@ -39,7 +53,7 @@ export default class ProjectList extends Component<any, any> {
                 >
                   <AiOutlineCheck color={"green"} size={20} />
                 </OverlayTrigger>
-                <AiOutlinePlus />
+                <AiOutlinePlus onClick={followProject} />
               </div>
             </Card.Title>
           </div>
@@ -52,3 +66,11 @@ export default class ProjectList extends Component<any, any> {
     );
   }
 }
+
+const mapDispatchToProps = (dispatch) => {
+  return {
+    onFetchProject: (projectid) => dispatch(fetchProject(projectid)),
+  };
+};
+
+export default connect(null, mapDispatchToProps)(ProjectList);

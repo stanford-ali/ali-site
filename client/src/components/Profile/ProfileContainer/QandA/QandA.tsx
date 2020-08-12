@@ -14,8 +14,7 @@ class QandA extends Component<any, any> {
   }
   state = {
     questions: [],
-    qna: {},
-    user: {},
+    user: null,
   };
 
   /**
@@ -36,7 +35,6 @@ class QandA extends Component<any, any> {
           this.setState({
             ...this.state,
             questions: questionsResponse.data,
-            qna: userResponse.data[0].qna,
             user: userResponse.data[0],
           });
         })
@@ -57,7 +55,7 @@ class QandA extends Component<any, any> {
           key={id}
           questionid={elem.id}
           question={elem.question}
-          value={this.state.qna[elem.id]}
+          value={this.state.user.qna[elem.id]}
           textarea={elem.textarea}
           user={this.state.user}
           onEdit={this.loadQuestionsAndUser}
