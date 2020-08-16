@@ -110,3 +110,24 @@ export const fetchUser = (userid) => {
       });
   };
 };
+
+// Thunk middleware that updates the user in the database
+export const updateFollow = (project, user) => {
+  user.following.push(project);
+  console.log(user);
+  return async (dispatch) => {
+    await axios
+      .put(`http://localhost:5000/students/auth/${user.google_id}`, user)
+      .then(() => dispatch(updateUser(user)))
+      .catch((error) => {
+        console.log(error);
+      });
+  };
+};
+
+export const updateUser = (newUser) => {
+  return {
+    type: "UPDATE_USER",
+    payload: newUser,
+  };
+};

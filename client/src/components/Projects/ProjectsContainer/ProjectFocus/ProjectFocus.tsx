@@ -5,6 +5,7 @@ import RingLoader from "react-spinners/RingLoader";
 import Button from "../../../GlobalUI/Button/Button";
 import { Form } from "react-bootstrap";
 import "./ProjectFocus.scss";
+import Axios from "axios";
 
 class ProjectFocus extends Component<any, any> {
   render() {
@@ -30,12 +31,16 @@ class ProjectFocus extends Component<any, any> {
       event.preventDefault();
       let inputs = event.target.elements;
       let questions = this.props.questions;
+      let projectid = this.props.id;
       let answers = {};
       for (let i = 0; i < inputs.length - 1; i++) {
         answers[questions[i]] = inputs[i].value;
       }
-      // Submit the application and add the application to the user's application {}
-      // Need the user to send PATCH request
+      Axios.get(`http://localhost:5000/projects/${projectid}`)
+        .then((res) => {
+          console.log(res);
+        })
+        .catch((error) => console.log(error));
       console.log(answers);
     };
 
@@ -72,6 +77,7 @@ class ProjectFocus extends Component<any, any> {
 
 const mapStateToProps = (state) => {
   return {
+    user: state.auth.user,
     loading: state.project.loading,
   };
 };

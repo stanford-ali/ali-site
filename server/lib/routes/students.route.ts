@@ -18,6 +18,6 @@ export default class StudentRouter {
     app
       .route("/students/auth/:googleid")
       .get(this.studentController.getStudentByGoogleID)
-      .patch(this.studentController.updateStudent);
+      .put(this.studentController.updateStudent);
   }
 }

@@ -20,16 +20,12 @@ export const fetchProjectFailed = () => {
 };
 
 export const fetchProject = (projectid) => {
-  return (dispatch) => {
+  return async (dispatch) => {
     // Execute async code
     dispatch(fetchProjectStart());
-    axios
+    await axios
       .get(`http://localhost:5000/projects/${projectid}`)
-      .then((res) => {
-        dispatch(selectProject(res.data[0]));
-      })
-      .catch((error) => {
-        dispatch(fetchProjectFailed());
-      });
+      .then((res) => dispatch(selectProject(res.data[0])))
+      .catch(() => dispatch(fetchProjectFailed()));
   };
 };

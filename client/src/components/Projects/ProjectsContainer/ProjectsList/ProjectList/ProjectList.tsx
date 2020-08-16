@@ -1,10 +1,36 @@
 import React, { Component } from "react";
-import { AiOutlinePlus, AiOutlineCheck } from "react-icons/ai";
+import { AiOutlinePlus, AiOutlineCheck, AiOutlineMinus } from "react-icons/ai";
 import { Card, Tooltip, OverlayTrigger } from "react-bootstrap";
 import { connect } from "react-redux";
 import { fetchProject } from "../../../../../store/actions/project.actions";
+import { updateFollow } from "../../../../../store/actions/auth.actions";
+import MoonLoader from "react-spinners/MoonLoader";
+import axios from "axios";
 import "./ProjectList.scss";
+
 class ProjectList extends Component<any, any> {
+  // Onclick handler to follow project
+  followProject = async (event) => {
+    event.stopPropagation();
+    event.preventDefault();
+
+    await this.props.onFetchProject(event.target.id);
+
+    await this.props.onFollowProject(this.props.details, this.props.user);
+    console.log(this.props.user);
+  };
+
+  // Onclick handler to unfollow project
+  unfollowProject = async (event) => {
+    event.stopPropagation();
+    event.preventDefault();
+
+    // Delete project from user's following array
+    this.props.user.following.filter((elem) => {
+      return elem.id !== event.target.id;
+    });
+  };
+
   render() {
     const renderTooltip = (props) => {
       const { pid, ...rest } = props;
@@ -15,17 +41,43 @@ class ProjectList extends Component<any, any> {
       );
     };
 
-    const followProject = (event) => {
-      event.stopPropagation();
+    // An array of project id's the user is following
+    let followingids =
+      this.props.user &&
+      this.props.user.following.map((elem) => {
+        return elem.id;
+      });
 
-      // Need the user to update their following array, then send PATCH req
-      console.log(event);
-    };
+    const followButton = (
+      <button
+        className="FollowButton"
+        id={this.props.projectid}
+        onClick={this.followProject}
+      >
+        <AiOutlinePlus style={{ pointerEvents: "none" }} />
+      </button>
+    );
+
+    const unfollowButton = (
+      <button
+        className="FollowButton"
+        id={this.props.projectid}
+        onClick={this.unfollowProject}
+      >
+        <AiOutlineMinus style={{ pointerEvents: "none" }} />
+      </button>
+    );
+
+    let followUnfollowButton =
+      followingids && followingids.includes(this.props.projectid)
+        ? unfollowButton
+        : followButton;
 
     const description = `${this.props.desc
       .split(" ")
       .slice(0, 20)
       .join(" ")}. . .`;
+
     return (
       <Card
         className="ProjectCard"
@@ -46,14 +98,16 @@ class ProjectList extends Component<any, any> {
             >
               {this.props.title}
               <div className="ProjectCardButtons">
-                <OverlayTrigger
-                  placement="left"
-                  delay={{ show: 250, hide: 400 }}
-                  overlay={renderTooltip}
-                >
-                  <AiOutlineCheck color={"green"} size={20} />
-                </OverlayTrigger>
-                <AiOutlinePlus onClick={followProject} />
+                <div style={{ display: "flex", alignItems: "center" }}>
+                  <OverlayTrigger
+                    placement="left"
+                    delay={{ show: 250, hide: 400 }}
+                    overlay={renderTooltip}
+                  >
+                    <AiOutlineCheck color={"green"} size={20} />
+                  </OverlayTrigger>
+                </div>
+                {followUnfollowButton}
               </div>
             </Card.Title>
           </div>
@@ -67,10 +121,18 @@ class ProjectList extends Component<any, any> {
   }
 }
 
-const mapDispatchToProps = (dispatch) => {
+const mapStateToProps = (state) => {
   return {
-    onFetchProject: (projectid) => dispatch(fetchProject(projectid)),
+    user: state.auth.user,
+    details: state.project.details,
   };
 };
 
-export default connect(null, mapDispatchToProps)(ProjectList);
+const mapDispatchToProps = (dispatch) => {
+  return {
+    onFetchProject: (projectid) => dispatch(fetchProject(projectid)),
+    onFollowProject: (project, user) => dispatch(updateFollow(project, user)),
+  };
+};
+
+export default connect(mapStateToProps, mapDispatchToProps)(ProjectList);

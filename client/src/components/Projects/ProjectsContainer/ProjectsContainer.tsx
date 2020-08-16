@@ -37,7 +37,6 @@ class ProjectsContainer extends Component<any, any> {
     axios
       .get(`http://localhost:5000/students/auth/${this.props.userid}`)
       .then((res) => {
-        console.log(res.data);
         this.setState({
           ...this.state,
           user: res.data[0],

@@ -37,6 +37,13 @@ const auth: Reducer<any> = (state: any = initialState, action): any => {
         userId: null,
         admin: null,
       };
+    case "UPDATE_USER":
+      return {
+        ...state,
+        user: {
+          ...action.payload,
+        },
+      };
     default:
       return state;
   }

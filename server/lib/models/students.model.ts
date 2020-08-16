@@ -77,7 +77,7 @@ const studentSchema = new Schema(
     ],
     following: [
       {
-        type: Schema.Types.ObjectId,
+        type: Schema.Types.Object,
         ref: "Project",
       },
     ],

@@ -23,6 +23,7 @@ const projectSchema = new Schema(
         type: String,
       },
     ],
+
     faculty_id: {
       type: Schema.Types.ObjectId,
       ref: "Faculty",
