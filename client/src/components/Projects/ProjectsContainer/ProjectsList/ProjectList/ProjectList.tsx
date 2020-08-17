@@ -3,7 +3,10 @@ import { AiOutlinePlus, AiOutlineCheck, AiOutlineMinus } from "react-icons/ai";
 import { Card, Tooltip, OverlayTrigger } from "react-bootstrap";
 import { connect } from "react-redux";
 import { fetchProject } from "../../../../../store/actions/project.actions";
-import { updateFollow } from "../../../../../store/actions/auth.actions";
+import {
+  followProject,
+  unfollowProject,
+} from "../../../../../store/actions/auth.actions";
 import MoonLoader from "react-spinners/MoonLoader";
 import axios from "axios";
 import "./ProjectList.scss";
@@ -17,7 +20,6 @@ class ProjectList extends Component<any, any> {
     await this.props.onFetchProject(event.target.id);
 
     await this.props.onFollowProject(this.props.details, this.props.user);
-    console.log(this.props.user);
   };
 
   // Onclick handler to unfollow project
@@ -25,10 +27,7 @@ class ProjectList extends Component<any, any> {
     event.stopPropagation();
     event.preventDefault();
 
-    // Delete project from user's following array
-    this.props.user.following.filter((elem) => {
-      return elem.id !== event.target.id;
-    });
+    await this.props.onUnfollowProject(event.target.id, this.props.user);
   };
 
   render() {
@@ -131,7 +130,9 @@ const mapStateToProps = (state) => {
 const mapDispatchToProps = (dispatch) => {
   return {
     onFetchProject: (projectid) => dispatch(fetchProject(projectid)),
-    onFollowProject: (project, user) => dispatch(updateFollow(project, user)),
+    onFollowProject: (project, user) => dispatch(followProject(project, user)),
+    onUnfollowProject: (projectid, user) =>
+      dispatch(unfollowProject(projectid, user)),
   };
 };
 
