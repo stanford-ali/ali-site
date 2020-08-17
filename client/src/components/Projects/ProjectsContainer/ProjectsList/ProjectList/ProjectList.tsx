@@ -7,8 +7,6 @@ import {
   followProject,
   unfollowProject,
 } from "../../../../../store/actions/auth.actions";
-import MoonLoader from "react-spinners/MoonLoader";
-import axios from "axios";
 import "./ProjectList.scss";
 
 class ProjectList extends Component<any, any> {

@@ -4,21 +4,19 @@ import { connect } from "react-redux";
 import "./Following.scss";
 
 class Following extends Component<any, any> {
-  state = {
-    following: [],
-  };
-
   render() {
-    const following = this.state.following.map((elem, id) => {
-      return (
-        <FollowProject
-          key={id}
-          title={elem.title}
-          department={elem.department}
-          category={elem.category}
-        />
-      );
-    });
+    const following =
+      this.props.user &&
+      this.props.user.following.map((elem, id) => {
+        return (
+          <FollowProject
+            key={id}
+            title={elem.title}
+            department={elem.department}
+            category={elem.category}
+          />
+        );
+      });
 
     return (
       <div className="Following">

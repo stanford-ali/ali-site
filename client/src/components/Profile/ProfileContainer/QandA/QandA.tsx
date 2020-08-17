@@ -26,7 +26,6 @@ class QandA extends Component<any, any> {
    * Make user and questions request to backend and populate state
    * onEdit function for the EditableText on Profile Page
    */
-
   render() {
     const updateUser = (input) => {
       let questionid = input.id;
@@ -34,7 +33,7 @@ class QandA extends Component<any, any> {
       let userid = this.props.user.google_id;
       this.props.user.qna[questionid] = answer;
       axios
-        .patch(`http://localhost:5000/students/auth/${userid}`, this.props.user)
+        .put(`http://localhost:5000/students/auth/${userid}`, this.props.user)
         .catch((error) => console.log(error));
     };
 

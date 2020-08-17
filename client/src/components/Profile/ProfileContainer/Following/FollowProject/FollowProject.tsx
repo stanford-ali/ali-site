@@ -12,16 +12,11 @@ export default function FollowProject(props) {
           {props.title}
         </div>
 
-        <AiOutlineClose color="#ff7070" />
+        <AiOutlineClose color="#ff7070" size={30} />
       </li>
       <ul className="ProjectCaption">
         <li className="Department">
           <p>{props.department}</p>
-        </li>
-        <li>
-          <button type="submit" className="Apply">
-            Apply
-          </button>
         </li>
       </ul>
     </div>
