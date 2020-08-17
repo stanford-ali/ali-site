@@ -7,6 +7,7 @@ const initialState: IAuthState = {
   user: null,
   userId: null,
   admin: null,
+  loading: false,
 };
 
 const auth: Reducer<any> = (state: any = initialState, action): any => {
@@ -24,6 +25,7 @@ const auth: Reducer<any> = (state: any = initialState, action): any => {
           ...action.payload,
         },
         admin: false,
+        loading: false,
       };
     case "LOAD_USER_FAILED":
       return {
@@ -43,6 +45,12 @@ const auth: Reducer<any> = (state: any = initialState, action): any => {
         user: {
           ...action.payload,
         },
+        loading: false,
+      };
+    case "UPDATE_FOLLOW_START":
+      return {
+        ...state,
+        loading: true,
       };
     default:
       return state;

@@ -1,12 +1,12 @@
 import React, { Component } from "react";
 import ProjectList from "./ProjectList/ProjectList";
-import RingLoader from "react-spinners/RingLoader";
+import Loader from "../../../GlobalUI/ModalLoader/ModalLoader";
 import axios from "axios";
+import { connect } from "react-redux";
 
 class ProjectsList extends Component<any, any> {
   state = {
     projects: [],
-    loading: false,
   };
 
   componentDidMount() {
@@ -16,7 +16,6 @@ class ProjectsList extends Component<any, any> {
         this.setState({
           ...this.state,
           projects: res.data,
-          loading: false,
         })
       )
       .catch((error) => console.log(error));
@@ -36,12 +35,14 @@ class ProjectsList extends Component<any, any> {
         />
       );
     });
-    return (
-      <div>
-        {this.state.loading ? <RingLoader color="#3246bb" /> : questions}
-      </div>
-    );
+    return <div>{!this.props.user ? <Loader /> : questions}</div>;
   }
 }
 
-export default ProjectsList;
+const mapStateToProps = (state) => {
+  return {
+    user: state.auth.user,
+  };
+};
+
+export default connect(mapStateToProps, null)(ProjectsList);

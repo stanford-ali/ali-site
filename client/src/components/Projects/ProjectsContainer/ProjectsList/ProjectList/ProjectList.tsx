@@ -18,7 +18,6 @@ class ProjectList extends Component<any, any> {
     event.preventDefault();
 
     await this.props.onFetchProject(event.target.id);
-
     await this.props.onFollowProject(this.props.details, this.props.user);
   };
 

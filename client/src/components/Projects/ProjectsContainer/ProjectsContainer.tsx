@@ -48,7 +48,7 @@ class ProjectsContainer extends Component<any, any> {
   }
 
   render() {
-    const focusFiller = (
+    const focusFiller = !this.props.user ? null : (
       <div className="FocusFiller">
         <div
           style={{
@@ -84,6 +84,7 @@ const mapStateToProps = (state) => {
   return {
     details: state.project.details,
     userid: state.auth.userId,
+    user: state.auth.user,
   };
 };
 

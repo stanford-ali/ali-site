@@ -96,9 +96,15 @@ export const loadUserFailed = () => {
   };
 };
 
+export const updateFollowStart = () => {
+  return {
+    type: "UPDATE_FOLLOW_START",
+  };
+};
+
+// Thunk that fetches user
 export const fetchUser = (userid) => {
   return (dispatch) => {
-    // Execute async code
     axios
       .get(`http://localhost:5000/students/auth/${userid}`)
       .then((res) => {
@@ -111,11 +117,19 @@ export const fetchUser = (userid) => {
   };
 };
 
-// Thunk middleware that updates the user in the database
+// Action creator that updates the user
+export const updateUser = (newUser) => {
+  return {
+    type: "UPDATE_USER",
+    payload: newUser,
+  };
+};
+
+// Thunk middleware that updates the user to unfollow in the database
 export const followProject = (project, user) => {
   user.following.push(project);
-  console.log(user);
   return async (dispatch) => {
+    dispatch(updateFollowStart());
     await axios
       .put(`http://localhost:5000/students/auth/${user.google_id}`, user)
       .then(() => dispatch(updateUser(user)))
@@ -125,24 +139,19 @@ export const followProject = (project, user) => {
   };
 };
 
+// Thunk middleware that updates the user to follow in the database
 export const unfollowProject = (projectid, user) => {
   user.following = user.following.filter((elem) => {
     return elem.id !== projectid;
   });
 
   return async (dispatch) => {
+    dispatch(updateFollowStart());
     await axios
       .put(`http://localhost:5000/students/auth/${user.google_id}`, user)
       .then(() => dispatch(updateUser(user)))
       .catch((error) => {
         console.log(error);
       });
-  };
-};
-
-export const updateUser = (newUser) => {
-  return {
-    type: "UPDATE_USER",
-    payload: newUser,
   };
 };

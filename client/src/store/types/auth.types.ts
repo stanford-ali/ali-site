@@ -1,6 +1,6 @@
-export const INITIALIZE_GAPI: string = 'INITIALIZE_GAPI';
-export const SIGN_IN: string = 'SIGN_IN';
-export const SIGN_OUT: string = 'SIGN_OUT';
+export const INITIALIZE_GAPI: string = "INITIALIZE_GAPI";
+export const SIGN_IN: string = "SIGN_IN";
+export const SIGN_OUT: string = "SIGN_OUT";
 
 export interface IUser {
   firstname: string;
@@ -14,4 +14,5 @@ export interface IAuthState {
   user: IUser;
   userId: string;
   admin: boolean;
+  loading: boolean;
 }
