@@ -1,25 +1,28 @@
 import React from "react";
-import { FaDna } from "react-icons/fa";
+import { useHistory } from "react-router-dom";
 import { AiOutlineClose } from "react-icons/ai";
 import { connect } from "react-redux";
 import { unfollowProject } from "../../../../../store/actions/auth.actions";
 import "./FollowProject.scss";
 
 function FollowProject(props) {
+  const history = useHistory();
+
   // Onclick handler to unfollow project
   const unfollowProject = async (event) => {
     event.stopPropagation();
     event.preventDefault();
     await props.onUnfollowProject(props.projectid, props.user);
   };
+
+  const selectProject = (event) => {
+    history.push(`/projects/?search=${props.projectid}`);
+  };
+
   return (
     <div className="FollowProjects">
       <li className="Title">
-        <div>
-          <FaDna style={{ marginRight: "5px" }} />
-          {props.title}
-        </div>
-
+        <div onClick={selectProject}>{props.title}</div>
         <div>
           <button className="UnfollowProject" onClick={unfollowProject}>
             <AiOutlineClose

@@ -52,6 +52,7 @@ class ProjectsContainer extends Component<any, any> {
 
   async componentDidMount() {
     if (window.location.search) {
+      console.log(window.location);
       // We have a query param for a project
       let params = qs.parse(window.location.search.substring(1), {
         encode: false,
