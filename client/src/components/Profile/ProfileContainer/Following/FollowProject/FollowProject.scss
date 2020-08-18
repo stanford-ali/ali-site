@@ -1,6 +1,6 @@
 .FollowProjects {
   padding: 0 20px;
-
+  margin-bottom: 40px;
   li {
     list-style-type: none;
     font-size: 1.3rem;
@@ -20,4 +20,13 @@
   p {
     font-size: 14px;
   }
+}
+
+.UnfollowProject {
+  background-color: Transparent;
+  background-repeat: no-repeat;
+  border: none;
+  cursor: pointer;
+  overflow: hidden;
+  outline: none;
 }

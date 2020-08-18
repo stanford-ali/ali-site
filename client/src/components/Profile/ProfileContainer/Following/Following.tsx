@@ -14,6 +14,7 @@ class Following extends Component<any, any> {
             title={elem.title}
             department={elem.department}
             category={elem.category}
+            projectid={elem.id}
           />
         );
       });

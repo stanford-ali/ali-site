@@ -34,7 +34,7 @@ export default function HomeContainer() {
             Stanford. Students provide much needed expertise while gaining
             valuable experience working on real‑world projects.
           </p>
-          <Button className="HomeButton">Learn more</Button>
+          <Button className="HomeButton">View Projects</Button>
         </div>
       </div>
       <img

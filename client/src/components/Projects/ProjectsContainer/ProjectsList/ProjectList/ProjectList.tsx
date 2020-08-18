@@ -77,9 +77,10 @@ class ProjectList extends Component<any, any> {
     return (
       <Card
         className="ProjectCard"
+        id={this.props.projectid}
         onClick={() => this.props.click(this.props.projectid)}
       >
-        <Card.Header as="h6">
+        <Card.Header as="h6" className="CardHead">
           {this.props.categ || `Biology | Computer Science`}
         </Card.Header>
         <Card.Body>

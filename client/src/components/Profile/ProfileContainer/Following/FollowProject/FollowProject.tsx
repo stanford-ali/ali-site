@@ -1,9 +1,17 @@
 import React from "react";
 import { FaDna } from "react-icons/fa";
 import { AiOutlineClose } from "react-icons/ai";
+import { connect } from "react-redux";
+import { unfollowProject } from "../../../../../store/actions/auth.actions";
 import "./FollowProject.scss";
 
-export default function FollowProject(props) {
+function FollowProject(props) {
+  // Onclick handler to unfollow project
+  const unfollowProject = async (event) => {
+    event.stopPropagation();
+    event.preventDefault();
+    await props.onUnfollowProject(props.projectid, props.user);
+  };
   return (
     <div className="FollowProjects">
       <li className="Title">
@@ -12,7 +20,15 @@ export default function FollowProject(props) {
           {props.title}
         </div>
 
-        <AiOutlineClose color="#ff7070" size={30} />
+        <div>
+          <button className="UnfollowProject" onClick={unfollowProject}>
+            <AiOutlineClose
+              color="#ff7070"
+              size={25}
+              style={{ pointerEvents: "none" }}
+            />
+          </button>
+        </div>
       </li>
       <ul className="ProjectCaption">
         <li className="Department">
@@ -22,3 +38,18 @@ export default function FollowProject(props) {
     </div>
   );
 }
+
+const mapStateToProps = (state) => {
+  return {
+    user: state.auth.user,
+  };
+};
+
+// Actions
+const mapDispatchToProps = (dispatch) => {
+  return {
+    onUnfollowProject: (projectid, user) =>
+      dispatch(unfollowProject(projectid, user)),
+  };
+};
+export default connect(mapStateToProps, mapDispatchToProps)(FollowProject);

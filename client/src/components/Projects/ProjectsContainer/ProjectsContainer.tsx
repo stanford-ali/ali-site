@@ -4,7 +4,7 @@ import ProjectFocus from "./ProjectFocus/ProjectFocus";
 import { GrProjects } from "react-icons/gr";
 import { fetchProject } from "../../../store/actions/project.actions";
 import { connect } from "react-redux";
-import axios from "axios";
+import qs from "qs";
 import "./ProjectsContainer.scss";
 
 class ProjectsContainer extends Component<any, any> {
@@ -21,7 +21,6 @@ class ProjectsContainer extends Component<any, any> {
   state = {
     projSelected: false,
     projectid: "",
-    user: {},
   };
 
   // Change so that ProjectFocus component shows
@@ -30,21 +29,37 @@ class ProjectsContainer extends Component<any, any> {
       projSelected: true,
       projectid: id,
     });
+    this.setQueryString(id);
     this.props.onFetchProject(id);
   }
 
-  componentDidMount() {
-    axios
-      .get(`http://localhost:5000/students/auth/${this.props.userid}`)
-      .then((res) => {
-        this.setState({
-          ...this.state,
-          user: res.data[0],
-        });
-      })
-      .catch((errors) => {
-        console.log(errors);
+  // Sets the URL's query string when a user selects a project
+  setQueryString(projectid) {
+    let query_string = qs.stringify(
+      {
+        search: projectid,
+      },
+      {
+        encode: false,
+        indices: false,
+      }
+    );
+    if (query_string !== "") {
+      query_string = `?${query_string}`;
+    }
+    window.history.replaceState({}, "", `/projects/${query_string}`);
+  }
+
+  async componentDidMount() {
+    if (window.location.search) {
+      // We have a query param for a project
+      let params = qs.parse(window.location.search.substring(1), {
+        encode: false,
+        indices: false,
       });
+      this.setState({ projSelected: true, projectid: params.search });
+      this.props.onFetchProject(params.search);
+    }
   }
 
   render() {
