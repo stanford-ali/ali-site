@@ -117,11 +117,17 @@ export const fetchUser = (userid) => {
   };
 };
 
-// Action creator that updates the user
+// Action creator that updates the redux user
 export const updateUser = (newUser) => {
   return {
     type: "UPDATE_USER",
     payload: newUser,
+  };
+};
+
+export const applyProjectStart = () => {
+  return {
+    type: "APPLY_PROJECT_START",
   };
 };
 
@@ -147,6 +153,20 @@ export const unfollowProject = (projectid, user) => {
 
   return async (dispatch) => {
     dispatch(updateFollowStart());
+    await axios
+      .put(`http://localhost:5000/students/auth/${user.google_id}`, user)
+      .then(() => dispatch(updateUser(user)))
+      .catch((error) => {
+        console.log(error);
+      });
+  };
+};
+
+// Thunk middleware that updates the user's applications array
+export const applyProject = (projectid, user) => {
+  user.applications.push(projectid);
+  return async (dispatch) => {
+    dispatch(applyProjectStart());
     await axios
       .put(`http://localhost:5000/students/auth/${user.google_id}`, user)
       .then(() => dispatch(updateUser(user)))

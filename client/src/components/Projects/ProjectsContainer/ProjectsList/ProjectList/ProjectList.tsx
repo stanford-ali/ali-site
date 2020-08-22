@@ -1,5 +1,6 @@
 import React, { Component } from "react";
 import { AiOutlinePlus, AiOutlineCheck, AiOutlineMinus } from "react-icons/ai";
+import { RiUserStarLine } from "react-icons/ri";
 import { Card, Tooltip, OverlayTrigger } from "react-bootstrap";
 import { connect } from "react-redux";
 import { fetchProject } from "../../../../../store/actions/project.actions";
@@ -76,12 +77,22 @@ class ProjectList extends Component<any, any> {
 
     return (
       <Card
-        className="ProjectCard"
+        className={
+          this.props.applied
+            ? "ProjectCardDisable ProjectCardOverlay"
+            : "ProjectCard"
+        }
         id={this.props.projectid}
         onClick={() => this.props.click(this.props.projectid)}
+        // style={{ pointerEvents: this.props.applied ? "none" : "auto" }}
       >
         <Card.Header as="h6" className="CardHead">
           {this.props.categ || `Biology | Computer Science`}
+          {this.props.applied && (
+            <span className="AppliedHeader">
+              <RiUserStarLine size={20} />
+            </span>
+          )}
         </Card.Header>
         <Card.Body>
           <div className="ProjectListTitle">

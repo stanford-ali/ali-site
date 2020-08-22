@@ -1,9 +1,9 @@
 import React, { Component } from "react";
 import { Card } from "react-bootstrap";
 import { connect } from "react-redux";
-import RingLoader from "react-spinners/RingLoader";
 import Button from "../../../GlobalUI/Button/Button";
 import { Form } from "react-bootstrap";
+import { applyProject } from "../../../../store/actions/auth.actions";
 import "./ProjectFocus.scss";
 import Axios from "axios";
 
@@ -27,7 +27,7 @@ class ProjectFocus extends Component<any, any> {
         );
       });
 
-    const handleSubmit = (event) => {
+    const handleSubmit = async (event) => {
       event.preventDefault();
       let inputs = event.target.elements;
       let questions = this.props.questions;
@@ -36,12 +36,17 @@ class ProjectFocus extends Component<any, any> {
       for (let i = 0; i < inputs.length - 1; i++) {
         answers[questions[i]] = inputs[i].value;
       }
-      Axios.get(`http://localhost:5000/projects/${projectid}`)
-        .then((res) => {
-          console.log(res);
-        })
-        .catch((error) => console.log(error));
-      console.log(answers);
+
+      let application = {
+        id: this.props.id,
+        title: this.props.title,
+        department: this.props.department,
+        desc: this.props.desc,
+        category: [this.props.category],
+        answers: { ...answers, ...this.props.user.qna },
+      };
+
+      await this.props.onApplyProject(application, this.props.user);
     };
 
     const questionsForm = (
@@ -51,12 +56,8 @@ class ProjectFocus extends Component<any, any> {
       </Form>
     );
 
-    return this.props.loading ? (
-      <div className="FocusFiller">
-        <RingLoader color="#3246bb" />
-      </div>
-    ) : (
-      <Card>
+    return (
+      <Card className="FocusProjectRight">
         <Card.Body>
           <Card.Title>{this.props.title}</Card.Title>
           <Card.Text>{this.props.department}</Card.Text>
@@ -78,8 +79,14 @@ class ProjectFocus extends Component<any, any> {
 const mapStateToProps = (state) => {
   return {
     user: state.auth.user,
-    loading: state.project.loading,
   };
 };
 
-export default connect(mapStateToProps, null)(ProjectFocus);
+const mapDispatchToProps = (dispatch) => {
+  return {
+    onApplyProject: (application, user) =>
+      dispatch(applyProject(application, user)),
+  };
+};
+
+export default connect(mapStateToProps, mapDispatchToProps)(ProjectFocus);

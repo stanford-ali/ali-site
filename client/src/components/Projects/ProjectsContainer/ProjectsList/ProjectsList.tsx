@@ -22,20 +22,30 @@ class ProjectsList extends Component<any, any> {
   }
 
   render() {
-    const questions = this.state.projects.map((elem, id) => {
-      return (
-        <ProjectList
-          key={id}
-          projectid={elem.id}
-          title={elem.title}
-          department={elem.department}
-          desc={elem.desc}
-          categ={elem.category.join(" ")}
-          click={this.props.click}
-        />
-      );
-    });
-    return <div>{!this.props.user ? <Loader /> : questions}</div>;
+    // The application ids of the projects a user has applied to
+    const applied =
+      this.props.user &&
+      this.props.user.applications.map((elem) => {
+        return elem.id;
+      });
+
+    const projects =
+      this.props.user &&
+      this.state.projects.map((elem, id) => {
+        return (
+          <ProjectList
+            key={id}
+            projectid={elem.id}
+            title={elem.title}
+            department={elem.department}
+            desc={elem.desc}
+            categ={elem.category.join(" ")}
+            click={this.props.click}
+            applied={applied.includes(elem.id)}
+          />
+        );
+      });
+    return <div>{!this.props.user ? <Loader /> : projects}</div>;
   }
 }
 

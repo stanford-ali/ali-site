@@ -71,7 +71,7 @@ const studentSchema = new Schema(
         },
         category: [{ type: String }],
         answers: {
-          type: Schema.Types.ObjectId,
+          type: Schema.Types.Object,
         },
       },
     ],

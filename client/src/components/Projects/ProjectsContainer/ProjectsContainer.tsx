@@ -50,15 +50,16 @@ class ProjectsContainer extends Component<any, any> {
     window.history.replaceState({}, "", `/projects/${query_string}`);
   }
 
-  async componentDidMount() {
+  componentDidMount() {
     if (window.location.search) {
-      console.log(window.location);
       // We have a query param for a project
       let params = qs.parse(window.location.search.substring(1), {
         encode: false,
         indices: false,
       });
       this.setState({ projSelected: true, projectid: params.search });
+
+      // Update this.props.details so information can be displayed
       this.props.onFetchProject(params.search);
     }
   }
