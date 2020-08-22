@@ -52,6 +52,11 @@ const auth: Reducer<any> = (state: any = initialState, action): any => {
         ...state,
         loading: true,
       };
+    case "APPLY_PROJECT_START":
+      return {
+        ...state,
+        loading: true,
+      };
     default:
       return state;
   }

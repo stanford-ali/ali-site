@@ -4,8 +4,8 @@ import { connect } from "react-redux";
 import Button from "../../../GlobalUI/Button/Button";
 import { Form } from "react-bootstrap";
 import { applyProject } from "../../../../store/actions/auth.actions";
+import ClipLoader from "react-spinners/ClipLoader";
 import "./ProjectFocus.scss";
-import Axios from "axios";
 
 class ProjectFocus extends Component<any, any> {
   render() {
@@ -52,7 +52,13 @@ class ProjectFocus extends Component<any, any> {
     const questionsForm = (
       <Form onSubmit={handleSubmit}>
         {questions}
-        <Button type="submit" />
+        {this.props.loading ? (
+          <Button>
+            <ClipLoader color={"white"} />
+          </Button>
+        ) : (
+          <Button type="submit">Apply</Button>
+        )}
       </Form>
     );
 
@@ -79,6 +85,7 @@ class ProjectFocus extends Component<any, any> {
 const mapStateToProps = (state) => {
   return {
     user: state.auth.user,
+    loading: state.auth.loading,
   };
 };
 
