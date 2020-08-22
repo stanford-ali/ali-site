@@ -74,7 +74,6 @@ class ProjectList extends Component<any, any> {
       .split(" ")
       .slice(0, 20)
       .join(" ")}. . .`;
-
     return (
       <Card
         className={
@@ -88,11 +87,15 @@ class ProjectList extends Component<any, any> {
       >
         <Card.Header as="h6" className="CardHead">
           {this.props.categ || `Biology | Computer Science`}
-          {this.props.applied && (
-            <span className="AppliedHeader">
+          <span className="AppliedHeader">
+            <OverlayTrigger
+              placement="left"
+              delay={{ show: 250, hide: 400 }}
+              overlay={renderTooltip}
+            >
               <RiUserStarLine size={20} />
-            </span>
-          )}
+            </OverlayTrigger>
+          </span>
         </Card.Header>
         <Card.Body>
           <div className="ProjectListTitle">
@@ -107,13 +110,9 @@ class ProjectList extends Component<any, any> {
               {this.props.title}
               <div className="ProjectCardButtons">
                 <div style={{ display: "flex", alignItems: "center" }}>
-                  <OverlayTrigger
-                    placement="left"
-                    delay={{ show: 250, hide: 400 }}
-                    overlay={renderTooltip}
-                  >
+                  {this.props.applied && (
                     <AiOutlineCheck color={"green"} size={20} />
-                  </OverlayTrigger>
+                  )}
                 </div>
                 {followUnfollowButton}
               </div>

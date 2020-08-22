@@ -32,6 +32,7 @@ class ProjectsList extends Component<any, any> {
     const projects =
       this.props.user &&
       this.state.projects.map((elem, id) => {
+        console.log(elem.category);
         return (
           <ProjectList
             key={id}
@@ -39,7 +40,7 @@ class ProjectsList extends Component<any, any> {
             title={elem.title}
             department={elem.department}
             desc={elem.desc}
-            categ={elem.category.join(" ")}
+            categ={elem.category.join(" | ")}
             click={this.props.click}
             applied={applied.includes(elem.id)}
           />

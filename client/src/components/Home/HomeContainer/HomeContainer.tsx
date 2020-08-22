@@ -10,12 +10,6 @@ export default function HomeContainer() {
 
   return (
     <div className="HomeContainer">
-      <ALIlogo
-        className="HomeLogo"
-        stroke="#c4c4c480"
-        width="400"
-        height="400"
-      />
       <div className="LeftContainer">
         <div>
           <h1 className="HomeMessage1">We connect</h1>
@@ -28,6 +22,12 @@ export default function HomeContainer() {
             />
           </h1>
           <h1 className="HomeMessage1">to projects</h1>
+          <ALIlogo
+            className="HomeLogo"
+            stroke="#c4c4c466"
+            width="400"
+            height="400"
+          />
         </div>
         <div className="HomeInfo">
           <p>

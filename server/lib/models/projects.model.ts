@@ -37,8 +37,7 @@ const projectSchema = new Schema(
     website: String,
     category: [
       {
-        type: Schema.Types.ObjectId,
-        rel: "Category",
+        type: String,
       },
     ],
     tag_ids: [

@@ -31,7 +31,6 @@ class ProjectFocus extends Component<any, any> {
       event.preventDefault();
       let inputs = event.target.elements;
       let questions = this.props.questions;
-      let projectid = this.props.id;
       let answers = {};
       for (let i = 0; i < inputs.length - 1; i++) {
         answers[questions[i]] = inputs[i].value;

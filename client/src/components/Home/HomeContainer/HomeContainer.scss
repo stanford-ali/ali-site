@@ -5,6 +5,8 @@ $logo-color: #c4c4c4;
 .HomeContainer {
   display: flex;
   padding: 10vh 7vw;
+  max-width: 1500px;
+  margin: auto;
   .RightContainer {
     width: 50%;
     margin-left: 20px;
@@ -13,6 +15,7 @@ $logo-color: #c4c4c4;
   .LeftContainer {
     width: 50%;
     margin-right: 20px;
+    position: relative;
   }
 
   .HomeMessage1 {
@@ -32,14 +35,14 @@ $logo-color: #c4c4c4;
   .HomeLogo {
     flex: none;
     position: absolute;
-    left: 10px;
-    top: 40px;
+    left: -100px;
+    top: -125px;
     z-index: -1;
   }
 
   .HomeInfo {
     margin-top: 20px;
-    background-color: #c4c4c480;
+    background-color: #f2f5f8;
     max-width: 500px;
     padding: 10px;
     border-radius: 10px;
