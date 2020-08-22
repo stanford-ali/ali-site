@@ -11,7 +11,9 @@
 
 .ProjectsContainerRight {
   width: 60%;
-  position: relative;
+  align-self: flex-start;
+  position: sticky;
+  top: 3%;
 }
 
 .FocusFiller {
