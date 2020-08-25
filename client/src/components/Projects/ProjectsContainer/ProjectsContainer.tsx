@@ -79,6 +79,7 @@ class ProjectsContainer extends Component<any, any> {
         </div>
       </div>
     );
+
     return (
       <div className="ProjectsContainer">
         <div className="ProjectsContainerLeft">

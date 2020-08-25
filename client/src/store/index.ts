@@ -9,6 +9,7 @@ const createRootReducer = (history) =>
     auth: Reducers.auth,
     admin: Reducers.admin,
     project: Reducers.project,
+    questions: Reducers.questions,
   });
 
 export default createRootReducer;

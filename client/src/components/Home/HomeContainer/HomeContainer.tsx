@@ -6,7 +6,9 @@ import { Button } from "react-bootstrap";
 
 import "./HomeContainer.scss";
 export default function HomeContainer() {
-  const viewProjects = () => {};
+  const viewProjects = () => {
+    window.history.pushState({}, "", `/projects`);
+  };
 
   return (
     <div className="HomeContainer">

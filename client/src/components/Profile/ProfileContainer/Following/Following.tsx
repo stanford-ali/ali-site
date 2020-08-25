@@ -1,10 +1,32 @@
 import React, { Component } from "react";
 import FollowProject from "./FollowProject/FollowProject";
+import AppliedProject from "./AppliedProject/AppliedProject";
 import { connect } from "react-redux";
 import "./Following.scss";
 
 class Following extends Component<any, any> {
+  state = {
+    rightDisplay: "following",
+  };
+
+  onRightDisplayChange(title) {
+    console.log(title);
+  }
+
   render() {
+    const applied = this.props.user?.applications.map((elem, id) => {
+      return (
+        <AppliedProject
+          key={id}
+          title={elem.title}
+          department={elem.department}
+          desc={elem.desc}
+          projectid={elem.id}
+          answers={elem.answers}
+        />
+      );
+    });
+
     const following =
       this.props.user &&
       this.props.user.following.map((elem, id) => {
@@ -22,10 +44,16 @@ class Following extends Component<any, any> {
     return (
       <div className="Following">
         <div className="FollowingHead">
-          <h1>Following</h1>
+          <button onClick={() => this.onRightDisplayChange("following")}>
+            Following
+          </button>
+          <button onClick={() => this.onRightDisplayChange("applied")}>
+            Applied
+          </button>
         </div>
-        {/* Insert all projects user is following */}
+        {/* Insert all projects user is following or applied to */}
         {following}
+        {applied}
       </div>
     );
   }

@@ -25,17 +25,17 @@ export default function Footer() {
             </li>
             <li>
               <a className="text-muted" href="#">
-                Resource name
+                Partners
               </a>
             </li>
             <li>
               <a className="text-muted" href="#">
-                Another resource
+                Partners
               </a>
             </li>
             <li>
               <a className="text-muted" href="#">
-                Final resource
+                Partners
               </a>
             </li>
           </ul>
@@ -44,7 +44,7 @@ export default function Footer() {
           <h5>People</h5>
           <ul className="list-unstyled text-small">
             <li className="text-muted">Alix Cui</li>
-            <li className="text-muted">David Toomer</li>
+            <li className="text-muted"></li>
           </ul>
         </div>
       </div>

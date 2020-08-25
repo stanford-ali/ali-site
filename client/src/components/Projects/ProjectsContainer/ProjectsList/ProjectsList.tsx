@@ -32,7 +32,6 @@ class ProjectsList extends Component<any, any> {
     const projects =
       this.props.user &&
       this.state.projects.map((elem, id) => {
-        console.log(elem.category);
         return (
           <ProjectList
             key={id}

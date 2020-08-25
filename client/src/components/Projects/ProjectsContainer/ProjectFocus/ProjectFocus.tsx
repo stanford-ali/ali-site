@@ -27,6 +27,13 @@ class ProjectFocus extends Component<any, any> {
         );
       });
 
+    // Array of project id's applied to by the user
+    const appliedIds =
+      this.props.user &&
+      this.props.user.applications.map((elem) => {
+        return elem.id;
+      });
+
     const handleSubmit = async (event) => {
       event.preventDefault();
       let inputs = event.target.elements;
@@ -56,7 +63,9 @@ class ProjectFocus extends Component<any, any> {
             <ClipLoader color={"white"} />
           </Button>
         ) : (
-          <Button type="submit">Apply</Button>
+          <Button type="submit" disabled={appliedIds?.includes(this.props.id)}>
+            Apply
+          </Button>
         )}
       </Form>
     );
