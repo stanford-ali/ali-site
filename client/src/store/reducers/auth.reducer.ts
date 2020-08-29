@@ -12,10 +12,10 @@ const initialState: IAuthState = {
 
 const auth: Reducer<any> = (state: any = initialState, action): any => {
   switch (action.type) {
-    case INITIALIZE_GAPI:
+    case "SIGNUP_USER":
       return {
         ...state,
-        authInstance: action.payload,
+        user: action.payload,
       };
     case "LOAD_USER":
       return {
