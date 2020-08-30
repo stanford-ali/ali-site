@@ -3,6 +3,8 @@ import * as Routes from "./routes";
 import * as cors from "cors";
 import * as mongoose from "mongoose";
 import * as dotenv from "dotenv";
+import * as admin from "firebase-admin";
+import serviceAccount from "./serviceAccount";
 
 dotenv.config();
 
@@ -35,9 +37,55 @@ class App {
   }
 
   private config(): void {
+    const params = {
+      type: serviceAccount.type,
+      projectId: serviceAccount.project_id,
+      privateKeyId: serviceAccount.private_key_id,
+      privateKey: serviceAccount.private_key,
+      clientEmail: serviceAccount.client_email,
+      clientId: serviceAccount.client_id,
+      authUri: serviceAccount.auth_uri,
+      tokenUri: serviceAccount.token_uri,
+      authProviderX509CertUrl: serviceAccount.auth_provider_x509_cert_url,
+      clientC509CertUrl: serviceAccount.client_x509_cert_url,
+    };
+
+    // Initialize Firebase Admin SDK
+    admin.initializeApp({
+      credential: admin.credential.cert(params),
+      databaseURL: "https://<DATABASE_NAME>.firebaseio.com",
+    });
+
     this.app.use(cors()); // TODO: check security details with CORS
     this.app.use(express.json());
     this.app.use(express.urlencoded({ extended: false }));
+
+    // Middleware for authenticating REST requests
+    this.app.use((req, res, next) => {
+      const { token } = req.headers;
+      admin
+        .auth()
+        .verifyIdToken(token as string)
+        .then((decodedToken) => {
+          // Check if user is authenticated in Firebase authentication
+          admin
+            .auth()
+            .getUser(decodedToken.uid)
+            .then((user) => {
+              console.log(user);
+            })
+            .catch(() => {
+              res
+                .status(400)
+                .send(
+                  "[oauth] the user with the ID does not exist in firebase"
+                );
+            });
+        })
+        .catch((error) => {
+          res.status(401).send("authentication failed");
+        });
+    });
   }
 
   private setupMongo(): void {

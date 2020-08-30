@@ -1,9 +1,14 @@
 import store from "../../store";
-import { loadingStart, loadingEnd } from "./base.actions";
 import axios from "axios";
+import { loadingStart, loadingEnd } from "./base.actions";
 import { auth } from "../../config/fbConfig";
 
 export const signup = (user) => {
+  return (dispatch) => {
+    // Axios request to signup
+    axios.post("/students", {});
+  };
+
   // Dispatch a middleware that creates the user in the database
   auth.currentUser.getIdToken().then((token) => console.log(token));
   return {
@@ -13,7 +18,7 @@ export const signup = (user) => {
 };
 
 export const login = (user) => {
-  auth.currentUser.getIdToken().then((token) => console.log(token));
+  axios.get("http://localhost:5000/students");
   return {
     type: "LOGIN",
     payload: user,
