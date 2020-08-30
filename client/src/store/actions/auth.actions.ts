@@ -5,23 +5,18 @@ import { auth } from "../../config/fbConfig";
 
 export const signup = (user) => {
   return (dispatch) => {
-    // Axios request to signup
-    axios.post("/students", {});
-  };
+    // Modify user here to store in database here
 
-  // Dispatch a middleware that creates the user in the database
-  auth.currentUser.getIdToken().then((token) => console.log(token));
-  return {
-    type: "SIGNUP_USER",
-    payload: user,
+    // Axios request to signup
+    axios.post("/students", { user }).then((user) => dispatch(loadUser(user)));
   };
 };
 
 export const login = (user) => {
-  axios.get("http://localhost:5000/students");
-  return {
-    type: "LOGIN",
-    payload: user,
+  return (dispatch) => {
+    axios
+      .get("http://localhost:5000/students")
+      .then((user) => dispatch(loadUser(user)));
   };
 };
 

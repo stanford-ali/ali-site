@@ -72,7 +72,7 @@ class App {
             .auth()
             .getUser(decodedToken.uid)
             .then((user) => {
-              console.log(user);
+              next();
             })
             .catch(() => {
               res

@@ -12,7 +12,7 @@ function SignUp(props) {
     if (password === confirmedPassword) {
       auth
         .createUserWithEmailAndPassword(email, password)
-        .then((user) => props.onSignUp(user))
+        .then((user) => props.onSignUp(user)) // spread user right here with firstname, etc {...user, firstName }
         .catch((error) => console.log(error));
     } else {
       alert("passwords don't match");
