@@ -13,7 +13,7 @@ export default class StudentController {
   }
 
   public getStudentByID(req: Request, res: Response, next: NextFunction) {
-    Student.findById(req.params.studentid, (error, data) => {
+    Student.findOne({ firebaseid: res.locals.userid }, (error, data) => {
       if (error) {
         next(error);
         return;

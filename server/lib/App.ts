@@ -72,6 +72,7 @@ class App {
             .auth()
             .getUser(decodedToken.uid)
             .then((user) => {
+              res.locals.userid = user.uid;
               next();
             })
             .catch(() => {

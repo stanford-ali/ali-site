@@ -10,8 +10,13 @@ export default class StudentRouter {
       .get(this.studentController.getStudents)
       .post(this.studentController.addStudent);
 
+    // app
+    //   .route("/students/:studentid")
+    //   .get(this.studentController.getStudentByID)
+    //   .delete(this.studentController.removeStudent);
+
     app
-      .route("/students/:studentid")
+      .route("/student")
       .get(this.studentController.getStudentByID)
       .delete(this.studentController.removeStudent);
 

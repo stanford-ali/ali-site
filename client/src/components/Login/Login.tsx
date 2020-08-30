@@ -2,7 +2,7 @@ import React, { useState } from "react";
 import Navbar from "../Navbar/Navbar";
 import SignUp from "./SignUp/SignUp";
 import { connect } from "react-redux";
-import { login } from "../../store/actions/auth.actions";
+import { login, logout } from "../../store/actions/auth.actions";
 import { auth } from "../../config/fbConfig";
 
 const Login = (props) => {
@@ -16,6 +16,15 @@ const Login = (props) => {
       .then(() => props.onLogin({ email: email, password: password }))
       .catch((error) => console.log(error));
   };
+
+  const handleSignOut = (e) => {
+    e.preventDefault();
+    auth
+      .signOut()
+      .then(() => console.log("Signout Successful"))
+      .catch(() => console.log("not successful"));
+  };
+
   return (
     <>
       <Navbar />
@@ -36,6 +45,7 @@ const Login = (props) => {
           />
           <button onClick={handleSignIn}>Sign In</button>
         </form>
+        <button onClick={handleSignOut}>Sign Out</button>
       </div>
     </>
   );

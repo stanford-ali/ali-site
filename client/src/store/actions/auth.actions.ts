@@ -15,7 +15,7 @@ export const signup = (user) => {
 export const login = (user) => {
   return (dispatch) => {
     axios
-      .get("http://localhost:5000/students")
+      .get(`http://localhost:5000/student`)
       .then((user) => dispatch(loadUser(user)));
   };
 };
