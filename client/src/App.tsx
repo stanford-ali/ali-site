@@ -1,27 +1,62 @@
-import React from "react";
+import React, { useEffect } from "react";
 import { ConnectedRouter } from "connected-react-router";
-import { Switch, Route } from "react-router-dom";
+import { Switch, Route, Redirect } from "react-router-dom";
 import history from "./history";
-
+import { connect } from "react-redux";
+import { auth } from "./config/fbConfig";
 import Home from "./components/Home/Home";
 import Login from "./components/Login/Login";
 import Profile from "./components/Profile/Profile";
 import Projects from "./components/Projects/Projects";
 
 import "./App.scss";
+import { fetchUser, logout } from "./store/actions/auth.actions";
 
-const App = () => {
+const App = (props) => {
+  // Auth observable (get the current user)
+  useEffect(() => {
+    let unsubscribeFromAuth = null;
+    unsubscribeFromAuth = auth.onAuthStateChanged((user) => {
+      if (user) {
+        // If user exists, set the current user fetchUser
+        props.onFetchUser();
+      } else {
+        // If user doesn't exist, clear user
+        props.onLogout();
+      }
+    });
+
+    return () => unsubscribeFromAuth();
+  }, []);
+
   return (
     <ConnectedRouter history={history}>
       <Switch>
         <Route exact path="/" component={Home} />
         <Route exact path="/projects" component={Projects} />
-        <Route exact path="/login" component={Login} />
-        <Route exact path="/profile" component={Profile} />
+        <Route exact path="/login">
+          {props.user ? <Redirect to="/" /> : <Login />}
+        </Route>
+        <Route exact path="/profile">
+          {!props.user ? <Redirect to="/" /> : <Profile />}
+        </Route>
         <Route exact path="/admin" />
       </Switch>
     </ConnectedRouter>
   );
 };
 
-export default App;
+const mapStateToProps = (state) => {
+  return {
+    user: state.auth.user,
+  };
+};
+
+const mapDispatchToProps = (dispatch) => {
+  return {
+    onFetchUser: () => dispatch(fetchUser()),
+    onLogout: () => dispatch(logout()),
+  };
+};
+
+export default connect(mapStateToProps, mapDispatchToProps)(App);

@@ -1,8 +1,9 @@
 import React from "react";
 import { Link, NavLink } from "react-router-dom";
 import NavbarLoginButton from "./NavbarLoginButton/NavbarLoginButton";
+import { connect } from "react-redux";
 
-const Navbar = () => (
+const Navbar = (props) => (
   <section id="navbar">
     <div>
       <nav id="navbar">
@@ -29,11 +30,28 @@ const Navbar = () => (
           >
             Projects
           </NavLink>
-          <NavbarLoginButton />
+          {props.user ? (
+            <NavbarLoginButton />
+          ) : (
+            <NavLink
+              to="/login"
+              exact
+              className="navbar-item page"
+              activeClassName="active"
+            >
+              Login
+            </NavLink>
+          )}
         </div>
       </nav>
     </div>
   </section>
 );
 
-export default Navbar;
+const mapStateToProps = (state) => {
+  return {
+    user: state.auth.user,
+  };
+};
+
+export default connect(mapStateToProps)(Navbar);

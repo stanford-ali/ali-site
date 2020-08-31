@@ -32,6 +32,9 @@ export const login = (user) => {
 
 export const logout = () => {
   // Reroute to home?
+  return {
+    type: "LOGOUT_USER",
+  };
 };
 
 export const loadUser = (user) => {
@@ -54,12 +57,12 @@ export const updateFollowStart = () => {
 };
 
 // Thunk that fetches user
-export const fetchUser = (userid) => {
+export const fetchUser = () => {
   return (dispatch) => {
     axios
-      .get(`http://localhost:5000/students/auth/${userid}`)
+      .get(`http://localhost:5000/student`)
       .then((res) => {
-        dispatch(loadUser(res.data[0]));
+        dispatch(loadUser(res.data));
       })
       .catch((error) => {
         console.log(error);

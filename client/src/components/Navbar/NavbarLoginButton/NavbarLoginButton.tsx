@@ -1,45 +1,44 @@
-import React, {useEffect} from 'react';
-import {useSelector, useDispatch} from 'react-redux';
-import {logout} from '../../../store/actions/auth.actions';
+import React from "react";
+import { connect } from "react-redux";
+import { logout } from "../../../store/actions/auth.actions";
+import { Dropdown, DropdownButton } from "react-bootstrap";
+import { Link } from "react-router-dom";
 
-import {Dropdown, DropdownButton, Spinner} from 'react-bootstrap';
-import {Link} from 'react-router-dom';
-
-const NavbarLoginButton = () => {
-  const dispatch = useDispatch();
-  const loggedIn = useSelector(state => state.auth.loggedIn);
-  const loading = useSelector(state => state.base.loading);
-  const {firstname, lastname} = useSelector(state => ({
-    firstname: state.auth.user ? state.auth.user.firstname : '',
-    lastname: state.auth.user ? state.auth.user.lastname : ''
-  }));
-
-  useEffect(() => {
-    if (window.gapi && !loggedIn) {
-      window.gapi.load('signin2', () => {
-        window.gapi.signin2.render('login-button', {});
-      });
-    }
-  }, [loggedIn, loading]);
-
+const NavbarLoginButton = (props) => {
   return (
     <React.Fragment>
-      {loggedIn 
-        ? <DropdownButton id='dropdown-basic-button' className='navbar-item' title={`${firstname} ${lastname} `}>
-            {/* use Link wrapper instead of Dropdown href='/profile' to avoid unnecessary reload/redirect */}
-            <Link to='/profile'>
-              <Dropdown.Item as='button'>My Profile</Dropdown.Item>
-            </Link>
-            <Dropdown.Item as='button' id='signout' onClick={() => dispatch(logout())}>Logout</Dropdown.Item>
-          </DropdownButton>
-        : loading
-          ? <Spinner animation='border' role='status' variant='light'>
-              <span className='sr-only'>Loading...</span>
-            </Spinner>
-          : <div id='login-button' className='navbar-item last-page'/>
-      }
+      <DropdownButton
+        id="dropdown-basic-button"
+        className="navbar-item"
+        title={`${props.user.firstname} ${props.user.lastname} `}
+      >
+        {/* use Link wrapper instead of Dropdown href='/profile' to avoid unnecessary reload/redirect */}
+        <Link to="/profile">
+          <Dropdown.Item as="button">My Profile</Dropdown.Item>
+        </Link>
+        <Dropdown.Item
+          as="button"
+          id="signout"
+          onClick={() => props.onLogout()} // update
+        >
+          Logout
+        </Dropdown.Item>
+      </DropdownButton>
     </React.Fragment>
-  )
-}
+  );
+};
 
-export default NavbarLoginButton;
+const mapStateToProps = (state) => {
+  return {
+    user: state.auth.user,
+    loading: state.base.loading,
+  };
+};
+
+const mapDispatchToProps = (dispatch) => {
+  return {
+    onLogout: () => dispatch(logout()),
+  };
+};
+
+export default connect(mapStateToProps, mapDispatchToProps)(NavbarLoginButton);

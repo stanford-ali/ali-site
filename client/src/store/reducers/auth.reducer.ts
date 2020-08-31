@@ -27,6 +27,11 @@ const auth: Reducer<any> = (state: any = initialState, action): any => {
         admin: false,
         loading: false,
       };
+    case "LOGOUT_USER":
+      return {
+        ...state,
+        user: null,
+      };
     case "LOAD_USER_FAILED":
       return {
         // TODO: ERROR/FAIL CHECKING
