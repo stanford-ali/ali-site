@@ -10,7 +10,6 @@ const studentSchema = new Schema(
     },
     image: {
       type: String,
-      required: true,
     },
     lastname: {
       type: String,
@@ -18,12 +17,13 @@ const studentSchema = new Schema(
     },
     email: {
       type: String,
-      required: true,
       unique: true,
+      required: true,
     },
-    google_id: {
+    firebaseid: {
       type: String,
       unique: true,
+      required: true,
     },
     qna: {
       email: {

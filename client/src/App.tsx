@@ -1,14 +1,12 @@
-import React, { useEffect } from "react";
+import React from "react";
 import { ConnectedRouter } from "connected-react-router";
-import { Switch, Route, Redirect } from "react-router-dom";
+import { Switch, Route } from "react-router-dom";
 import history from "./history";
 
-import Admin from "./components/Admin/Admin";
 import Home from "./components/Home/Home";
 import Login from "./components/Login/Login";
 import Profile from "./components/Profile/Profile";
 import Projects from "./components/Projects/Projects";
-import Unauthorized from "./components/Unauthorized/Unauthorized";
 
 import "./App.scss";
 

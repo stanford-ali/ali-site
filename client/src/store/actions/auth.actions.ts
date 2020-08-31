@@ -1,14 +1,24 @@
-import store from "../../store";
 import axios from "axios";
-import { loadingStart, loadingEnd } from "./base.actions";
-import { auth } from "../../config/fbConfig";
 
 export const signup = (user) => {
   return (dispatch) => {
     // Modify user here to store in database here
+    const newUser = {
+      firebaseid: user.user.uid,
+      email: user.user.email,
+      firstname: user.firstName,
+      lastname: user.lastName,
+      image: "",
+      qna: {},
+      applications: [],
+      following: [],
+    };
 
     // Axios request to signup
-    axios.post("/students", { user }).then((user) => dispatch(loadUser(user)));
+    axios
+      .post("http://localhost:5000/students", newUser)
+      .then((user) => dispatch(loadUser(user)))
+      .catch((error) => console.log(error));
   };
 };
 
@@ -20,7 +30,9 @@ export const login = (user) => {
   };
 };
 
-export const logout = () => {};
+export const logout = () => {
+  // Reroute to home?
+};
 
 export const loadUser = (user) => {
   return {

@@ -1,5 +1,5 @@
 import { Reducer } from "redux";
-import { IAuthState, INITIALIZE_GAPI, SIGN_OUT } from "../types/auth.types";
+import { IAuthState, SIGN_OUT } from "../types/auth.types";
 
 const initialState: IAuthState = {
   authInstance: null,

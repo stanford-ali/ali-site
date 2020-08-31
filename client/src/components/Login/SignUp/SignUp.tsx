@@ -4,6 +4,8 @@ import { signup } from "../../../store/actions/auth.actions";
 import { auth } from "../../../config/fbConfig";
 
 function SignUp(props) {
+  const [firstName, setFirstName] = useState("");
+  const [lastName, setLastName] = useState("");
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
   const [confirmedPassword, setConfirmedPassword] = useState("");
@@ -12,7 +14,7 @@ function SignUp(props) {
     if (password === confirmedPassword) {
       auth
         .createUserWithEmailAndPassword(email, password)
-        .then((user) => props.onSignUp(user)) // spread user right here with firstname, etc {...user, firstName }
+        .then((user) => props.onSignUp({ ...user, firstName, lastName })) // spread user right here with firstname, etc {...user, firstName }
         .catch((error) => console.log(error));
     } else {
       alert("passwords don't match");
@@ -22,6 +24,18 @@ function SignUp(props) {
   return (
     <div>
       <form>
+        <input
+          type="text"
+          placeholder="First Name"
+          value={firstName}
+          onChange={(e) => setFirstName(e.target.value)}
+        />
+        <input
+          type="text"
+          placeholder="Last Name"
+          value={lastName}
+          onChange={(e) => setLastName(e.target.value)}
+        />
         <input
           type="text"
           placeholder="Email"
@@ -35,7 +49,7 @@ function SignUp(props) {
           onChange={(e) => setPassword(e.target.value)}
         />
         <input
-          type="text"
+          type="password"
           placeholder="Confirm Password"
           value={confirmedPassword}
           onChange={(e) => setConfirmedPassword(e.target.value)}

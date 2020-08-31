@@ -2,7 +2,7 @@ import React, { useState } from "react";
 import Navbar from "../Navbar/Navbar";
 import SignUp from "./SignUp/SignUp";
 import { connect } from "react-redux";
-import { login, logout } from "../../store/actions/auth.actions";
+import { login } from "../../store/actions/auth.actions";
 import { auth } from "../../config/fbConfig";
 
 const Login = (props) => {
