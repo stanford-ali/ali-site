@@ -1,4 +1,5 @@
 import axios from "axios";
+import { loadingStart, loadingEnd } from "./base.actions";
 
 export const signup = (user) => {
   return (dispatch) => {
@@ -31,7 +32,6 @@ export const login = (user) => {
 };
 
 export const logout = () => {
-  // Reroute to home?
   return {
     type: "LOGOUT_USER",
   };
@@ -56,7 +56,6 @@ export const updateFollowStart = () => {
   };
 };
 
-// Thunk that fetches user
 export const fetchUser = () => {
   return (dispatch) => {
     axios

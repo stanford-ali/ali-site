@@ -45,7 +45,7 @@ class ProjectsList extends Component<any, any> {
           />
         );
       });
-    return <div>{!this.props.user ? <Loader /> : projects}</div>;
+    return <div>{projects}</div>;
   }
 }
 

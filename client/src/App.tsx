@@ -37,8 +37,8 @@ const App = (props) => {
         <Route exact path="/login">
           {props.user ? <Redirect to="/" /> : <Login />}
         </Route>
-        <Route exact path="/profile">
-          {!props.user ? <Redirect to="/" /> : <Profile />}
+        <Route exact path="/profile" component={Profile}>
+          {props.user ? <Profile /> : <Redirect to="/" />}
         </Route>
         <Route exact path="/admin" />
       </Switch>

@@ -76,11 +76,7 @@ class ProjectList extends Component<any, any> {
       .join(" ")}. . .`;
     return (
       <Card
-        className={
-          this.props.applied
-            ? "ProjectCardDisable ProjectCardOverlay"
-            : "ProjectCard"
-        }
+        className="ProjectCard"
         id={this.props.projectid}
         onClick={() => this.props.click(this.props.projectid)}
         // style={{ pointerEvents: this.props.applied ? "none" : "auto" }}
