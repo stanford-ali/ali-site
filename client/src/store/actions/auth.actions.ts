@@ -17,7 +17,7 @@ export const signup = (user) => {
     // Axios request to signup
     axios
       .post("http://localhost:5000/students", newUser)
-      .then((user) => dispatch(loadUser(user)))
+      .then((res) => dispatch(loadUser(res.data[0])))
       .catch((error) => console.log(error));
   };
 };
