@@ -3,8 +3,18 @@ import { connect } from "react-redux";
 import { logout } from "../../../store/actions/auth.actions";
 import { Dropdown, DropdownButton } from "react-bootstrap";
 import { Link } from "react-router-dom";
+import { auth } from "../../../config/fbConfig";
 
 const NavbarLoginButton = (props) => {
+  const handleLogOut = (e) => {
+    e.preventDefault();
+    auth
+      .signOut()
+      .then(() => console.log("Signout Successful"))
+      .catch(() => console.log("not successful"));
+    props.onLogout();
+  };
+
   return (
     <React.Fragment>
       <DropdownButton
@@ -19,7 +29,7 @@ const NavbarLoginButton = (props) => {
         <Dropdown.Item
           as="button"
           id="signout"
-          onClick={() => props.onLogout()} // update
+          onClick={handleLogOut} // update
         >
           Logout
         </Dropdown.Item>
