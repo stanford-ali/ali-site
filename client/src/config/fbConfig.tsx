@@ -19,12 +19,13 @@ export const uiConfig = {
   // We will display Google and Email as auth providers.
   signInOptions: [
     firebase.auth.GoogleAuthProvider.PROVIDER_ID,
+    firebase.auth.FacebookAuthProvider.PROVIDER_ID,
     firebase.auth.EmailAuthProvider.PROVIDER_ID,
   ],
   callbacks: {
     signInSuccessWithAuthResult: (user) => {
       if (user.additionalUserInfo.isNewUser) {
-        // Create user in database
+        // New User - Create user in database
         const firstName = user.user.displayName.split(" ")[0];
         const lastName = user.user.displayName.split(" ")[1];
         const newUser = {
@@ -42,7 +43,6 @@ export const uiConfig = {
           .post("http://localhost:5000/students", newUser)
           .catch((error) => console.log(error));
       }
-      console.log(user);
       return false;
     },
   },
