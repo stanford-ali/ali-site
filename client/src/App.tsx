@@ -22,13 +22,15 @@ const App = (props) => {
         props.onFetchUser();
       } else {
         // If user doesn't exist, clear user
-        props.onLogout();
+        return;
+        // props.onLogout();
       }
     });
 
     return () => unsubscribeFromAuth();
   }, []);
 
+  // ternary the switch with loading -> modalLoader
   return (
     <ConnectedRouter history={history}>
       <Switch>
@@ -37,9 +39,11 @@ const App = (props) => {
         <Route exact path="/login">
           {props.user ? <Redirect to="/" /> : <Login />}
         </Route>
-        <Route exact path="/profile" component={Profile}>
-          {props.user ? <Profile /> : <Redirect to="/" />}
-        </Route>
+        <Route
+          exact
+          path="/profile"
+          component={() => (props.user ? <Profile /> : <Redirect to="/" />)}
+        />
         <Route exact path="/admin" />
       </Switch>
     </ConnectedRouter>

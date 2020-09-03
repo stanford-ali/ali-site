@@ -6,7 +6,7 @@ import ModalLoader from "../GlobalUI/ModalLoader/ModalLoader";
 
 const Navbar = (props) => (
   <section id="navbar">
-    {!props.user ? <ModalLoader /> : null}
+    {/* {!props.user ? <ModalLoader /> : null} */}
     <div>
       <nav id="navbar">
         <div className="navbar">

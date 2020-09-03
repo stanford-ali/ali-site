@@ -3,7 +3,8 @@ import Navbar from "../Navbar/Navbar";
 import SignUp from "./SignUp/SignUp";
 import { connect } from "react-redux";
 import { login } from "../../store/actions/auth.actions";
-import { auth } from "../../config/fbConfig";
+import { auth, uiConfig } from "../../config/fbConfig";
+import StyledFirebaseAuth from "react-firebaseui/StyledFirebaseAuth";
 
 const Login = (props) => {
   const [email, setEmail] = useState("");
@@ -46,6 +47,7 @@ const Login = (props) => {
           <button onClick={handleSignIn}>Sign In</button>
         </form>
         <button onClick={handleSignOut}>Sign Out</button>
+        <StyledFirebaseAuth uiConfig={uiConfig} firebaseAuth={auth} />
       </div>
     </>
   );
