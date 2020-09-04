@@ -61,6 +61,7 @@ export const fetchUser = () => {
     axios
       .get(`http://localhost:5000/student`)
       .then((res) => {
+        console.log("get is done", res);
         dispatch(loadUser(res.data));
       })
       .catch((error) => {

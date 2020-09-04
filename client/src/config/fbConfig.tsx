@@ -24,7 +24,15 @@ export const uiConfig = {
   ],
   callbacks: {
     signInSuccessWithAuthResult: (user) => {
-      if (user.additionalUserInfo.isNewUser) {
+      const userInfo = user.additionalUserInfo;
+      async function sendVerification() {
+        await user.user
+          .sendEmailVerification()
+          .then(() => console.log("check email"))
+          .catch((error) => console.log(error));
+      }
+
+      if (userInfo.isNewUser && userInfo.providerId === "password") {
         // New User - Create user in database
         const firstName = user.user.displayName.split(" ")[0];
         const lastName = user.user.displayName.split(" ")[1];
@@ -39,9 +47,18 @@ export const uiConfig = {
           following: [],
         };
 
+        // async function createUser(newUser) {
+        //   await axios.post("http://localhost:5000/students", newUser);
+        // }
+
+        // createUser(newUser);
+
         axios
           .post("http://localhost:5000/students", newUser)
+          .then(() => console.log("post is done"))
           .catch((error) => console.log(error));
+
+        sendVerification();
       }
       return false;
     },
