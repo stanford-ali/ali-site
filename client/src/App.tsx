@@ -10,7 +10,7 @@ import Profile from "./components/Profile/Profile";
 import Projects from "./components/Projects/Projects";
 
 import "./App.scss";
-import { fetchUser, logout } from "./store/actions/auth.actions";
+import { fetchUser, logout } from "./store/auth/auth.actions";
 
 const App = (props) => {
   // Auth observable (get the current user)
@@ -19,7 +19,7 @@ const App = (props) => {
     unsubscribeFromAuth = auth.onAuthStateChanged((user) => {
       if (user) {
         // If user exists, set the current user fetchUser
-        props.onFetchUser();
+        props.onFetchUser(user.uid);
       } else {
         // If user doesn't exist, clear user
         return;
@@ -58,7 +58,7 @@ const mapStateToProps = (state) => {
 
 const mapDispatchToProps = (dispatch) => {
   return {
-    onFetchUser: () => dispatch(fetchUser()),
+    onFetchUser: (uid) => dispatch(fetchUser(uid)),
     onLogout: () => dispatch(logout()),
   };
 };

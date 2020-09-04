@@ -2,10 +2,10 @@ import React, { Component } from "react";
 import ProjectsList from "./ProjectsList/ProjectsList";
 import ProjectFocus from "./ProjectFocus/ProjectFocus";
 import { GrProjects } from "react-icons/gr";
-import { fetchProject } from "../../../store/actions/project.actions";
 import { connect } from "react-redux";
 import qs from "qs";
 import "./ProjectsContainer.scss";
+import { fetchProject } from "../../../store/projects/projects.actions";
 
 class ProjectsContainer extends Component<any, any> {
   constructor(props) {

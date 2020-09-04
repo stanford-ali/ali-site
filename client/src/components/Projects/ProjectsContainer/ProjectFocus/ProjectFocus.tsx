@@ -3,9 +3,9 @@ import { Card } from "react-bootstrap";
 import { connect } from "react-redux";
 import Button from "../../../GlobalUI/Button/Button";
 import { Form } from "react-bootstrap";
-import { applyProject } from "../../../../store/actions/auth.actions";
 import ClipLoader from "react-spinners/ClipLoader";
 import "./ProjectFocus.scss";
+import { applyProject } from "../../../../store/auth/auth.actions";
 
 class ProjectFocus extends Component<any, any> {
   render() {
@@ -99,8 +99,8 @@ const mapStateToProps = (state) => {
 
 const mapDispatchToProps = (dispatch) => {
   return {
-    onApplyProject: (application, user) =>
-      dispatch(applyProject(application, user)),
+    onApplyProject: (user_id, project_id, answers) =>
+      dispatch(applyProject(user_id, project_id, answers)),
   };
 };
 

@@ -14,19 +14,21 @@ class Following extends Component<any, any> {
   }
 
   render() {
-    const applied = this.props.user?.applications.map((elem, id) => {
-      return (
-        <AppliedProject
-          key={id}
-          title={elem.title}
-          department={elem.department}
-          desc={elem.desc}
-          projectid={elem.id}
-          answers={elem.answers}
-        />
-      );
-    });
+    // Update to adhere to new applications backend
+    // const applied = this.props.user?.applications.map((elem, id) => {
+    //   return (
+    //     <AppliedProject
+    //       key={id}
+    //       title={elem.title}
+    //       department={elem.department}
+    //       desc={elem.desc}
+    //       projectid={elem.id}
+    //       answers={elem.answers}
+    //     />
+    //   );
+    // });
 
+    // All the projects a user is following
     const following =
       this.props.user &&
       this.props.user.following.map((elem, id) => {
@@ -53,7 +55,7 @@ class Following extends Component<any, any> {
         </div>
         {/* Insert all projects user is following or applied to */}
         {following}
-        {applied}
+        {/* {applied} */}
       </div>
     );
   }

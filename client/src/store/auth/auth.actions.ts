@@ -1,6 +1,8 @@
 import axios from "axios";
-import { loadingStart, loadingEnd } from "./base.actions";
+import { loadingStart, loadingEnd } from "../base/base.actions";
+import { LOAD_USER, UPDATE_USER, SIGN_OUT } from "./auth.types";
 
+// NOT NEEDED ANYMORE BECAUSE FIREBASEUI HANDLES IT //
 export const signup = (user) => {
   return (dispatch) => {
     // Modify user here to store in database here
@@ -23,6 +25,7 @@ export const signup = (user) => {
   };
 };
 
+// ALSO HANDLED BY FIREBASE UI //
 export const login = (user) => {
   return (dispatch) => {
     axios
@@ -31,42 +34,32 @@ export const login = (user) => {
   };
 };
 
+// Logout the user and reset user in store
 export const logout = () => {
   return {
-    type: "LOGOUT_USER",
+    type: SIGN_OUT,
   };
 };
 
+// Put user in the store
 export const loadUser = (user) => {
   return {
-    type: "LOAD_USER",
+    type: LOAD_USER,
     payload: user,
   };
 };
 
-export const loadUserFailed = () => {
-  return {
-    type: "LOAD_USER_FAILED",
-  };
-};
-
-export const updateFollowStart = () => {
-  return {
-    type: "UPDATE_FOLLOW_START",
-  };
-};
-
-export const fetchUser = () => {
+// Fetch the user object from DB
+export const fetchUser = (uid) => {
   return (dispatch) => {
     axios
-      .get(`http://localhost:5000/student`)
+      .get(`http://localhost:5000/users/${uid}`)
       .then((res) => {
         console.log("get is done", res);
         dispatch(loadUser(res.data));
       })
       .catch((error) => {
         console.log(error);
-        dispatch(loadUserFailed);
       });
   };
 };
@@ -74,24 +67,17 @@ export const fetchUser = () => {
 // Action creator that updates the redux user
 export const updateUser = (newUser) => {
   return {
-    type: "UPDATE_USER",
+    type: UPDATE_USER,
     payload: newUser,
   };
 };
 
-export const applyProjectStart = () => {
-  return {
-    type: "APPLY_PROJECT_START",
-  };
-};
-
-// Thunk middleware that updates the user to unfollow in the database
+// Updates the user to unfollow in the database
 export const followProject = (project, user) => {
   user.following.push(project);
   return async (dispatch) => {
-    dispatch(updateFollowStart());
     await axios
-      .put(`http://localhost:5000/students/auth/${user.google_id}`, user)
+      .put(`http://localhost:5000/users/${user.uid}`, user)
       .then(() => dispatch(updateUser(user)))
       .catch((error) => {
         console.log(error);
@@ -99,16 +85,15 @@ export const followProject = (project, user) => {
   };
 };
 
-// Thunk middleware that updates the user to follow in the database
+// Updates the user to follow in the database
 export const unfollowProject = (projectid, user) => {
   user.following = user.following.filter((elem) => {
     return elem.id !== projectid;
   });
 
   return async (dispatch) => {
-    dispatch(updateFollowStart());
     await axios
-      .put(`http://localhost:5000/students/auth/${user.google_id}`, user)
+      .put(`http://localhost:5000/users/${user.uid}`, user)
       .then(() => dispatch(updateUser(user)))
       .catch((error) => {
         console.log(error);
@@ -116,16 +101,21 @@ export const unfollowProject = (projectid, user) => {
   };
 };
 
-// Thunk middleware that updates the user's applications array
-export const applyProject = (projectid, user) => {
-  user.applications.push(projectid);
-  return async (dispatch) => {
-    dispatch(applyProjectStart());
-    await axios
-      .put(`http://localhost:5000/students/auth/${user.google_id}`, user)
-      .then(() => dispatch(updateUser(user)))
-      .catch((error) => {
-        console.log(error);
-      });
-  };
+export const applyProject = (user_id, project_id, answers) => (dispatch) => {
+  dispatch(loadingStart);
+  // Create application in applications collection
+  axios
+    .post(
+      `http://localhost:5000/applications/user/${user_id}/project/${project_id}`,
+      {
+        answers: answers,
+      }
+    )
+    .then((res) => {
+      /* maybe some applied message/modal */
+    })
+    .catch((error) => {
+      console.log(error);
+    })
+    .then(dispatch(loadingEnd));
 };

@@ -1,9 +1,9 @@
 import React from "react";
 import { connect } from "react-redux";
-import { logout } from "../../../store/actions/auth.actions";
 import { Dropdown, DropdownButton } from "react-bootstrap";
 import { Link } from "react-router-dom";
 import { auth } from "../../../config/fbConfig";
+import { logout } from "../../../store/auth/auth.actions";
 
 const NavbarLoginButton = (props) => {
   const handleLogOut = (e) => {

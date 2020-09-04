@@ -3,12 +3,12 @@ import { AiOutlinePlus, AiOutlineCheck, AiOutlineMinus } from "react-icons/ai";
 import { RiUserStarLine } from "react-icons/ri";
 import { Card, Tooltip, OverlayTrigger } from "react-bootstrap";
 import { connect } from "react-redux";
-import { fetchProject } from "../../../../../store/actions/project.actions";
+import "./ProjectList.scss";
+import { fetchProject } from "../../../../../store/projects/projects.actions";
 import {
   followProject,
   unfollowProject,
-} from "../../../../../store/actions/auth.actions";
-import "./ProjectList.scss";
+} from "../../../../../store/auth/auth.actions";
 
 class ProjectList extends Component<any, any> {
   // Onclick handler to follow project
