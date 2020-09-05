@@ -10,6 +10,7 @@ class ProjectsList extends Component<any, any> {
   };
 
   componentDidMount() {
+    console.log("projectslist mounting");
     axios
       .get(`http://localhost:5000/projects`, { params: { verify: false } })
       .then((res) =>
@@ -22,22 +23,20 @@ class ProjectsList extends Component<any, any> {
   }
 
   render() {
-    const projects =
-      this.props.user &&
-      this.state.projects.map((elem, id) => {
-        return (
-          <ProjectList
-            key={id}
-            projectid={elem._id}
-            title={elem.title}
-            departments={elem.departments}
-            desc={elem.description}
-            categ={elem.categories.join(" | ")}
-            click={this.props.click}
-            applied={this.props.user.applied.includes(elem.id)}
-          />
-        );
-      });
+    const projects = this.state.projects.map((elem, id) => {
+      return (
+        <ProjectList
+          key={id}
+          projectid={elem._id}
+          title={elem.title}
+          departments={elem.departments}
+          desc={elem.description}
+          categ={elem.categories.join(" | ")}
+          click={this.props.click}
+          applied={false || this.props.user?.applied.includes(elem.id)}
+        />
+      );
+    });
     return <div>{projects}</div>;
   }
 }

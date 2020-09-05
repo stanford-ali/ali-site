@@ -15,6 +15,10 @@ class ProjectList extends Component<any, any> {
   followProject = async (event) => {
     event.stopPropagation();
     event.preventDefault();
+    if (!this.props.user) {
+      alert("Please login to follow projects!");
+      return;
+    }
 
     await this.props.onFetchProject(event.target.id);
     await this.props.onFollowProject(
@@ -32,6 +36,7 @@ class ProjectList extends Component<any, any> {
   };
 
   render() {
+    console.log(this.props.user); // add check for null user when applying/following a project
     const renderTooltip = (props) => {
       const { pid, ...rest } = props;
       return (
@@ -87,7 +92,7 @@ class ProjectList extends Component<any, any> {
         // style={{ pointerEvents: this.props.applied ? "none" : "auto" }}
       >
         <Card.Header as="h6" className="CardHead">
-          {this.props.categ || `Biology | Computer Science`}
+          {this.props.categ}
           <span className="AppliedHeader">
             <OverlayTrigger
               placement="left"

@@ -64,7 +64,7 @@ class ProjectsContainer extends Component<any, any> {
   }
 
   render() {
-    const focusFiller = !this.props.user ? null : (
+    const focusFiller = (
       <div className="FocusFiller">
         <div
           style={{
