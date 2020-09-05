@@ -36,6 +36,12 @@ class ProjectFocus extends Component<any, any> {
 
     const handleSubmit = async (event) => {
       event.preventDefault();
+      // If there is no user, alert them that they need to login
+      if (!this.props.user) {
+        alert("Please login to apply to projects!");
+        return;
+      }
+
       let inputs = event.target.elements;
       let questions = this.props.questions;
       let answers = {};
@@ -74,8 +80,8 @@ class ProjectFocus extends Component<any, any> {
       <Card className="FocusProjectRight">
         <Card.Body>
           <Card.Title>{this.props.title}</Card.Title>
-          <Card.Text>{this.props.department}</Card.Text>
-          <Card.Text>{this.props.desc}</Card.Text>
+          <Card.Text>{this.props.departments}</Card.Text>
+          <Card.Text>{this.props.description}</Card.Text>
           <p className="QuestionsHeader">
             <span style={{ color: "#ff7070" }}>*</span>Questions:
           </p>

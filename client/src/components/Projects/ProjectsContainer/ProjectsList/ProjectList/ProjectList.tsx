@@ -15,6 +15,8 @@ class ProjectList extends Component<any, any> {
   followProject = async (event) => {
     event.stopPropagation();
     event.preventDefault();
+
+    // If there is no user, alert the user that they cannot follow
     if (!this.props.user) {
       alert("Please login to follow projects!");
       return;
@@ -36,7 +38,6 @@ class ProjectList extends Component<any, any> {
   };
 
   render() {
-    console.log(this.props.user); // add check for null user when applying/following a project
     const renderTooltip = (props) => {
       const { pid, ...rest } = props;
       return (
@@ -50,7 +51,7 @@ class ProjectList extends Component<any, any> {
     let followingids =
       this.props.user &&
       this.props.user.following.map((elem) => {
-        return elem.id;
+        return elem._id;
       });
 
     const followButton = (
