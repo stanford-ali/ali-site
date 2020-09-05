@@ -22,15 +22,13 @@ const App = (props) => {
         props.onFetchUser(user.uid);
       } else {
         // If user doesn't exist, clear user
-        return;
-        // props.onLogout();
+        props.onLogout();
       }
     });
 
     return () => unsubscribeFromAuth();
   }, []);
 
-  // ternary the switch with loading -> modalLoader
   return (
     <ConnectedRouter history={history}>
       <Switch>

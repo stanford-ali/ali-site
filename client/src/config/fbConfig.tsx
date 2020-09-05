@@ -25,6 +25,8 @@ export const uiConfig = {
   callbacks: {
     signInSuccessWithAuthResult: (user) => {
       const userInfo = user.additionalUserInfo;
+
+      // Send verification email function
       async function sendVerification() {
         await user.user
           .sendEmailVerification()
@@ -32,33 +34,37 @@ export const uiConfig = {
           .catch((error) => console.log(error));
       }
 
-      if (userInfo.isNewUser && userInfo.providerId === "password") {
+      // If user is new and they signed in via Google
+      if (userInfo.isNewUser) {
         // New User - Create user in database
         const firstName = user.user.displayName.split(" ")[0];
         const lastName = user.user.displayName.split(" ")[1];
         const newUser = {
-          firebaseid: user.user.uid,
-          email: user.user.email,
+          uid: user.user.uid,
           firstname: firstName,
           lastname: lastName,
+          email: user.user.email,
           image: user.user.photoURL || "",
-          qna: {},
-          applications: [],
+          university: "", // tentative until post-signup questions are implemented
+          year: "", // tentative until post-signup questions are implemented
+          skills: "", // tentative until post-signup questions are implemented
+          programming: "", // tentative until post-signup questions are implemented
+          resume: "", // tentative until post-signup questions are implemented
           following: [],
+          faculty: false, // tentative until post-signup questions are implemented
+          admin: false,
         };
 
-        // async function createUser(newUser) {
-        //   await axios.post("http://localhost:5000/students", newUser);
-        // }
-
-        // createUser(newUser);
-
+        // Create new user in database
         axios
-          .post("http://localhost:5000/students", newUser)
+          .post(`http://localhost:5000/users/${user.user.uid}`, newUser)
           .then(() => console.log("post is done"))
           .catch((error) => console.log(error));
 
-        sendVerification();
+        // Send email verification if signed in through EmailAuth (not Google/FB, etc)
+        if (userInfo.providerId === "password") {
+          sendVerification();
+        }
       }
       return false;
     },

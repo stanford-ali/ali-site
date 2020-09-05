@@ -43,7 +43,7 @@ const auth: Reducer<any> = (state: any = initialState, action): any => {
     case LOAD_USER:
       return {
         ...state,
-        signedinIn: true,
+        signedIn: true,
         user: {
           ...action.payload,
         },

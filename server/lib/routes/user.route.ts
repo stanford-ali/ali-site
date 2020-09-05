@@ -1,5 +1,4 @@
 import * as express from "express";
-import serviceAccount from "../serviceAccount";
 import * as admin from "firebase-admin";
 const userRoute = express.Router();
 userRoute.use((req, res, next) => {

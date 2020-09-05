@@ -17,7 +17,10 @@ class ProjectList extends Component<any, any> {
     event.preventDefault();
 
     await this.props.onFetchProject(event.target.id);
-    await this.props.onFollowProject(this.props.details, this.props.user);
+    await this.props.onFollowProject(
+      this.props.current_project,
+      this.props.user
+    );
   };
 
   // Onclick handler to unfollow project
@@ -74,6 +77,8 @@ class ProjectList extends Component<any, any> {
       .split(" ")
       .slice(0, 20)
       .join(" ")}. . .`;
+
+    const departments = `${this.props.departments.join(" ")}`;
     return (
       <Card
         className="ProjectCard"
@@ -115,7 +120,7 @@ class ProjectList extends Component<any, any> {
             </Card.Title>
           </div>
           <Card.Text>
-            {this.props.department} <br />
+            {departments} <br />
             {description}
           </Card.Text>
         </Card.Body>
@@ -127,7 +132,7 @@ class ProjectList extends Component<any, any> {
 const mapStateToProps = (state) => {
   return {
     user: state.auth.user,
-    details: state.project.details,
+    current_project: state.project.current_project,
   };
 };
 

@@ -2,7 +2,7 @@ import React from "react";
 import { useHistory } from "react-router-dom";
 import { AiOutlineClose } from "react-icons/ai";
 import { connect } from "react-redux";
-import { unfollowProject } from "../../../../../store/actions/auth.actions";
+import { unfollowProject } from "../../../../../store/auth/auth.actions";
 import "./FollowProject.scss";
 
 function FollowProject(props) {

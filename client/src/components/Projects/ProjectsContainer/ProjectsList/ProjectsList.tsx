@@ -11,7 +11,7 @@ class ProjectsList extends Component<any, any> {
 
   componentDidMount() {
     axios
-      .get(`http://localhost:5000/projects`)
+      .get(`http://localhost:5000/projects`, { params: { verify: false } })
       .then((res) =>
         this.setState({
           ...this.state,
@@ -22,26 +22,19 @@ class ProjectsList extends Component<any, any> {
   }
 
   render() {
-    // The application ids of the projects a user has applied to
-    const applied =
-      this.props.user &&
-      this.props.user.applications.map((elem) => {
-        return elem.id;
-      });
-
     const projects =
       this.props.user &&
       this.state.projects.map((elem, id) => {
         return (
           <ProjectList
             key={id}
-            projectid={elem.id}
+            projectid={elem._id}
             title={elem.title}
-            department={elem.department}
-            desc={elem.desc}
-            categ={elem.category.join(" | ")}
+            departments={elem.departments}
+            desc={elem.description}
+            categ={elem.categories.join(" | ")}
             click={this.props.click}
-            applied={applied.includes(elem.id)}
+            applied={this.props.user.applied.includes(elem.id)}
           />
         );
       });

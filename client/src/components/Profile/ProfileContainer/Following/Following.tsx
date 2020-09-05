@@ -1,6 +1,6 @@
 import React, { Component } from "react";
 import FollowProject from "./FollowProject/FollowProject";
-import AppliedProject from "./AppliedProject/AppliedProject";
+// import AppliedProject from "./AppliedProject/AppliedProject";
 import { connect } from "react-redux";
 import "./Following.scss";
 

@@ -10,7 +10,6 @@ import { fetchProject } from "../../../store/projects/projects.actions";
 class ProjectsContainer extends Component<any, any> {
   constructor(props) {
     super(props);
-
     this.changeProjSelected = this.changeProjSelected.bind(this);
   }
 
@@ -87,7 +86,7 @@ class ProjectsContainer extends Component<any, any> {
         </div>
         <div className="ProjectsContainerRight">
           {this.state.projSelected ? (
-            <ProjectFocus {...this.props.details} />
+            <ProjectFocus {...this.props.current_project} />
           ) : (
             focusFiller
           )}
@@ -100,8 +99,7 @@ class ProjectsContainer extends Component<any, any> {
 // Get state from redux
 const mapStateToProps = (state) => {
   return {
-    details: state.project.details,
-    userid: state.auth.userId,
+    current_project: state.project.current_project,
     user: state.auth.user,
   };
 };

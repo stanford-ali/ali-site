@@ -24,15 +24,11 @@ const project: Reducer<any> = (state: any = initialState, action) => {
         ...state,
         current_project: action.payload as IProject,
       };
-    case SELECT_PROJECT:
-
     case FETCH_PROJECTS:
       return {
         ...state,
         projects: action.payload,
       };
-    case APPROVE_PROJECT:
-    case SUBMIT_APPLICATION:
     default:
       return state;
   }

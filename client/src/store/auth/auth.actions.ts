@@ -55,8 +55,7 @@ export const fetchUser = (uid) => {
     axios
       .get(`http://localhost:5000/users/${uid}`)
       .then((res) => {
-        console.log("get is done", res);
-        dispatch(loadUser(res.data));
+        dispatch(loadUser(res.data[0]));
       })
       .catch((error) => {
         console.log(error);
@@ -103,7 +102,7 @@ export const unfollowProject = (projectid, user) => {
 
 export const applyProject = (user_id, project_id, answers) => (dispatch) => {
   dispatch(loadingStart);
-  // Create application in applications collection
+  // Create application in applications collection, and update the user's application array
   axios
     .post(
       `http://localhost:5000/applications/user/${user_id}/project/${project_id}`,
