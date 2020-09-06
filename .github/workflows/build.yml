@@ -19,8 +19,8 @@ jobs:
 
       - name: Build Backend
         run: |
+          cd server
           npm run build
-          cd ..
       
       - name: Clean Install Frontend Packages
         run: |
@@ -29,5 +29,5 @@ jobs:
       
       - name: Build Frontend
         run: |
+          cd client
           npm run build
-          cd ..
