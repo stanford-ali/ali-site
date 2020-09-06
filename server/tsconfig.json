@@ -7,13 +7,9 @@
     "removeComments": true,
     "target": "es6",
     "outDir": "./dist",
-    "baseUrl": "./lib"
-    
+    "baseUrl": "./lib",
+    "resolveJsonModule": true
   },
-  "include": [
-    "lib/**/*.ts"
-  ],
-  "exclude": [
-    "node_modules"
-  ]
+  "include": ["lib/**/*.ts", "lib/**/*.json"],
+  "exclude": ["node_modules"]
 }

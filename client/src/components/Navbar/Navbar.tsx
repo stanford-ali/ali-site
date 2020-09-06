@@ -1,9 +1,12 @@
 import React from "react";
 import { Link, NavLink } from "react-router-dom";
 import NavbarLoginButton from "./NavbarLoginButton/NavbarLoginButton";
+import { connect } from "react-redux";
+import ModalLoader from "../GlobalUI/ModalLoader/ModalLoader";
 
-const Navbar = () => (
+const Navbar = (props) => (
   <section id="navbar">
+    {/* SHOULD BE LOADING {!props.user ? <ModalLoader /> : null} */} 
     <div>
       <nav id="navbar">
         <div className="navbar">
@@ -29,11 +32,28 @@ const Navbar = () => (
           >
             Projects
           </NavLink>
-          <NavbarLoginButton />
+          {props.user ? (
+            <NavbarLoginButton />
+          ) : (
+            <NavLink
+              to="/login"
+              exact
+              className="navbar-item page"
+              activeClassName="active"
+            >
+              Login
+            </NavLink>
+          )}
         </div>
       </nav>
     </div>
   </section>
 );
 
-export default Navbar;
+const mapStateToProps = (state) => {
+  return {
+    user: state.auth.user,
+  };
+};
+
+export default connect(mapStateToProps)(Navbar);

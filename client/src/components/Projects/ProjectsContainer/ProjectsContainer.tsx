@@ -2,15 +2,14 @@ import React, { Component } from "react";
 import ProjectsList from "./ProjectsList/ProjectsList";
 import ProjectFocus from "./ProjectFocus/ProjectFocus";
 import { GrProjects } from "react-icons/gr";
-import { fetchProject } from "../../../store/actions/project.actions";
 import { connect } from "react-redux";
-import axios from "axios";
+import qs from "qs";
 import "./ProjectsContainer.scss";
+import { fetchProject } from "../../../store/projects/projects.actions";
 
 class ProjectsContainer extends Component<any, any> {
   constructor(props) {
     super(props);
-
     this.changeProjSelected = this.changeProjSelected.bind(this);
   }
 
@@ -21,7 +20,6 @@ class ProjectsContainer extends Component<any, any> {
   state = {
     projSelected: false,
     projectid: "",
-    user: {},
   };
 
   // Change so that ProjectFocus component shows
@@ -30,22 +28,39 @@ class ProjectsContainer extends Component<any, any> {
       projSelected: true,
       projectid: id,
     });
+    this.setQueryString(id);
     this.props.onFetchProject(id);
   }
 
+  // Sets the URL's query string when a user selects a project
+  setQueryString(projectid) {
+    let query_string = qs.stringify(
+      {
+        search: projectid,
+      },
+      {
+        encode: false,
+        indices: false,
+      }
+    );
+    if (query_string !== "") {
+      query_string = `?${query_string}`;
+    }
+    window.history.replaceState({}, "", `/projects/${query_string}`);
+  }
+
   componentDidMount() {
-    axios
-      .get(`http://localhost:5000/students/auth/${this.props.userid}`)
-      .then((res) => {
-        console.log(res.data);
-        this.setState({
-          ...this.state,
-          user: res.data[0],
-        });
-      })
-      .catch((errors) => {
-        console.log(errors);
+    if (window.location.search) {
+      // We have a query param for a project
+      let params = qs.parse(window.location.search.substring(1), {
+        encode: false,
+        indices: false,
       });
+      this.setState({ projSelected: true, projectid: params.search });
+
+      // Update this.props.details so information can be displayed
+      this.props.onFetchProject(params.search);
+    }
   }
 
   render() {
@@ -63,6 +78,7 @@ class ProjectsContainer extends Component<any, any> {
         </div>
       </div>
     );
+
     return (
       <div className="ProjectsContainer">
         <div className="ProjectsContainerLeft">
@@ -70,7 +86,7 @@ class ProjectsContainer extends Component<any, any> {
         </div>
         <div className="ProjectsContainerRight">
           {this.state.projSelected ? (
-            <ProjectFocus {...this.props.details} />
+            <ProjectFocus {...this.props.current_project} />
           ) : (
             focusFiller
           )}
@@ -83,8 +99,8 @@ class ProjectsContainer extends Component<any, any> {
 // Get state from redux
 const mapStateToProps = (state) => {
   return {
-    details: state.project.details,
-    userid: state.auth.userId,
+    current_project: state.project.current_project,
+    user: state.auth.user,
   };
 };
 

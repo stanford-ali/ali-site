@@ -16,6 +16,40 @@ $outline: #3246bb;
   }
 }
 
+.ProjectCardDisable {
+  pointer-events: none;
+  margin-bottom: 10px;
+}
+
+.ProjectCardOverlay {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background-color: rgba(184, 184, 184, 0.2) !important;
+}
+
 .ProjectCardButtons {
   display: flex;
+  align-items: center;
+}
+
+.FollowButton {
+  background-color: Transparent;
+  background-repeat: no-repeat;
+  border: none;
+  cursor: pointer;
+  overflow: hidden;
+  outline: none;
+}
+
+.CardHead {
+  background-color: #f7f7f7b3 !important;
+}
+
+.AppliedHeader {
+  color: $outline;
+  font-weight: normal;
+  float: right;
 }

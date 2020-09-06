@@ -1,13 +1,26 @@
 import React from "react";
 import Navbar from "../Navbar/Navbar";
+import { auth, uiConfig } from "../../config/fbConfig";
+import StyledFirebaseAuth from "react-firebaseui/StyledFirebaseAuth";
+import { connect } from "react-redux";
+import { Redirect } from "react-router-dom";
 
-const Login = () => (
-  <>
-    <Navbar />
-    <div>
-      <h3>This is test information.</h3>
-    </div>
-  </>
-);
+const Login = (props) => {
+  return props.user ? (
+    <Redirect to={props.redirect} />
+  ) : (
+    <>
+      <Navbar />
+      <StyledFirebaseAuth uiConfig={uiConfig} firebaseAuth={auth} />
+    </>
+  );
+};
 
-export default Login;
+const mapStateToProps = (state) => {
+  return {
+    user: state.auth.user,
+    redirect: state.base.redirect,
+  };
+};
+
+export default connect(mapStateToProps)(Login);

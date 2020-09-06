@@ -14,3 +14,9 @@
     background-color: #2b3da1;
   }
 }
+
+.Apply:disabled,
+.Apply[disabled] {
+  pointer-events: none;
+  background-color: #a3a3a3;
+}

@@ -6,14 +6,12 @@ import { Button } from "react-bootstrap";
 
 import "./HomeContainer.scss";
 export default function HomeContainer() {
+  const viewProjects = () => {
+    window.history.pushState({}, "", `/projects`);
+  };
+
   return (
     <div className="HomeContainer">
-      <ALIlogo
-        className="HomeLogo"
-        stroke="#c4c4c480"
-        width="400"
-        height="400"
-      />
       <div className="LeftContainer">
         <div>
           <h1 className="HomeMessage1">We connect</h1>
@@ -26,6 +24,12 @@ export default function HomeContainer() {
             />
           </h1>
           <h1 className="HomeMessage1">to projects</h1>
+          <ALIlogo
+            className="HomeLogo"
+            stroke="#c4c4c466"
+            width="400"
+            height="400"
+          />
         </div>
         <div className="HomeInfo">
           <p>
@@ -34,7 +38,9 @@ export default function HomeContainer() {
             Stanford. Students provide much needed expertise while gaining
             valuable experience working on real‑world projects.
           </p>
-          <Button className="HomeButton">Learn more</Button>
+          <Button className="HomeButton" onClick={viewProjects}>
+            View Projects
+          </Button>
         </div>
       </div>
       <img

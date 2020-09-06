@@ -1,6 +1,8 @@
 .ProjectsContainer {
   display: flex;
   padding: 3vh 5vw;
+  max-width: 1500px;
+  margin: auto;
 }
 
 .ProjectsContainerLeft {
@@ -11,17 +13,18 @@
 
 .ProjectsContainerRight {
   width: 60%;
-  position: relative;
+  align-self: flex-start;
+  position: sticky;
+  top: 3%;
 }
 
 .FocusFiller {
   position: absolute;
-  top: 50%;
   left: 50%;
-  transform: translate(-50%, -50%);
+  transform: translate(-50%, 30vh);
 }
 
-.ProjectFocus {
+.FocusProject {
   border: 1px solid;
   border-color: #3246bb;
 }

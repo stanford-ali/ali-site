@@ -1,47 +1,49 @@
 import React, { Component } from "react";
 import ProjectList from "./ProjectList/ProjectList";
-import RingLoader from "react-spinners/RingLoader";
+import Loader from "../../../GlobalUI/ModalLoader/ModalLoader";
 import axios from "axios";
+import { connect } from "react-redux";
 
 class ProjectsList extends Component<any, any> {
   state = {
     projects: [],
-    loading: false,
   };
 
   componentDidMount() {
     axios
-      .get(`http://localhost:5000/projects`)
+      .get(`http://localhost:5000/projects`, { params: { verify: false } })
       .then((res) =>
         this.setState({
           ...this.state,
           projects: res.data,
-          loading: false,
         })
       )
       .catch((error) => console.log(error));
   }
 
   render() {
-    const questions = this.state.projects.map((elem, id) => {
+    const projects = this.state.projects.map((elem, id) => {
       return (
         <ProjectList
           key={id}
-          projectid={elem.id}
+          projectid={elem._id}
           title={elem.title}
-          department={elem.department}
-          desc={elem.desc}
-          categ={elem.category.join(" ")}
+          departments={elem.departments}
+          desc={elem.description}
+          categ={elem.categories.join(" | ")}
           click={this.props.click}
+          applied={false || this.props.user?.applied.includes(elem.id)}
         />
       );
     });
-    return (
-      <div>
-        {this.state.loading ? <RingLoader color="#3246bb" /> : questions}
-      </div>
-    );
+    return <div>{projects}</div>;
   }
 }
 
-export default ProjectsList;
+const mapStateToProps = (state) => {
+  return {
+    user: state.auth.user,
+  };
+};
+
+export default connect(mapStateToProps, null)(ProjectsList);

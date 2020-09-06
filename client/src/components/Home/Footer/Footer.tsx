@@ -1,41 +1,53 @@
 import React from "react";
 import "./Footer.scss";
 export default function Footer() {
+  const date = new Date();
+  const year = date.getFullYear();
+
   return (
-    <div className="footer">
-      <div className="footer-groups">
-        <div className="footer-group">
-          <h2 className="footer-group-title"> Bookstack </h2>
-          <div className="footer-group-links">
-            <a href="http://bookstack.io"> Flashcards </a>
-            <a href="http://bookstack.io/about"> About </a>
-          </div>
+    <footer className="pt-4 my-md-3 pt-md-5 border-top">
+      <div className="FooterRow">
+        <div className="col-6 col-md">
+          <h5>Contact Us</h5>
+          <p className="text-muted">
+            If you have a question or suggestion, or want to work with us, we'd
+            love to hear from you!
+          </p>
+          <small className="text-muted">&copy; {year}</small>
         </div>
-        <div className="footer-group">
-          <h2 className="footer-group-title"> Resources </h2>
-          <div className="footer-group-links">
-            <a href="http://bookstack.io"> Contact </a>
-            <a href="http://bookstack.io"> Terms & Conditions </a>
-          </div>
+        <div className="col-6">
+          <h5>Partners</h5>
+          <ul className="list-unstyled text-small">
+            <li>
+              <a className="text-muted" href="#">
+                Partners
+              </a>
+            </li>
+            <li>
+              <a className="text-muted" href="#">
+                Partners
+              </a>
+            </li>
+            <li>
+              <a className="text-muted" href="#">
+                Partners
+              </a>
+            </li>
+            <li>
+              <a className="text-muted" href="#">
+                Partners
+              </a>
+            </li>
+          </ul>
         </div>
-        <div className="footer-group">
-          <h2 className="footer-group-title"> Supported by </h2>
-          <div className="footer-group-links">
-            <a href="https://www.presidentialscholars.org/2020-seed-grant">
-              {" "}
-              Presidential Scholars Association{" "}
-            </a>
-            <a href="https://www.studentcapitaldao.org/"> USC SCDAO </a>
-          </div>
-        </div>
-        <div className="footer-group">
-          <div className="footer-group-sm-links">
-            <a href="#" className="fa fa-facebook"></a>
-            <a href="#" className="fa fa-instagram"></a>
-            <a href="#" className="fa fa-linkedin"></a>
-          </div>
+        <div className="col-6 col-md">
+          <h5>People</h5>
+          <ul className="list-unstyled text-small">
+            <li className="text-muted">Alix Cui</li>
+            <li className="text-muted"></li>
+          </ul>
         </div>
       </div>
-    </div>
+    </footer>
   );
 }

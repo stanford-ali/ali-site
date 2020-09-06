@@ -1,0 +1,21 @@
+.AppliedProjects {
+  padding: 0 20px;
+  display: flex;
+  justify-content: space-between;
+  align-items: flex-start;
+  li {
+    list-style-type: none;
+    font-size: 1.3rem;
+    color: #5f574f;
+    font-family: "Lato", sans-serif;
+  }
+}
+
+.ExpandApplication {
+  background-color: Transparent;
+  background-repeat: no-repeat;
+  border: none;
+  cursor: pointer;
+  overflow: hidden;
+  outline: none;
+}

@@ -1,14 +1,16 @@
 import { combineReducers } from "redux";
-import * as Reducers from "./reducers";
+import baseReducer from "./base/base.reducer";
+import authReducer from "./auth/auth.reducer";
+import projectsReducer from "./projects/projects.reducer";
+
 import { connectRouter } from "connected-react-router";
 
 const createRootReducer = (history) =>
   combineReducers({
     router: connectRouter(history),
-    base: Reducers.base,
-    auth: Reducers.auth,
-    admin: Reducers.admin,
-    project: Reducers.project,
+    base: baseReducer,
+    auth: authReducer,
+    project: projectsReducer,
   });
 
 export default createRootReducer;

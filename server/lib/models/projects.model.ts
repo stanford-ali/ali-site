@@ -9,50 +9,32 @@ const projectSchema = new Schema(
       required: true,
       unique: true,
     },
-    id: {
-      type: String,
-      required: true,
-    },
     description: {
       type: String,
       required: true,
     },
     timeframe: String,
-    questions: [
-      {
-        type: String,
-      },
-    ],
-    faculty_id: {
-      type: Schema.Types.ObjectId,
-      ref: "Faculty",
-    },
-    departments: [
-      {
-        type: String,
-        required: true,
-      },
-    ],
+    questions: [String],
+    owner: String, // owner of the project, uid
+    university: String,
+    departments: [String],
     website: String,
-    category: [
-      {
-        type: Schema.Types.ObjectId,
-        rel: "Category",
-      },
-    ],
-    tag_ids: [
-      {
-        type: Schema.Types.ObjectId,
-        ref: "Tag",
-      },
-    ],
-    application_ids: [
-      {
-        type: Schema.Types.ObjectId,
-        ref: "Application",
-      },
-    ],
-    self_designed: Boolean,
+    skills: [String],
+    courses: [String],
+    categories: [String],
+    tags: [String],
+    faculty_designed: {
+      type: Boolean,
+      default: false,
+    },
+    self_designed: {
+      type: Boolean,
+      default: false,
+    },
+    approved: {
+      type: Boolean,
+      default: false,
+    },
   },
   {
     timestamps: true,

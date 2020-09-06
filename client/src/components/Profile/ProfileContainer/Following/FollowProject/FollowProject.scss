@@ -1,6 +1,6 @@
 .FollowProjects {
   padding: 0 20px;
-
+  margin-bottom: 40px;
   li {
     list-style-type: none;
     font-size: 1.3rem;
@@ -16,21 +16,17 @@
   justify-content: space-between;
 }
 
-.Apply {
-  padding: 0.3rem 2rem;
-  font-size: 1rem;
-  font-weight: bold;
-  border: none;
-  border-radius: 0.75rem;
-  background-color: #6e7ed8;
-  color: white;
-  cursor: pointer;
-  margin-top: 10px;
-  margin-bottom: 50px;
-}
-
 .Department {
   p {
     font-size: 14px;
   }
+}
+
+.UnfollowProject {
+  background-color: Transparent;
+  background-repeat: no-repeat;
+  border: none;
+  cursor: pointer;
+  overflow: hidden;
+  outline: none;
 }
