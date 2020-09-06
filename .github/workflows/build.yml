@@ -1,0 +1,33 @@
+name: Clean Install and Build Front and Back Ends
+on:
+  pull_request:
+    branches:
+      - preproduction
+jobs:
+  install-and-build:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v2
+        with:
+          persist-credentials: false
+
+      - name: Clean Install Backend Packages
+        run: | 
+          cd server
+          npm ci
+
+      - name: Build Backend
+        run: |
+          npm run build
+          cd ..
+      
+      - name: Clean Install Frontend Packages
+        run: |
+          cd client
+          npm ci
+      
+      - name: Build Frontend
+        run: |
+          npm run build
+          cd ..
