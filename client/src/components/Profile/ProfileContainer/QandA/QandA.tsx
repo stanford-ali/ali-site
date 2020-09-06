@@ -18,8 +18,11 @@ class QandA extends Component<any, any> {
       let answer = input.value;
       let userid = this.props.user.uid;
       this.props.user[questionid] = answer;
+
+      let body = {};
+      body[questionid] = answer;
       axios
-        .put(`http://localhost:5000/users/${userid}`, this.props.user)
+        .patch(`http://localhost:5000/users/${userid}`, body)
         .catch((error) => console.log(error));
     };
 

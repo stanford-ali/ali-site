@@ -3,11 +3,23 @@ import FollowProject from "./FollowProject/FollowProject";
 // import AppliedProject from "./AppliedProject/AppliedProject";
 import { connect } from "react-redux";
 import "./Following.scss";
+import axios from "axios";
 
 class Following extends Component<any, any> {
   state = {
     rightDisplay: "following",
+    followingProjects: [],
   };
+
+  async componentDidMount() {
+    for (let project of this.props.user.following) {
+      await axios.get(`http://localhost:5000/projects/${project}`).then((res) =>
+        this.setState({
+          followingProjects: [...this.state.followingProjects, res.data[0]],
+        })
+      );
+    }
+  }
 
   onRightDisplayChange(title) {
     console.log(title);
@@ -29,19 +41,17 @@ class Following extends Component<any, any> {
     // });
 
     // All the projects a user is following
-    const following =
-      this.props.user &&
-      this.props.user.following.map((elem, id) => {
-        return (
-          <FollowProject
-            key={id}
-            title={elem.title}
-            department={elem.department}
-            category={elem.category}
-            projectid={elem.id}
-          />
-        );
-      });
+    const following = this.state.followingProjects.map((elem, id) => {
+      return (
+        <FollowProject
+          key={id}
+          title={elem.title}
+          department={elem.departments}
+          category={elem.categories}
+          projectid={elem._id}
+        />
+      );
+    });
 
     return (
       <div className="Following">

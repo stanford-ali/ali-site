@@ -72,7 +72,8 @@ export default class ApplicationController {
       {
         user_id: req.params.user_id,
         project_id: req.params.project_id,
-        answers: req.body,
+        answers: req.body.answers,
+        owner_id: req.body.owner_id,
       },
       (error, data) => {
         if (error) {

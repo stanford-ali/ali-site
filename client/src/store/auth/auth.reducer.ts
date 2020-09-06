@@ -4,6 +4,7 @@ import { LOAD_USER, SIGN_UP, SIGN_OUT, UPDATE_USER } from "./auth.types";
 const initialState = {
   user: null,
   signedIn: false,
+  loading: false,
   questions: [
     {
       question: "What university do you attend?",
@@ -61,7 +62,6 @@ const auth: Reducer<any> = (state: any = initialState, action): any => {
           ...action.payload,
         },
       };
-
     default:
       return state;
   }

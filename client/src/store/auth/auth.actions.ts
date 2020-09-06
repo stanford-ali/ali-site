@@ -104,21 +104,19 @@ export const unfollowProject = (projectid, user) => {
   };
 };
 
-export const applyProject = (user_id, project_id, answers) => (dispatch) => {
-  dispatch(loadingStart);
-  // Create application in applications collection, and update the user's application array
-  axios
-    .post(
-      `http://localhost:5000/applications/user/${user_id}/project/${project_id}`,
-      {
-        answers: answers,
-      }
-    )
-    .then((res) => {
-      /* maybe some applied message/modal */
-    })
-    .catch((error) => {
-      console.log(error);
-    })
-    .then(dispatch(loadingEnd));
+export const applyProject = (user_id, project_id, owner_id, answers) => {
+  return (dispatch) => {
+    dispatch(loadingStart);
+    // Create application in applications collection, and update the user's application array
+    axios
+      .post(
+        `http://localhost:5000/applications/user/${user_id}/project/${project_id}`,
+        { answers, owner_id }
+      )
+      .then((res) => {})
+      .catch((error) => {
+        console.log(error);
+      })
+      .then(dispatch(loadingEnd));
+  };
 };

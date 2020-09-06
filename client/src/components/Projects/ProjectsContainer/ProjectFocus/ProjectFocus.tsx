@@ -53,22 +53,17 @@ class ProjectFocus extends Component<any, any> {
       }
 
       let inputs = event.target.elements;
-      let questions = this.props.questions;
-      let answers = {};
+      let answers = [];
       for (let i = 0; i < inputs.length - 1; i++) {
-        answers[questions[i]] = inputs[i].value;
+        answers.push(inputs[i].value);
       }
 
-      let application = {
-        id: this.props.id,
-        title: this.props.title,
-        department: this.props.department,
-        desc: this.props.desc,
-        category: [this.props.category],
-        answers: { ...answers, ...this.props.user.qna },
-      };
-
-      await this.props.onApplyProject(application, this.props.user);
+      await this.props.onApplyProject(
+        this.props.user.uid,
+        this.props._id,
+        this.props.owner,
+        answers
+      );
     };
 
     const questionsForm = (
@@ -112,14 +107,14 @@ class ProjectFocus extends Component<any, any> {
 const mapStateToProps = (state) => {
   return {
     user: state.auth.user,
-    loading: state.auth.loading,
+    loading: state.base.loading,
   };
 };
 
 const mapDispatchToProps = (dispatch) => {
   return {
-    onApplyProject: (user_id, project_id, answers) =>
-      dispatch(applyProject(user_id, project_id, answers)),
+    onApplyProject: (user_id, project_id, owner_id, answers) =>
+      dispatch(applyProject(user_id, project_id, owner_id, answers)),
   };
 };
 

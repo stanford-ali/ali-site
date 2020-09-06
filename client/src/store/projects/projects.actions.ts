@@ -5,7 +5,6 @@ import {
   SUBMIT_APPLICATION,
 } from "./projects.types";
 import { loadingStart, loadingEnd } from "../base/base.actions";
-import { fetchUser } from "../auth/auth.actions";
 
 export const fetchProject = (project_id) => (dispatch) => {
   dispatch(loadingStart());
