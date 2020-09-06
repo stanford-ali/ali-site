@@ -8,9 +8,10 @@ import Home from "./components/Home/Home";
 import Login from "./components/Login/Login";
 import Profile from "./components/Profile/Profile";
 import Projects from "./components/Projects/Projects";
-
+import Submit from "./components/Submit/Submit";
 import "./App.scss";
 import { fetchUser, logout } from "./store/auth/auth.actions";
+import { setRedirect } from "./store/base/base.actions";
 
 const App = (props) => {
   // Auth observable (get the current user)
@@ -34,15 +35,25 @@ const App = (props) => {
       <Switch>
         <Route exact path="/" component={Home} />
         <Route exact path="/projects" component={Projects} />
-        <Route exact path="/login">
-          {props.user ? <Redirect to="/" /> : <Login />}
-        </Route>
+        <Route exact path="/login" component={Login} />
         <Route
           exact
           path="/profile"
-          component={() => (props.user ? <Profile /> : <Redirect to="/" />)}
+          component={() => {
+            if (props.user) return <Profile />;
+            props.setRedirect("/profile");
+            return <Redirect to="/login" />;
+          }}
         />
-        <Route exact path="/admin" />
+        <Route
+          exact
+          path="/submit"
+          component={() => {
+            if (props.user) return <Submit />;
+            props.setRedirect("/submit");
+            return <Redirect to="/login" />;
+          }}
+        />
       </Switch>
     </ConnectedRouter>
   );
@@ -58,6 +69,7 @@ const mapDispatchToProps = (dispatch) => {
   return {
     onFetchUser: (uid) => dispatch(fetchUser(uid)),
     onLogout: () => dispatch(logout()),
+    setRedirect: (route) => dispatch(setRedirect(route)),
   };
 };
 
