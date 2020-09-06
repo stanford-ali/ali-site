@@ -41,7 +41,7 @@ export default class UserController {
   public updateUser(req: Request, res: Response, next: NextFunction) {
     User.findOne(
       {
-        uid: req.params.google_id,
+        uid: req.params.user_id,
       },
       (error, data) => {
         if (error) {
@@ -54,11 +54,11 @@ export default class UserController {
         if (req.body.uid) {
           delete req.body.uid;
         }
-        req.body.forEach((attr) => {
-          if (attr !== "admin") {
-            data[attr] = req.body[attr];
+        for (const property in req.body) {
+          if (property !== "admin") {
+            data[property] = req.body[property];
           }
-        });
+        }
         data.save();
         res.json(data);
       }

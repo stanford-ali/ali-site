@@ -72,11 +72,13 @@ export const updateUser = (newUser) => {
 };
 
 // Updates the user to unfollow in the database
-export const followProject = (project, user) => {
-  user.following.push(project);
+export const followProject = (projectid, user) => {
+  user.following.push(projectid);
   return async (dispatch) => {
     await axios
-      .put(`http://localhost:5000/users/${user.uid}`, user)
+      .patch(`http://localhost:5000/users/${user.uid}`, {
+        following: user.following,
+      })
       .then(() => dispatch(updateUser(user)))
       .catch((error) => {
         console.log(error);
@@ -87,12 +89,14 @@ export const followProject = (project, user) => {
 // Updates the user to follow in the database
 export const unfollowProject = (projectid, user) => {
   user.following = user.following.filter((elem) => {
-    return elem.id !== projectid;
+    return elem !== projectid;
   });
 
   return async (dispatch) => {
     await axios
-      .put(`http://localhost:5000/users/${user.uid}`, user)
+      .patch(`http://localhost:5000/users/${user.uid}`, {
+        following: user.following,
+      })
       .then(() => dispatch(updateUser(user)))
       .catch((error) => {
         console.log(error);

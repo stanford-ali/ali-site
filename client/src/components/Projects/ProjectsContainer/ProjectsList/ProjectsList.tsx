@@ -10,7 +10,6 @@ class ProjectsList extends Component<any, any> {
   };
 
   componentDidMount() {
-    console.log("projectslist mounting");
     axios
       .get(`http://localhost:5000/projects`, { params: { verify: false } })
       .then((res) =>

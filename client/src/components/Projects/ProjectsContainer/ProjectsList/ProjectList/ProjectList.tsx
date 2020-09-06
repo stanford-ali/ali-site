@@ -22,11 +22,7 @@ class ProjectList extends Component<any, any> {
       return;
     }
 
-    await this.props.onFetchProject(event.target.id);
-    await this.props.onFollowProject(
-      this.props.current_project,
-      this.props.user
-    );
+    await this.props.onFollowProject(this.props.projectid, this.props.user);
   };
 
   // Onclick handler to unfollow project
@@ -46,13 +42,6 @@ class ProjectList extends Component<any, any> {
         </Tooltip>
       );
     };
-
-    // An array of project id's the user is following
-    let followingids =
-      this.props.user &&
-      this.props.user.following.map((elem) => {
-        return elem._id;
-      });
 
     const followButton = (
       <button
@@ -75,7 +64,8 @@ class ProjectList extends Component<any, any> {
     );
 
     let followUnfollowButton =
-      followingids && followingids.includes(this.props.projectid)
+      this.props.user &&
+      this.props.user.following.includes(this.props.projectid)
         ? unfollowButton
         : followButton;
 
@@ -145,7 +135,8 @@ const mapStateToProps = (state) => {
 const mapDispatchToProps = (dispatch) => {
   return {
     onFetchProject: (projectid) => dispatch(fetchProject(projectid)),
-    onFollowProject: (project, user) => dispatch(followProject(project, user)),
+    onFollowProject: (projectid, user) =>
+      dispatch(followProject(projectid, user)),
     onUnfollowProject: (projectid, user) =>
       dispatch(unfollowProject(projectid, user)),
   };

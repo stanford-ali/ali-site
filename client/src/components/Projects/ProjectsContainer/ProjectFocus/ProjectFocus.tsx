@@ -6,8 +6,25 @@ import { Form } from "react-bootstrap";
 import ClipLoader from "react-spinners/ClipLoader";
 import "./ProjectFocus.scss";
 import { applyProject } from "../../../../store/auth/auth.actions";
+import axios from "axios";
 
 class ProjectFocus extends Component<any, any> {
+  state = {
+    application: null,
+  };
+
+  componentDidUpdate(prevProps, prevState) {
+    // User is established - see if they have applied to the project
+    if (this.props.user !== prevProps.user) {
+      axios
+        .get(
+          `http://localhost:5000/applications/user/${this.props.user.uid}/project/${this.props._id}`
+        )
+        .then((res) => this.setState({ application: res.data }))
+        .catch((error) => console.log(error));
+    }
+  }
+
   render() {
     const questions =
       this.props.questions &&
@@ -25,13 +42,6 @@ class ProjectFocus extends Component<any, any> {
             />
           </Form.Group>
         );
-      });
-
-    // Array of project id's applied to by the user
-    const appliedIds =
-      this.props.user &&
-      this.props.user.applications.map((elem) => {
-        return elem.id;
       });
 
     const handleSubmit = async (event) => {
@@ -69,7 +79,10 @@ class ProjectFocus extends Component<any, any> {
             <ClipLoader color={"white"} />
           </Button>
         ) : (
-          <Button type="submit" disabled={appliedIds?.includes(this.props.id)}>
+          <Button
+            type="submit"
+            disabled={this.state.application ? true : false} // if there is an application found, applied
+          >
             Apply
           </Button>
         )}
