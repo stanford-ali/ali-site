@@ -3,9 +3,9 @@ import {
   IProject,
   FETCH_PROJECT,
   FETCH_PROJECTS,
-  SELECT_PROJECT,
-  APPROVE_PROJECT,
-  SUBMIT_APPLICATION,
+  // SELECT_PROJECT,
+  // APPROVE_PROJECT,
+  // SUBMIT_APPLICATION,
 } from "./projects.types";
 
 const initialState = {

@@ -19,22 +19,22 @@ export default function Footer() {
           <h5>Partners</h5>
           <ul className="list-unstyled text-small">
             <li>
-              <a className="text-muted" href="#">
+              <a className="text-muted" href="/#">
                 Partners
               </a>
             </li>
             <li>
-              <a className="text-muted" href="#">
+              <a className="text-muted" href="/#">
                 Partners
               </a>
             </li>
             <li>
-              <a className="text-muted" href="#">
+              <a className="text-muted" href="/#">
                 Partners
               </a>
             </li>
             <li>
-              <a className="text-muted" href="#">
+              <a className="text-muted" href="/#">
                 Partners
               </a>
             </li>

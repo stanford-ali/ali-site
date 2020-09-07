@@ -2,7 +2,7 @@ import React from "react";
 import { Link, NavLink } from "react-router-dom";
 import NavbarLoginButton from "./NavbarLoginButton/NavbarLoginButton";
 import { connect } from "react-redux";
-import ModalLoader from "../GlobalUI/ModalLoader/ModalLoader";
+// import ModalLoader from "../GlobalUI/ModalLoader/ModalLoader";
 
 const Navbar = (props) => (
   <section id="navbar">
