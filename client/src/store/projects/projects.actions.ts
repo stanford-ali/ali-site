@@ -2,7 +2,7 @@ import axios from "axios";
 import {
   FETCH_PROJECT,
   FETCH_PROJECTS,
-  SUBMIT_APPLICATION,
+  // SUBMIT_APPLICATION,
 } from "./projects.types";
 import { loadingStart, loadingEnd } from "../base/base.actions";
 
