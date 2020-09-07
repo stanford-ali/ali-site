@@ -9,16 +9,25 @@ class Following extends Component<any, any> {
   state = {
     rightDisplay: "following",
     followingProjects: [],
+    appliedProjects: [],
   };
 
   async componentDidMount() {
     for (let project of this.props.user.following) {
-      await axios.get(`http://localhost:5000/projects/${project}`).then((res) =>
-        this.setState({
-          followingProjects: [...this.state.followingProjects, res.data[0]],
-        })
-      );
+      await axios
+        .get(`http://localhost:5000/projects/${project}`)
+        .then((res) =>
+          this.setState({
+            followingProjects: [...this.state.followingProjects, res.data[0]],
+          })
+        )
+        .catch((error) => console.log(error));
     }
+
+    await axios
+      .get(`http://localhost:5000/applications/user/${this.props.user.uid}`)
+      .then((res) => console.log(res))
+      .catch((error) => console.log(error));
   }
 
   onRightDisplayChange(title) {
