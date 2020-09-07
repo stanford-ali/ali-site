@@ -28,7 +28,7 @@ const App = (props) => {
     });
 
     return () => unsubscribeFromAuth();
-  }, []);
+  }, [props]);
 
   return (
     <ConnectedRouter history={history}>
