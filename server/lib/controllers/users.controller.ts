@@ -14,6 +14,10 @@ export default class UserController {
 
   public getUserByID(req: Request, res: Response, next: NextFunction) {
     User.find({ uid: req.params.user_id }, (error, data) => {
+      if (data.length === 0) {
+        res.status(400).json({ error: "User doesn't exist" });
+        return;
+      }
       if (error) {
         next(error);
         return;

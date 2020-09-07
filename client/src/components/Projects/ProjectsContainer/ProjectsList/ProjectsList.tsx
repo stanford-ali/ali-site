@@ -32,7 +32,6 @@ class ProjectsList extends Component<any, any> {
           desc={elem.description}
           categ={elem.categories.join(" | ")}
           click={this.props.click}
-          applied={false || this.props.user?.applied.includes(elem.id)}
         />
       );
     });
