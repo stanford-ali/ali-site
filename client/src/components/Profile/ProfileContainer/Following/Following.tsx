@@ -13,6 +13,7 @@ class Following extends Component<any, any> {
   };
 
   async componentDidMount() {
+    // Get followed projects
     for (let project of this.props.user.following) {
       await axios
         .get(`http://localhost:5000/projects/${project}`)

@@ -1,10 +1,10 @@
 // QandA is the left container of the Profile page
-
 import React, { Component } from "react";
 import { connect } from "react-redux";
 import Question from "./Question/Question";
 import axios from "axios";
 import "./QandA.scss";
+import { AiOutlineUser } from "react-icons/ai";
 
 class QandA extends Component<any, any> {
   /**
@@ -41,11 +41,15 @@ class QandA extends Component<any, any> {
     return (
       <div className="QandA">
         <div className="ProfileLeftHead">
-          <img
-            src={this.props.user.image}
-            style={{ borderRadius: "50%", margin: "10px 0" }}
-            alt="profile"
-          />
+          {this.props.user.image_url ? (
+            <img
+              src={this.props.user.image_url}
+              style={{ borderRadius: "50%", margin: "10px 0" }}
+              alt="profile"
+            />
+          ) : (
+            <AiOutlineUser size={40} />
+          )}
           <h3
             style={{ color: "white" }}
           >{`${this.props.user.firstname} ${this.props.user.lastname}`}</h3>
