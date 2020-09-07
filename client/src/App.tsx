@@ -1,8 +1,8 @@
-import React, { useEffect } from "react";
+import React, { useEffect, useCallback } from "react";
 import { ConnectedRouter } from "connected-react-router";
 import { Switch, Route, Redirect } from "react-router-dom";
 import history from "./history";
-import { connect } from "react-redux";
+import { useSelector, useDispatch } from "react-redux";
 import { auth } from "./config/fbConfig";
 import Home from "./components/Home/Home";
 import Login from "./components/Login/Login";
@@ -13,22 +13,35 @@ import "./App.scss";
 import { fetchUser, logout } from "./store/auth/auth.actions";
 import { setRedirect } from "./store/base/base.actions";
 
-const App = (props) => {
+const App = () => {
+  // Get user from redux
+  const user = useSelector((state) => state.auth.user);
+  const dispatch = useDispatch();
+
+  // Dispatch action creators from redux
+  const onFetchUser = useCallback((uid) => dispatch(fetchUser(uid)), [
+    dispatch,
+  ]);
+  const onLogout = useCallback(() => dispatch(logout()), [dispatch]);
+  const onSetRedirect = useCallback((route) => dispatch(setRedirect(route)), [
+    dispatch,
+  ]);
+
   // Auth observable (get the current user)
   useEffect(() => {
     let unsubscribeFromAuth = null;
     unsubscribeFromAuth = auth.onAuthStateChanged((user) => {
       if (user) {
         // If user exists, set the current user fetchUser
-        props.onFetchUser(user.uid);
+        onFetchUser(user.uid);
       } else {
         // If user doesn't exist, clear user
-        props.onLogout();
+        onLogout();
       }
     });
 
     return () => unsubscribeFromAuth();
-  }, [props]);
+  }, [onFetchUser, onLogout]);
 
   return (
     <ConnectedRouter history={history}>
@@ -40,8 +53,8 @@ const App = (props) => {
           exact
           path="/profile"
           component={() => {
-            if (props.user) return <Profile />;
-            props.setRedirect("/profile");
+            if (user) return <Profile />;
+            onSetRedirect("/profile");
             return <Redirect to="/login" />;
           }}
         />
@@ -49,8 +62,8 @@ const App = (props) => {
           exact
           path="/submit"
           component={() => {
-            if (props.user) return <Submit />;
-            props.setRedirect("/submit");
+            if (user) return <Submit />;
+            onSetRedirect("/submit");
             return <Redirect to="/login" />;
           }}
         />
@@ -59,18 +72,4 @@ const App = (props) => {
   );
 };
 
-const mapStateToProps = (state) => {
-  return {
-    user: state.auth.user,
-  };
-};
-
-const mapDispatchToProps = (dispatch) => {
-  return {
-    onFetchUser: (uid) => dispatch(fetchUser(uid)),
-    onLogout: () => dispatch(logout()),
-    setRedirect: (route) => dispatch(setRedirect(route)),
-  };
-};
-
-export default connect(mapStateToProps, mapDispatchToProps)(App);
+export default App;
