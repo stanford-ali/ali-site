@@ -1,6 +1,6 @@
 import { Application } from "express";
 import ProjectController from "../controllers/projects.controller";
-import { userRoute, adminRoute } from "../routes";
+import { adminRoute } from "../routes";
 
 export default class ProjectRouter {
   public projectController: ProjectController = new ProjectController();
