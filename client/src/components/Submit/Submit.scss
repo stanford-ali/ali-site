@@ -1,0 +1,24 @@
+@import "../../global.scss";
+
+.submit-project {
+  padding: 0 5vw;
+  margin-bottom: 5vw; // will eventually be footer
+}
+
+.add-button {
+  width: 100%;
+  background-color: $primary-light !important;
+  border-color: $primary-light !important;
+  color: $base-light !important;
+
+  &:hover {
+    background-color: $primary-dark !important;
+    border-color: $primary-dark !important;
+  }
+}
+
+.submit-header {
+  padding: 2vw 5vw;
+  color: $base-dark;
+  font-family: $title-font-family;
+}

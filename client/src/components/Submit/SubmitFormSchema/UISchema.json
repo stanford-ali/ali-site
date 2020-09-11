@@ -1,0 +1,10 @@
+{
+  "details": {
+    "self_designed": {
+      "ui:widget": "select"
+    },
+    "categories": {
+      "ui:widget": "checkboxes"
+    }
+  }
+}
