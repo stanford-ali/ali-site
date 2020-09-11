@@ -25,13 +25,11 @@ const SubmittedModal = (props) => {
         will notify you once your project has been approved.
       </Modal.Body>
       <Modal.Footer>
-        <Button
-          onClick={() => dispatch(startNewProject())}
-          classname="global-ui-button"
-          text="Submit Another Project"
-        />
+        <Button click={() => dispatch(startNewProject())}>
+          Submit Another Project
+        </Button>
         <Link to="/">
-          <Button text="Home" />
+          <Button>Return to Home</Button>
         </Link>
       </Modal.Footer>
     </Modal>
