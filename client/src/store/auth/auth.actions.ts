@@ -19,7 +19,7 @@ export const signup = (user) => {
 
     // Axios request to signup
     axios
-      .post("http://localhost:5000/students", newUser)
+      .post("/students", newUser)
       .then((res) => dispatch(loadUser(res.data[0])))
       .catch((error) => console.log(error));
   };
@@ -28,9 +28,7 @@ export const signup = (user) => {
 // ALSO HANDLED BY FIREBASE UI //
 export const login = (user) => {
   return (dispatch) => {
-    axios
-      .get(`http://localhost:5000/student`)
-      .then((user) => dispatch(loadUser(user)));
+    axios.get("/student").then((user) => dispatch(loadUser(user)));
   };
 };
 
@@ -60,7 +58,7 @@ export const fetchUser = (uid) => {
   return (dispatch) => {
     dispatch(loadingStart());
     axios
-      .get(`http://localhost:5000/users/${uid}`)
+      .get(`/users/${uid}`)
       .then((res) => {
         dispatch(loadUser(res.data[0]));
       })
@@ -84,7 +82,7 @@ export const followProject = (projectid, user) => {
   user.following.push(projectid);
   return async (dispatch) => {
     await axios
-      .patch(`http://localhost:5000/users/${user.uid}`, {
+      .patch(`/users/${user.uid}`, {
         following: user.following,
       })
       .then(() => dispatch(updateUser(user)))
@@ -102,7 +100,7 @@ export const unfollowProject = (projectid, user) => {
 
   return async (dispatch) => {
     await axios
-      .patch(`http://localhost:5000/users/${user.uid}`, {
+      .patch(`/users/${user.uid}`, {
         following: user.following,
       })
       .then(() => dispatch(updateUser(user)))
@@ -117,10 +115,10 @@ export const applyProject = (user_id, project_id, owner_id, answers) => {
     dispatch(loadingStart());
     // Create application in applications collection, and update the user's application array
     axios
-      .post(
-        `http://localhost:5000/applications/user/${user_id}/project/${project_id}`,
-        { answers, owner_id }
-      )
+      .post(`/applications/user/${user_id}/project/${project_id}`, {
+        answers,
+        owner_id,
+      })
       .then((res) => {})
       .catch((error) => {
         console.log(error);

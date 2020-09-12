@@ -59,7 +59,7 @@ const parseFormData = (owner, formData) => {
 export const submitProject = (owner, formData) => (dispatch) => {
   const data = parseFormData(owner, formData);
   axios
-    .post("http://localhost:5000/projects", data)
+    .post("/projects", data)
     .then((res) => {
       dispatch({
         type: SUBMIT_PROJECT,
