@@ -1,4 +1,4 @@
-import app from './App';
+import app from "./App";
 
 /* ADDING SECURITY (would need to generate key and cert files)
 import * as https from 'https';

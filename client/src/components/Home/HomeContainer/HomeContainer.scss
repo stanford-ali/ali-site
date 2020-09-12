@@ -1,0 +1,92 @@
+$h1-purple-font: #3247bb;
+$h1-gray-font: #7a7a7a;
+$logo-color: #c4c4c4;
+
+.HomeContainer {
+  display: flex;
+  padding: 10vh 7vw;
+  max-width: 1500px;
+  margin: auto;
+  .RightContainer {
+    width: 50%;
+    margin-left: 20px;
+  }
+
+  .LeftContainer {
+    width: 50%;
+    margin-right: 20px;
+    position: relative;
+  }
+
+  .HomeMessage1 {
+    color: #3247bb;
+    margin: 0;
+    font-size: 64px;
+    font-weight: 700;
+  }
+
+  .HomeMessage2 {
+    color: #7a7a7a;
+    font-size: 64px;
+    margin: 0;
+    font-weight: 700;
+  }
+
+  .HomeLogo {
+    flex: none;
+    position: absolute;
+    left: -100px;
+    top: -125px;
+    z-index: -1;
+  }
+
+  .HomeInfo {
+    margin-top: 20px;
+    background-color: #f2f5f8;
+    max-width: 500px;
+    padding: 10px;
+    border-radius: 10px;
+    position: relative;
+
+    p {
+      font-weight: 300;
+    }
+  }
+
+  .HomeButton {
+    position: absolute;
+    right: 20px;
+    bottom: -18px;
+    background-color: $h1-purple-font;
+    border-color: no;
+
+    &:hover {
+      background-color: rgba(64, 81, 182, 0.93);
+    }
+  }
+}
+
+@media only screen and (min-device-width: 320px) and (max-device-width: 480px) {
+  .HomeContainer {
+    flex-direction: column;
+    padding: 5vh 7vw;
+    .LeftContainer {
+      width: 100%;
+    }
+
+    .RightContainer {
+      width: 100%;
+      margin: 50px 0 0 0;
+    }
+
+    .HomeMessage1,
+    .HomeMessage2 {
+      font-size: 50px;
+    }
+
+    .HomeLogo {
+      left: -20px;
+      top: 100px;
+    }
+  }
+}

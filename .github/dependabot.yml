@@ -1,0 +1,17 @@
+version: 2
+updates:
+  - package-ecosystem: "npm"
+    directory: "/client"
+    schedule:
+      interval: "daily"
+    target-branch: "preproduction"
+    commit-message:
+      prefix: "Frontend"
+
+  - package-ecosystem: "npm"
+    directory: "/server"
+    schedule:
+      interval: "daily"
+    target-branch: "preproduction"
+    commit-message: 
+      prefix: "Backend"

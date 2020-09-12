@@ -1,0 +1,15 @@
+.SelfProjects {
+  height: 500px;
+  overflow: auto;
+  background-color: rgba(242, 242, 242, 0.8);
+  margin: 10px;
+
+  .SelfProjectsHead {
+    color: #f2f2f2;
+    text-align: center;
+    background-color: #adadad;
+    padding: 10px;
+    box-shadow: 0 20px 15px -15px gray;
+    margin-bottom: 20px;
+  }
+}

@@ -1,0 +1,39 @@
+.ResumeAnswer {
+  padding: 0 10px;
+  font-family: "Lato", sans-serif;
+
+  h3 {
+    font-size: 20px;
+    color: rgb(95, 87, 79);
+    font-weight: bold;
+  }
+
+  .Resume {
+    width: 0.1px;
+    height: 0.1px;
+    opacity: 0;
+    overflow: hidden;
+    position: absolute;
+    z-index: -1;
+  }
+
+  .ResumeLabel {
+    display: flex;
+    align-items: center;
+  }
+
+  .Resume + label {
+    font-size: 1.1em;
+    color: white;
+    background-color: #3246bb;
+    padding: 5px 10px 5px 10px;
+    border-radius: 10px;
+    display: inline-block;
+    cursor: pointer;
+  }
+
+  .Resume:focus + label,
+  .Resume + label:hover {
+    background-color: #5e70d4;
+  }
+}

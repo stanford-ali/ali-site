@@ -1,0 +1,31 @@
+.AppliedProjects {
+  padding: 0 20px;
+  display: flex;
+  justify-content: space-between;
+  align-items: flex-start;
+  li {
+    list-style-type: none;
+    font-size: 1.3rem;
+    color: #5f574f;
+    font-family: "Lato", sans-serif;
+    display: flex;
+    align-items: center;
+  }
+}
+
+.ProjectCaption {
+}
+
+.ExpandApplication {
+  background-color: Transparent;
+  background-repeat: no-repeat;
+  border: none;
+  cursor: pointer;
+  overflow: hidden;
+  outline: none;
+}
+
+.ExpandedAnswers {
+  padding: 0 20px;
+  margin: -10px 0 16px 0;
+}

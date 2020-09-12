@@ -1,0 +1,128 @@
+@import "../../global";
+@import "./NavbarLoginButton/NavbarLoginButton";
+
+$bg-dark-gradient-1: rgb(50, 70, 187) 0%;
+$bg-dark-gradient-2: rgba(64, 81, 182, 0.93) 55%;
+$bg-dark-gradient-3: rgba(96, 108, 182, 0.44) 100%;
+$offset-angle: 0deg;
+
+.navbar {
+  position: relative;
+  display: flex;
+  align-items: center;
+  background: -webkit-linear-gradient(
+    $offset-angle,
+    $bg-dark-gradient-1,
+    $bg-dark-gradient-2,
+    $bg-dark-gradient-3
+  );
+  background: -o-linear-gradient(
+    $offset-angle,
+    $bg-dark-gradient-1,
+    $bg-dark-gradient-2,
+    $bg-dark-gradient-3
+  );
+  background: linear-gradient(
+    $offset-angle + 90deg,
+    $bg-dark-gradient-1,
+    $bg-dark-gradient-2,
+    $bg-dark-gradient-3
+  );
+
+  .btn-primary,
+  .btn-primary:hover,
+  .btn-primary:focus,
+  .show > .btn-primary.dropdown-toggle,
+  .show > .btn-primary.dropdown-toggle:focus {
+    border-color: $base-light;
+    color: $base-light !important;
+    background: none;
+    box-shadow: none;
+  }
+
+  .dropdown-menu {
+    .dropdown-item:hover,
+    .dropdown-item:focus {
+      /* TODO: find a good color for this */
+      background-color: #7e61ff75;
+    }
+
+    a:hover {
+      text-decoration: none;
+    }
+  }
+}
+
+.navbar-item {
+  margin: 0 10px;
+  font-family: $title-font-family;
+  padding: 15px 5px;
+  font-size: 1rem;
+  text-decoration: none;
+  color: $base-light;
+
+  &:hover {
+    color: $base-light !important;
+    text-decoration: none;
+  }
+}
+
+.page {
+  &:hover {
+    z-index: 1;
+    border-bottom: 1px solid $base-light;
+    transition: 0.5s;
+    text-decoration: none;
+  }
+}
+
+.navbar-title {
+  font-family: $title-font-family;
+  text-decoration: none;
+  color: $base-light;
+  font-size: 1.6rem;
+
+  &:hover {
+    opacity: 0.9;
+    transition: 0.5s;
+  }
+}
+
+.first-page {
+  margin-left: auto;
+}
+
+#login {
+  font-family: $title-font-family;
+  border: none;
+  background-color: #2b3da1;
+  color: $base-light;
+  cursor: pointer;
+
+  &:hover {
+    background-color: #1e2a71;
+  }
+}
+
+#logo {
+  max-width: 40px;
+}
+
+#profile-icon {
+  font-size: 1.6em;
+}
+
+// ActiveClassName property for NavLink
+.active {
+  border-bottom: 1px rgba(255, 255, 255, 0.75) solid;
+}
+
+@media only screen and (min-device-width: 320px) and (max-device-width: 480px) {
+  #logo {
+    display: none;
+  }
+
+  .navbar-item {
+    margin: 0;
+  }
+}

@@ -1,0 +1,32 @@
+.FollowProjects {
+  padding: 0 20px;
+  margin-bottom: 40px;
+  li {
+    list-style-type: none;
+    font-size: 1.3rem;
+    color: #5f574f;
+    font-family: "Lato", sans-serif;
+  }
+}
+
+.Title {
+  margin-left: 5px;
+  cursor: pointer;
+  display: flex;
+  justify-content: space-between;
+}
+
+.Department {
+  p {
+    font-size: 14px;
+  }
+}
+
+.UnfollowProject {
+  background-color: Transparent;
+  background-repeat: no-repeat;
+  border: none;
+  cursor: pointer;
+  overflow: hidden;
+  outline: none;
+}
