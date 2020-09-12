@@ -5,6 +5,9 @@ import "./axios-interceptors";
 import "firebase/auth";
 import store from "./store";
 import App from "./App";
+import axios from "axios";
+
+axios.defaults.baseURL = "http://localhost:5000";
 
 ReactDOM.render(
   <Provider store={store}>
