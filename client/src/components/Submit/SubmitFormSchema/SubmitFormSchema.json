@@ -1,0 +1,149 @@
+{
+  "type": "object",
+  "properties": {
+    "general": {
+      "title": "General Information",
+      "type": "object",
+      "required": ["university", "departments"],
+      "properties": {
+        "university": {
+          "type": "string",
+          "title": "University"
+        },
+        "departments": {
+          "type": "array",
+          "title": "Departments",
+          "items": {
+            "type": "object",
+            "required": ["department"],
+            "properties": {
+              "department": {
+                "type": "string",
+                "title": "Department"
+              }
+            }
+          }
+        },
+        "website": {
+          "type": "string",
+          "title": "Lab / Project Website"
+        }
+      }
+    },
+    "details": {
+      "type": "object",
+      "title": "Project Details",
+      "required": ["title", "description", "timeframe"],
+      "properties": {
+        "title": {
+          "type": "string",
+          "title": "Project Title"
+        },
+        "description": {
+          "type": "string",
+          "title": "Project Description",
+          "description": "Describe details of the project."
+        },
+        "timeframe": {
+          "type": "string",
+          "title": "Project Timeframe",
+          "description": "Describe both the expected weekly time commitment and tentative project timeline. For example: \"Around 10 hours per week, October 2020 – February 2021.\""
+        },
+        "self_designed_text": {
+          "title": "Self-Designed",
+          "description": "At Applied Learning Initiative, we think it is important to create avenues for students to perform their own research with guidance from an experienced mentor. We created an option—a \"self-designed\" project feature—that is intentionally less specific and is designed to give students a large amount of room to come up with their own research project. You would be acting as a mentor in this situation, helping them with project ideation and the subsequent research within your general field of expertise. Click the checkbox below if you are a faculty member and would like this project to be a self-designed project.",
+          "type": "null"
+        },
+        "self_designed": {
+          "type": "boolean",
+          "title": "Self-Designed",
+          "default": false
+        },
+        "categories": {
+          "type": "array",
+          "title": "Project Categories",
+          "description": "Use this space to flag your project with broad categories.",
+          "items": {
+            "type": "string",
+            "enum": [],
+            "uniqueItems": true
+          }
+        },
+        "tags": {
+          "type": "array",
+          "title": "Project Tags",
+          "description": "Use this space to flag your project with specific tags, such as \"Machine Learning,\" \"COVID-19,\" \"Cell Culture,\" etc.",
+          "items": {
+            "type": "object",
+            "required": ["tag"],
+            "properties": {
+              "tag": {
+                "type": "string",
+                "title": "Tag"
+              }
+            }
+          }
+        }
+      }
+    },
+    "preferences": {
+      "type": "object",
+      "title": "",
+      "properties": {
+        "courses": {
+          "type": "array",
+          "title": "Preferred Coursework",
+          "items": {
+            "type": "object",
+            "required": ["course"],
+            "properties": {
+              "course": {
+                "type": "string",
+                "title": "Course"
+              }
+            }
+          }
+        },
+        "skills": {
+          "type": "array",
+          "title": "Preferred Skills",
+          "items": {
+            "type": "object",
+            "required": ["skill"],
+            "properties": {
+              "skill": {
+                "type": "string",
+                "title": "Skill"
+              }
+            }
+          }
+        }
+      }
+    },
+    "application": {
+      "type": "object",
+      "title": "Additional Application Questions",
+      "properties": {
+        "application_text": {
+          "type": "null",
+          "title": "Application Questions",
+          "description": "You can add additional questions to the application for your project. For context, we already ask students to list their graduation year, relevant skills, programming experience, and course experience."
+        },
+        "questions": {
+          "type": "array",
+          "title": "Questions",
+          "items": {
+            "type": "object",
+            "required": ["question"],
+            "properties": {
+              "question": {
+                "type": "string",
+                "title": "Question"
+              }
+            }
+          }
+        }
+      }
+    }
+  }
+}
