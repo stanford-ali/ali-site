@@ -8,7 +8,12 @@
     font-size: 1.3rem;
     color: #5f574f;
     font-family: "Lato", sans-serif;
+    display: flex;
+    align-items: center;
   }
+}
+
+.ProjectCaption {
 }
 
 .ExpandApplication {
@@ -18,4 +23,9 @@
   cursor: pointer;
   overflow: hidden;
   outline: none;
+}
+
+.ExpandedAnswers {
+  padding: 0 20px;
+  margin: -10px 0 16px 0;
 }

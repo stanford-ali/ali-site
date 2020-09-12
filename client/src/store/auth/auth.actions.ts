@@ -34,10 +34,16 @@ export const login = (user) => {
   };
 };
 
-// Logout the user and reset user in store
-export const logout = () => {
+export const signOut = () => {
   return {
     type: SIGN_OUT,
+  };
+};
+
+// Logout the user and reset user in store
+export const logout = () => {
+  return (dispatch) => {
+    dispatch(signOut());
   };
 };
 
@@ -52,6 +58,7 @@ export const loadUser = (user) => {
 // Fetch the user object from DB
 export const fetchUser = (uid) => {
   return (dispatch) => {
+    dispatch(loadingStart());
     axios
       .get(`http://localhost:5000/users/${uid}`)
       .then((res) => {
@@ -59,7 +66,8 @@ export const fetchUser = (uid) => {
       })
       .catch((error) => {
         console.log(error);
-      });
+      })
+      .finally(() => dispatch(loadingEnd()));
   };
 };
 
@@ -106,7 +114,7 @@ export const unfollowProject = (projectid, user) => {
 
 export const applyProject = (user_id, project_id, owner_id, answers) => {
   return (dispatch) => {
-    dispatch(loadingStart);
+    dispatch(loadingStart());
     // Create application in applications collection, and update the user's application array
     axios
       .post(
@@ -117,6 +125,6 @@ export const applyProject = (user_id, project_id, owner_id, answers) => {
       .catch((error) => {
         console.log(error);
       })
-      .then(dispatch(loadingEnd));
+      .finally(() => dispatch(loadingEnd()));
   };
 };

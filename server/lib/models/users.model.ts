@@ -27,7 +27,7 @@ const userSchema = new Schema(
     year: String,
     skills: String,
     programming: String,
-    resume: String, // change later to a file type
+    resume: Buffer,
     following: [
       {
         type: Schema.Types.ObjectId,

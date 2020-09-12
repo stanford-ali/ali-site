@@ -1,6 +1,6 @@
 import React, { Component } from "react";
 import FollowProject from "./FollowProject/FollowProject";
-// import AppliedProject from "./AppliedProject/AppliedProject";
+import AppliedProject from "./AppliedProject/AppliedProject";
 import { connect } from "react-redux";
 import "./Following.scss";
 import axios from "axios";
@@ -25,30 +25,33 @@ class Following extends Component<any, any> {
         .catch((error) => console.log(error));
     }
 
+    // Get applied projects
     await axios
       .get(`http://localhost:5000/applications/user/${this.props.user.uid}`)
-      .then((res) => console.log(res))
+      .then((res) => this.setState({ appliedProjects: res.data }))
       .catch((error) => console.log(error));
   }
 
   onRightDisplayChange(title) {
-    console.log(title);
+    this.setState({ rightDisplay: title });
   }
 
   render() {
     // Update to adhere to new applications backend
-    // const applied = this.props.user?.applications.map((elem, id) => {
-    //   return (
-    //     <AppliedProject
-    //       key={id}
-    //       title={elem.title}
-    //       department={elem.department}
-    //       desc={elem.desc}
-    //       projectid={elem.id}
-    //       answers={elem.answers}
-    //     />
-    //   );
-    // });
+    const applied = this.state.appliedProjects.map((elem, id) => {
+      return (
+        <AppliedProject
+          key={id}
+          title={elem.project_id.title}
+          university={elem.project_id.university}
+          departments={elem.project_id.departments}
+          faculty={elem.project_id.faculty_designed}
+          owner={elem.project_id.owner}
+          questions={elem.project_id.questions}
+          answers={elem.answers}
+        />
+      );
+    });
 
     // All the projects a user is following
     const following = this.state.followingProjects.map((elem, id) => {
@@ -63,19 +66,27 @@ class Following extends Component<any, any> {
       );
     });
 
+    const selectedStyle = { color: "#303030" };
+
     return (
       <div className="Following">
         <div className="FollowingHead">
-          <button onClick={() => this.onRightDisplayChange("following")}>
+          <button
+            onClick={() => this.onRightDisplayChange("following")}
+            style={
+              this.state.rightDisplay === "following" ? selectedStyle : null
+            }
+          >
             Following
           </button>
-          <button onClick={() => this.onRightDisplayChange("applied")}>
+          <button
+            onClick={() => this.onRightDisplayChange("applied")}
+            style={this.state.rightDisplay === "applied" ? selectedStyle : null}
+          >
             Applied
           </button>
         </div>
-        {/* Insert all projects user is following or applied to */}
-        {following}
-        {/* {applied} */}
+        {this.state.rightDisplay === "following" ? following : applied}
       </div>
     );
   }

@@ -2,6 +2,7 @@
 import React, { Component } from "react";
 import { connect } from "react-redux";
 import Question from "./Question/Question";
+import ResumeInput from "./ResumeInput/ResumeInput";
 import axios from "axios";
 import "./QandA.scss";
 import { AiOutlineUser } from "react-icons/ai";
@@ -54,7 +55,9 @@ class QandA extends Component<any, any> {
             style={{ color: "white" }}
           >{`${this.props.user.firstname} ${this.props.user.lastname}`}</h3>
         </div>
-        <div className="ProfileLeftContent">{questions}</div>
+        <div className="ProfileLeftContent">
+          {questions} <ResumeInput />
+        </div>
       </div>
     );
   }

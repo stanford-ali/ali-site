@@ -4,6 +4,7 @@ import { connect } from "react-redux";
 import Button from "../../../GlobalUI/Button/Button";
 import { Form } from "react-bootstrap";
 import ClipLoader from "react-spinners/ClipLoader";
+import ProjectSkill from "./ProjectSkill/ProjectSkill";
 import "./ProjectFocus.scss";
 import { applyProject } from "../../../../store/auth/auth.actions";
 import axios from "axios";
@@ -12,7 +13,17 @@ class ProjectFocus extends Component<any, any> {
   state = {
     application: null,
   };
+  componentDidMount() {
+    this.props.user &&
+      axios
+        .get(
+          `http://localhost:5000/applications/user/${this.props.user.uid}/project/${this.props._id}`
+        )
+        .then((res) => this.setState({ application: res.data }))
+        .catch((error) => console.log(error));
+  }
 
+  // Need this to account for if the user is refreshing the Projects page
   componentDidUpdate(prevProps, prevState) {
     // User is established - see if they have applied to the project
     if (this.props.user !== prevProps.user) {
@@ -44,6 +55,12 @@ class ProjectFocus extends Component<any, any> {
         );
       });
 
+    const departments = this.props.departments?.join(" | ");
+
+    const skills = this.props.skills?.map((elem) => {
+      return <ProjectSkill skill={elem} />;
+    });
+
     const handleSubmit = async (event) => {
       event.preventDefault();
       // If there is no user, alert them that they need to login
@@ -58,12 +75,14 @@ class ProjectFocus extends Component<any, any> {
         answers.push(inputs[i].value);
       }
 
-      await this.props.onApplyProject(
+      let res = await this.props.onApplyProject(
         this.props.user.uid,
         this.props._id,
         this.props.owner,
         answers
       );
+
+      console.log(res);
     };
 
     const questionsForm = (
@@ -88,8 +107,21 @@ class ProjectFocus extends Component<any, any> {
       <Card className="FocusProjectRight">
         <Card.Body>
           <Card.Title>{this.props.title}</Card.Title>
-          <Card.Text>{this.props.departments}</Card.Text>
-          <Card.Text>{this.props.description}</Card.Text>
+          <Card.Text style={{ fontSize: "18px" }} className="mb-2">
+            {departments}
+          </Card.Text>
+          <hr />
+          <Card.Text>
+            <p style={{ fontSize: "17px" }}>Project Description:</p>
+            {this.props.description}
+          </Card.Text>
+          <p style={{ fontSize: "17px" }}>Skills:</p>
+          <div className="SkillsContainer">{skills}</div>
+          <p style={{ fontSize: "17px" }}>Timeframe:</p>
+          <div className="TimeframeContainer">
+            <ProjectSkill skill={this.props.timeframe} />
+          </div>
+          <hr />
           <p className="QuestionsHeader">
             <span style={{ color: "#ff7070" }}>*</span>Questions:
           </p>

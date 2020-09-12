@@ -6,6 +6,7 @@ import { connect } from "react-redux";
 import qs from "qs";
 import "./ProjectsContainer.scss";
 import { fetchProject } from "../../../store/projects/projects.actions";
+import ModalLoader from "../../GlobalUI/ModalLoader/ModalLoader";
 
 class ProjectsContainer extends Component<any, any> {
   constructor(props) {
@@ -81,6 +82,7 @@ class ProjectsContainer extends Component<any, any> {
 
     return (
       <div className="ProjectsContainer">
+        {this.props.loading && <ModalLoader />}
         <div className="ProjectsContainerLeft">
           <ProjectsList click={this.changeProjSelected} />
         </div>
@@ -101,6 +103,7 @@ const mapStateToProps = (state) => {
   return {
     current_project: state.project.current_project,
     user: state.auth.user,
+    loading: state.base.loading,
   };
 };
 

@@ -1,5 +1,6 @@
 import Application from "../models/applications.model";
 import Project from "../models/projects.model";
+import Users from "../models/users.model";
 import { Request, Response, NextFunction } from "express";
 import App from "../App";
 
@@ -46,7 +47,11 @@ export default class ApplicationController {
       {
         owner_id: req.params.user_id,
       },
-      (error, data) => {
+      async (error, data) => {
+        for (const app of data) {
+          let project = await Project.find({ _id: app.project_id });
+          app.project_id = project[0];
+        }
         if (error) {
           next(error);
           return;

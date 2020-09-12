@@ -2,11 +2,13 @@ import React from "react";
 import { Link, NavLink } from "react-router-dom";
 import NavbarLoginButton from "./NavbarLoginButton/NavbarLoginButton";
 import { connect } from "react-redux";
+import BarLoader from "react-spinners/BarLoader";
+
 // import ModalLoader from "../GlobalUI/ModalLoader/ModalLoader";
 
 const Navbar = (props) => (
   <section id="navbar">
-    {/* SHOULD BE LOADING {!props.user ? <ModalLoader /> : null} */} 
+    {/* SHOULD BE LOADING {!props.user ? <ModalLoader /> : null} */}
     <div>
       <nav id="navbar">
         <div className="navbar">
@@ -32,7 +34,9 @@ const Navbar = (props) => (
           >
             Projects
           </NavLink>
-          {props.user ? (
+          {props.loading ? (
+            <BarLoader color="white" />
+          ) : props.user ? (
             <NavbarLoginButton />
           ) : (
             <NavLink
@@ -53,6 +57,7 @@ const Navbar = (props) => (
 const mapStateToProps = (state) => {
   return {
     user: state.auth.user,
+    loading: state.base.loading,
   };
 };
 

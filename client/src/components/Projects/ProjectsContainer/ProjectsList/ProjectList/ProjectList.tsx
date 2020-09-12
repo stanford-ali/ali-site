@@ -115,10 +115,8 @@ class ProjectList extends Component<any, any> {
               </div>
             </Card.Title>
           </div>
-          <Card.Text>
-            {departments} <br />
-            {description}
-          </Card.Text>
+          <Card.Text style={{ fontSize: "18px" }}>{departments}</Card.Text>
+          <Card.Text>{description}</Card.Text>
         </Card.Body>
       </Card>
     );

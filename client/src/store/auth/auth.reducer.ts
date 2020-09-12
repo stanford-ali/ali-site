@@ -26,11 +26,6 @@ const initialState = {
       questionid: "programming",
       textarea: true,
     },
-    {
-      question: "Attach resume",
-      questionid: "resume",
-      textarea: false,
-    },
   ],
 };
 
