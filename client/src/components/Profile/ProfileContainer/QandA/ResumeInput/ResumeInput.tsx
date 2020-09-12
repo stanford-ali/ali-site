@@ -1,6 +1,6 @@
 import React, { Component } from "react";
 import { BsUpload } from "react-icons/bs";
-import axios from "axios";
+// import axios from "axios";
 import { connect } from "react-redux";
 import "./ResumeInput.scss";
 
