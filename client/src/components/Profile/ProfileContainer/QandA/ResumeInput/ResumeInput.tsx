@@ -14,6 +14,12 @@ class ResumeInput extends Component<any, any> {
     resumeName: "",
   };
 
+  componentDidMount() {
+    // Request to get resume
+    // set resumeName state
+    // unhide the anchor tag
+  }
+
   onUploadHandler(event) {
     // Change the file button to show the user's uploaded file
     const file = document.getElementById("choose-file");
@@ -34,7 +40,6 @@ class ResumeInput extends Component<any, any> {
       "load",
       function () {
         // convert file to base64 string
-        console.log(reader.result);
 
         resumePreview.setAttribute("href", reader.result.toString());
       },
@@ -42,14 +47,12 @@ class ResumeInput extends Component<any, any> {
     );
     if (file) {
       reader.readAsDataURL(actualFile);
+      reader.onload = function (e) {
+        console.log("DataURL:", e.target.result);
+      };
     }
 
-    // Send axios request to backend to update
-    // const userid = this.props.user.uid;
-    // let body = {}
-    // axios
-    //   .patch(`http://localhost:5000/users/${userid}`, body)
-    //   .catch((error) => console.log(error));
+    // Send request to store the file
   }
 
   render() {
@@ -67,7 +70,7 @@ class ResumeInput extends Component<any, any> {
           <BsUpload className="mr-2 mb-1" size={20} />
           <span id="choose-file">Choose a file</span>
         </label>
-        <a download={this.state.resumeName} id="download-resume">
+        <a href="/#" download={this.state.resumeName} id="download-resume">
           Download Resume
         </a>
       </div>
