@@ -57,8 +57,8 @@ class ProjectFocus extends Component<any, any> {
 
     const departments = this.props.departments?.join(" | ");
 
-    const skills = this.props.skills?.map((elem) => {
-      return <ProjectSkill skill={elem} />;
+    const skills = this.props.skills?.map((elem, id) => {
+      return <ProjectSkill key={id} skill={elem} />;
     });
 
     const handleSubmit = async (event) => {
@@ -112,7 +112,7 @@ class ProjectFocus extends Component<any, any> {
           </Card.Text>
           <hr />
           <Card.Text>
-            <p style={{ fontSize: "17px" }}>Project Description:</p>
+            <span style={{ fontSize: "17px" }}>Project Description:</span>
             {this.props.description}
           </Card.Text>
           <p style={{ fontSize: "17px" }}>Skills:</p>

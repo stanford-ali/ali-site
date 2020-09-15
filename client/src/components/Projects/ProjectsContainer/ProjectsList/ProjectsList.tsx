@@ -31,6 +31,7 @@ class ProjectsList extends Component<any, any> {
           departments={elem.departments}
           desc={elem.description}
           categ={elem.categories.join(" | ")}
+          faculty={elem.faculty_designed}
           click={this.props.click}
         />
       );
