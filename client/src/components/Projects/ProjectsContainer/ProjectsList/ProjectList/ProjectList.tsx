@@ -84,15 +84,17 @@ class ProjectList extends Component<any, any> {
       >
         <Card.Header as="h6" className="CardHead">
           {this.props.categ}
-          <span className="AppliedHeader">
-            <OverlayTrigger
-              placement="left"
-              delay={{ show: 250, hide: 400 }}
-              overlay={renderTooltip}
-            >
-              <RiUserStarLine size={20} />
-            </OverlayTrigger>
-          </span>
+          {this.props.faculty ? (
+            <span className="AppliedHeader">
+              <OverlayTrigger
+                placement="left"
+                delay={{ show: 250, hide: 400 }}
+                overlay={renderTooltip}
+              >
+                <RiUserStarLine size={20} />
+              </OverlayTrigger>
+            </span>
+          ) : null}
         </Card.Header>
         <Card.Body>
           <div className="ProjectListTitle">
