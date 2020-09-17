@@ -32,6 +32,21 @@ export default class ProjectController {
     );
   }
 
+  public getProjectsByOwner(req: Request, res: Response, next: NextFunction) {
+    Project.find(
+      {
+        owner: req.params.user_id,
+      },
+      (error, data) => {
+        if (error) {
+          next(error);
+          return;
+        }
+        res.json(data);
+      }
+    );
+  }
+
   public addProject(req: Request, res: Response, next: NextFunction) {
     Project.create(req.body, (error, data) => {
       if (error) {

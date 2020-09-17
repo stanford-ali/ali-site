@@ -61,6 +61,7 @@ class Following extends Component<any, any> {
           title={elem.title}
           department={elem.departments}
           category={elem.categories}
+          faculty={elem.faculty_designed}
           projectid={elem._id}
         />
       );

@@ -1,5 +1,5 @@
 .SelfProjects {
-  height: 500px;
+  height: 600px;
   overflow: auto;
   background-color: rgba(242, 242, 242, 0.8);
   margin: 10px;
@@ -12,4 +12,27 @@
     box-shadow: 0 20px 15px -15px gray;
     margin-bottom: 20px;
   }
+
+  .SelfProjectsContent {
+    display: flex;
+    padding: 10px;
+
+    .SelfProjectsCards {
+      width: 40%;
+      display: flex;
+      flex-flow: column;
+      margin-right: 20px;
+    }
+
+    .SelfProjectsFocus {
+      width: 60%;
+      position: sticky;
+    }
+  }
+}
+
+.FocusFillerSelfProject {
+  position: absolute;
+  left: 50%;
+  transform: translate(-50%, 20vh);
 }

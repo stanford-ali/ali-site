@@ -1,0 +1,28 @@
+.SelfProject {
+  background-color: white;
+  padding: 20px 20px;
+  border-radius: 15px;
+  margin-bottom: 15px;
+  border: 1px solid #e7e7e7;
+  cursor: pointer;
+
+  h3 {
+    font-family: "Lato", sans-serif;
+    color: #5f574f;
+  }
+
+  p {
+    margin-bottom: 0;
+  }
+
+  .SelfProjectTitle {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    .SelfProjectApplications {
+      &:hover {
+        color: #3246bb;
+      }
+    }
+  }
+}

@@ -16,5 +16,9 @@ export default class ProjectRouter {
       adminRoute,
       this.projectController.getPendingProjects
     );
+    app.get(
+      "/projects/owner/:user_id",
+      this.projectController.getProjectsByOwner
+    );
   }
 }
