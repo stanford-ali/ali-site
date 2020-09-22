@@ -38,7 +38,7 @@ function FollowProject(props) {
       </li>
       <ul className="ProjectCaption">
         <li className="Department">
-          <p>{props.department}</p>
+          <p>{props.department.join(" | ")}</p>
         </li>
       </ul>
     </div>

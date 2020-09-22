@@ -1,6 +1,6 @@
 import { Application } from "express";
 import ProjectController from "../controllers/projects.controller";
-import { adminRoute } from "../routes";
+import { userRoute, adminRoute } from "../routes";
 
 export default class ProjectRouter {
   public projectController: ProjectController = new ProjectController();
@@ -8,7 +8,11 @@ export default class ProjectRouter {
   public routes(app: Application): void {
     app.get("/projects", this.projectController.getProjects);
     app.post("/projects", this.projectController.addProject);
-
+    app.patch(
+      "/projects/:project_id",
+      userRoute,
+      this.projectController.updateProject
+    );
     app.get("/projects/:project_id", this.projectController.getProjectByID);
 
     app.get(

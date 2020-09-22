@@ -9,9 +9,6 @@ interface EditableTextProps {
   textarea?: boolean;
   questionid?: string;
   question?: string;
-  header?: boolean;
-  userid: string;
-  user: any; // TODO: Update to user type later
   onEdit: Function;
 }
 
@@ -89,7 +86,7 @@ class EditableText extends Component<EditableTextProps, EditableTextState> {
           {this.state.editable ? (
             editableInput
           ) : (
-            <span style={{ fontSize: this.props.size, marginLeft: "20px" }}>
+            <span style={{ fontSize: this.props.size }}>
               {this.state.value}
             </span>
           )}

@@ -71,4 +71,23 @@ export default class ProjectController {
       }
     );
   }
+
+  public updateProject(req: Request, res: Response, next: NextFunction) {
+    Project.findOne(
+      {
+        _id: req.params.project_id,
+      },
+      (error, data) => {
+        if (error) {
+          next(error);
+          return;
+        }
+        for (const property in req.body) {
+          data[property] = req.body[property];
+        }
+        data.save();
+        res.json(data);
+      }
+    );
+  }
 }

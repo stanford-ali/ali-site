@@ -1,0 +1,26 @@
+.ArrayFocusElem {
+  display: flex;
+  align-items: center;
+}
+
+.ArrayFocusElemText {
+  border: 1px solid rgb(95, 87, 79);
+  border-radius: 15px;
+  padding: 5px 15px;
+  margin-right: 10px;
+  margin-bottom: 10px;
+  display: flex;
+  align-items: center;
+}
+
+.ArrayFocusButton {
+  border-radius: 5px;
+  border: 1px solid #3246bb;
+  background: none;
+}
+
+.ArrayFocusMinus {
+  padding: 5px 15px;
+  margin-right: 10px;
+  margin-bottom: 10px;
+}
