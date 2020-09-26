@@ -113,6 +113,7 @@ class ProjectFocus extends Component<any, any> {
           <hr />
           <Card.Text>
             <span style={{ fontSize: "17px" }}>Project Description:</span>
+            <br />
             {this.props.description}
           </Card.Text>
           <p style={{ fontSize: "17px" }}>Skills:</p>

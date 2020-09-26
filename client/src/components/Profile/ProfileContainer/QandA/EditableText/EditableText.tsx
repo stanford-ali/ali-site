@@ -9,9 +9,6 @@ interface EditableTextProps {
   textarea?: boolean;
   questionid?: string;
   question?: string;
-  header?: boolean;
-  userid: string;
-  user: any; // TODO: Update to user type later
   onEdit: Function;
 }
 
@@ -25,6 +22,15 @@ class EditableText extends Component<EditableTextProps, EditableTextState> {
     value: this.props.value,
     editable: false,
   };
+
+  /*** Fixes MyProjects block page - but renders QnA input uneditable ***/
+  static getDerivedStateFromProps(nextProps, prevState) {
+    if (nextProps.value !== prevState.value) {
+      return { value: nextProps.value };
+    } else {
+      return null;
+    }
+  }
 
   clickEditHandler = () => {
     this.setState({ editable: true });
@@ -89,7 +95,7 @@ class EditableText extends Component<EditableTextProps, EditableTextState> {
           {this.state.editable ? (
             editableInput
           ) : (
-            <span style={{ fontSize: this.props.size, marginLeft: "20px" }}>
+            <span style={{ fontSize: this.props.size }}>
               {this.state.value}
             </span>
           )}

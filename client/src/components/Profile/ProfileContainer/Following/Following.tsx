@@ -48,6 +48,7 @@ class Following extends Component<any, any> {
           faculty={elem.project_id.faculty_designed}
           owner={elem.project_id.owner}
           questions={elem.project_id.questions}
+          projectid={elem.project_id._id}
           answers={elem.answers}
         />
       );
@@ -61,6 +62,7 @@ class Following extends Component<any, any> {
           title={elem.title}
           department={elem.departments}
           category={elem.categories}
+          faculty={elem.faculty_designed}
           projectid={elem._id}
         />
       );

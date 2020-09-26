@@ -22,9 +22,14 @@ export default class ApplicationRouter {
       this.applicationController.getApplicationsByOwner
     );
     app.get(
-      "/applications/user/:user_id/project/:project_id",
+      "/application/user/:user_id/project/:project_id",
       userRoute,
       this.applicationController.getApplication
+    );
+    app.get(
+      "/applications/user/:user_id/selfproject/:project_id/",
+      userRoute,
+      this.applicationController.getSelfProjectApplications
     );
     app.post(
       "/applications/user/:user_id/project/:project_id",

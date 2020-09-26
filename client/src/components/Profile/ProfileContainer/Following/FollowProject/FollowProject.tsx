@@ -4,6 +4,7 @@ import { AiOutlineClose } from "react-icons/ai";
 import { connect } from "react-redux";
 import { unfollowProject } from "../../../../../store/auth/auth.actions";
 import "./FollowProject.scss";
+import { RiUserStarLine } from "react-icons/ri";
 
 function FollowProject(props) {
   const history = useHistory();
@@ -22,7 +23,9 @@ function FollowProject(props) {
   return (
     <div className="FollowProjects">
       <li className="Title">
-        <div onClick={selectProject}>{props.title}</div>
+        <div onClick={selectProject}>
+          {props.faculty ? <RiUserStarLine /> : null} {props.title}
+        </div>
         <div>
           <button className="UnfollowProject" onClick={unfollowProject}>
             <AiOutlineClose
@@ -35,7 +38,7 @@ function FollowProject(props) {
       </li>
       <ul className="ProjectCaption">
         <li className="Department">
-          <p>{props.department}</p>
+          <p>{props.department.join(" | ")}</p>
         </li>
       </ul>
     </div>

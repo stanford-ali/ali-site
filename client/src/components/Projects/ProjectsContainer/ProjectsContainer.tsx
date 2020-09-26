@@ -64,6 +64,22 @@ class ProjectsContainer extends Component<any, any> {
     }
   }
 
+  componentDidUpdate(prevProps, prevState) {
+    if (this.props.current_project !== prevProps.current_project) {
+      if (prevProps.current_project) {
+        // Reset the border of the old project
+        const oldProjectId = prevProps.current_project._id;
+        const oldProject = document.getElementById(oldProjectId);
+        oldProject.style.border = "1px solid rgba(0, 0, 0, 0.125)";
+      }
+
+      // Update the border of the selected project
+      const projectid = this.props.current_project._id;
+      const project = document.getElementById(projectid);
+      project.style.border = "1px solid #3246bb";
+    }
+  }
+
   render() {
     const focusFiller = (
       <div className="FocusFiller">

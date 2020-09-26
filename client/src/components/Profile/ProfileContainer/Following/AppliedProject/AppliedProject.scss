@@ -1,5 +1,9 @@
 .AppliedProjects {
-  padding: 0 20px;
+  padding: 20px 20px;
+  margin: 0 10px 20px 10px;
+  background-color: #ffffff;
+  border-radius: 15px;
+  border: 1px solid #e7e7e7;
   display: flex;
   justify-content: space-between;
   align-items: flex-start;
@@ -13,9 +17,6 @@
   }
 }
 
-.ProjectCaption {
-}
-
 .ExpandApplication {
   background-color: Transparent;
   background-repeat: no-repeat;
@@ -26,6 +27,8 @@
 }
 
 .ExpandedAnswers {
-  padding: 0 20px;
-  margin: -10px 0 16px 0;
+  padding: 10px 20px;
+  margin: 0 10px 20px 10px;
+  background-color: #ffffff;
+  border-radius: 15px;
 }
