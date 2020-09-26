@@ -23,6 +23,15 @@ class EditableText extends Component<EditableTextProps, EditableTextState> {
     editable: false,
   };
 
+  /*** Fixes MyProjects block page - but renders QnA input uneditable ***/
+  static getDerivedStateFromProps(nextProps, prevState) {
+    if (nextProps.value !== prevState.value) {
+      return { value: nextProps.value };
+    } else {
+      return null;
+    }
+  }
+
   clickEditHandler = () => {
     this.setState({ editable: true });
   };

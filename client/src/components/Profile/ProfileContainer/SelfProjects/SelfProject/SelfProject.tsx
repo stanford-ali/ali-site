@@ -1,10 +1,11 @@
 import React from "react";
 import { BiBookAlt } from "react-icons/bi";
 import { Tooltip, OverlayTrigger } from "react-bootstrap";
-
+import { connect } from "react-redux";
 import "./SelfProject.scss";
+import { getApplications } from "../../../../../store/profile/profile.actions";
 
-export default function SelfProject(props) {
+function SelfProject(props) {
   const renderTooltip = (props) => {
     const { pid, ...rest } = props;
     return (
@@ -17,7 +18,8 @@ export default function SelfProject(props) {
   const handleViewApplications = (event) => {
     event.preventDefault();
     event.stopPropagation();
-    console.log("viewing applications");
+    const user_id = props.user.uid;
+    props.onGetSelfProjectApplications(props._id, user_id);
   };
 
   const date = new Date(props.createdAt);
@@ -43,3 +45,21 @@ export default function SelfProject(props) {
     </div>
   );
 }
+
+const mapStateToProps = (state) => {
+  return {
+    selfProjectApplications: state.profile.selfProjectApplications,
+    selfProjectApplicationsSelected:
+      state.profile.selfProjectApplicationsSelected,
+    user: state.auth.user,
+  };
+};
+
+const mapDispatchToProps = (dispatch) => {
+  return {
+    onGetSelfProjectApplications: (project_id, user_id) =>
+      dispatch(getApplications(project_id, user_id)),
+  };
+};
+
+export default connect(mapStateToProps, mapDispatchToProps)(SelfProject);

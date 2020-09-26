@@ -8,9 +8,8 @@ import Answer from "./Answer/Answer";
 class AppliedProject extends Component<any, any> {
   render() {
     const renderTooltip = (props) => {
-      const { pid, ...rest } = props;
       return (
-        <Tooltip id="button-tooltip" {...rest}>
+        <Tooltip id="button-tooltip" {...props}>
           View Application
         </Tooltip>
       );

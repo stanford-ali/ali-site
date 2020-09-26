@@ -2,13 +2,15 @@ import React, { Component } from "react";
 import "./SelfProjectFocus.scss";
 import EditableText from "../../QandA/EditableText/EditableText";
 import ArrayFocusElem from "./ArrayFocusElem/ArrayFocusElem";
-import axios from "axios";
 import { connect } from "react-redux";
 import { AiOutlinePlusCircle } from "react-icons/ai";
 import {
-  loadingStart,
-  loadingEnd,
-} from "../../../../../store/base/base.actions";
+  updateDepartment,
+  updateSkills,
+  updateCourses,
+  updateCategories,
+  updateTags,
+} from "../../../../../store/profile/profile.actions";
 
 class SelfProjectFocus extends Component<any, any> {
   constructor(props) {
@@ -36,154 +38,137 @@ class SelfProjectFocus extends Component<any, any> {
 
   // Add/Delete departments
   addDepartments() {
+    const project_id = this.props.selectedProject._id;
     const departmentInput = document.getElementById(
       "DepartmentInput"
     ) as HTMLInputElement;
     const newDepartments = [
-      ...this.state.project.departments,
+      ...this.props.selectedProject.departments,
       departmentInput.value,
     ];
-    axios
-      .patch(`/projects/${this.props._id}`, {
-        departments: newDepartments,
-      })
-      .then((res) => this.setState({ project: res.data }));
+    this.props.onUpdateDepartment(project_id, newDepartments);
 
     // Clear input field
     departmentInput.value = "";
   }
 
   deleteDepartment(id) {
-    const newDepartment = this.state.project.departments.filter((elem, nid) => {
-      return nid !== id;
-    });
-    axios
-      .patch(`/projects/${this.props._id}`, {
-        departments: newDepartment,
-      })
-      .then((res) => this.setState({ project: res.data }));
+    const project_id = this.props.selectedProject._id;
+    const newDepartments = this.props.selectedProject.departments.filter(
+      (elem, nid) => {
+        return nid !== id;
+      }
+    );
+    this.props.onUpdateDepartment(project_id, newDepartments);
   }
 
   // Add/Delete skills
   addSkills() {
+    const project_id = this.props.selectedProject._id;
+
     const skillsInput = document.getElementById(
       "SkillsInput"
     ) as HTMLInputElement;
-    const newSkills = [...this.state.project.skills, skillsInput.value];
-    axios
-      .patch(`/projects/${this.props._id}`, {
-        skills: newSkills,
-      })
-      .then((res) => this.setState({ project: res.data }));
+    const newSkills = [...this.props.selectedProject.skills, skillsInput.value];
+    this.props.onUpdateSkills(project_id, newSkills);
 
     // Clear input field
     skillsInput.value = "";
   }
 
   deleteSkills(id) {
-    const newSkills = this.state.project.skills.filter((elem, nid) => {
+    const project_id = this.props.selectedProject._id;
+    const newSkills = this.props.selectedProject.skills.filter((elem, nid) => {
       return nid !== id;
     });
-    axios
-      .patch(`/projects/${this.props._id}`, {
-        skills: newSkills,
-      })
-      .then((res) => this.setState({ project: res.data }));
+    this.props.onUpdateSkills(project_id, newSkills);
   }
 
   // Add/Delete courses
   addCourses() {
+    const project_id = this.props.selectedProject._id;
     const coursesInput = document.getElementById(
       "CoursesInput"
     ) as HTMLInputElement;
-    const newCourses = [...this.state.project.courses, coursesInput.value];
-    axios
-      .patch(`/projects/${this.props._id}`, {
-        courses: newCourses,
-      })
-      .then((res) => this.setState({ project: res.data }));
+    const newCourses = [
+      ...this.props.selectedProject.courses,
+      coursesInput.value,
+    ];
+    this.props.onUpdateCourses(project_id, newCourses);
 
     // Clear input field
     coursesInput.value = "";
   }
 
   deleteCourses(id) {
-    const newCourses = this.state.project.skills.filter((elem, nid) => {
-      return nid !== id;
-    });
-    axios
-      .patch(`/projects/${this.props._id}`, {
-        courses: newCourses,
-      })
-      .then((res) => this.setState({ project: res.data }));
+    const project_id = this.props.selectedProject._id;
+    const newCourses = this.props.selectedProject.courses.filter(
+      (elem, nid) => {
+        return nid !== id;
+      }
+    );
+    this.props.onUpdateCourses(project_id, newCourses);
   }
 
   // Add/Delete categories
   addCategories() {
+    const project_id = this.props.selectedProject._id;
     const categoriesInput = document.getElementById(
       "CategoriesInput"
     ) as HTMLInputElement;
     const newCategories = [
-      ...this.state.project.categories,
+      ...this.props.selectedProject.categories,
       categoriesInput.value,
     ];
-    axios
-      .patch(`/projects/${this.props._id}`, {
-        categories: newCategories,
-      })
-      .then((res) => this.setState({ project: res.data }));
+    this.props.onUpdateCategories(project_id, newCategories);
 
     // Clear input field
     categoriesInput.value = "";
   }
   deleteCategories(id) {
-    const newCategories = this.state.project.skills.filter((elem, nid) => {
-      return nid !== id;
-    });
-    axios
-      .patch(`/projects/${this.props._id}`, {
-        categories: newCategories,
-      })
-      .then((res) => this.setState({ project: res.data }));
+    const project_id = this.props.selectedProject._id;
+    const newCategories = this.props.selectedProject.categories.filter(
+      (elem, nid) => {
+        return nid !== id;
+      }
+    );
+    this.props.onUpdateCategories(project_id, newCategories);
   }
 
   // Add/Delete tags
   addTags() {
+    const project_id = this.props.selectedProject._id;
     const tagsInput = document.getElementById("TagsInput") as HTMLInputElement;
-    const newTags = [...this.state.project.tags, tagsInput.value];
-    axios
-      .patch(`/projects/${this.props._id}`, {
-        tags: newTags,
-      })
-      .then((res) => this.setState({ project: res.data }));
+    const newTags = [...this.props.selectedProject.tags, tagsInput.value];
+    this.props.onUpdateTags(project_id, newTags);
 
     // Clear input field
     tagsInput.value = "";
   }
   deleteTags(id) {
-    const newTags = this.state.project.skills.filter((elem, nid) => {
+    const project_id = this.props.selectedProject._id;
+    const newTags = this.props.selectedProject.tags.filter((elem, nid) => {
       return nid !== id;
     });
-    axios
-      .patch(`/projects/${this.props._id}`, {
-        tags: newTags,
-      })
-      .then((res) => this.setState({ project: res.data }));
+    this.props.onUpdateTags(project_id, newTags);
   }
 
   render() {
-    const editDepartments = this.state.project.departments.map((elem, id) => {
-      return (
-        <div key={id} style={{ display: "inline-block" }}>
-          <ArrayFocusElem
-            value={elem}
-            minus={() => this.deleteDepartment(id)}
-          />
-        </div>
-      );
-    });
+    // Department bubbles with minus (subtract sign)
+    const editDepartments = this.props.selectedProject.departments.map(
+      (elem, id) => {
+        return (
+          <div key={id} style={{ display: "inline-block" }}>
+            <ArrayFocusElem
+              value={elem}
+              minus={() => this.deleteDepartment(id)}
+            />
+          </div>
+        );
+      }
+    );
 
-    const editSkills = this.state.project.skills.map((elem, id) => {
+    const editSkills = this.props.selectedProject.skills.map((elem, id) => {
       return (
         <div key={id} style={{ display: "inline-block" }}>
           <ArrayFocusElem value={elem} minus={() => this.deleteSkills(id)} />
@@ -191,7 +176,7 @@ class SelfProjectFocus extends Component<any, any> {
       );
     });
 
-    const editCourses = this.state.project.courses.map((elem, id) => {
+    const editCourses = this.props.selectedProject.courses.map((elem, id) => {
       return (
         <div key={id} style={{ display: "inline-block" }}>
           <ArrayFocusElem value={elem} minus={() => this.deleteCourses(id)} />
@@ -199,18 +184,20 @@ class SelfProjectFocus extends Component<any, any> {
       );
     });
 
-    const editCategories = this.state.project.categories.map((elem, id) => {
-      return (
-        <div key={id} style={{ display: "inline-block" }}>
-          <ArrayFocusElem
-            value={elem}
-            minus={() => this.deleteCategories(id)}
-          />
-        </div>
-      );
-    });
+    const editCategories = this.props.selectedProject.categories.map(
+      (elem, id) => {
+        return (
+          <div key={id} style={{ display: "inline-block" }}>
+            <ArrayFocusElem
+              value={elem}
+              minus={() => this.deleteCategories(id)}
+            />
+          </div>
+        );
+      }
+    );
 
-    const editTags = this.state.project.tags.map((elem, id) => {
+    const editTags = this.props.selectedProject.tags.map((elem, id) => {
       return (
         <div key={id} style={{ display: "inline-block" }}>
           <ArrayFocusElem value={elem} minus={() => this.deleteTags(id)} />
@@ -218,12 +205,14 @@ class SelfProjectFocus extends Component<any, any> {
       );
     });
 
+    // EditableText portions
     const editablePortions = this.state.editableQuestions.map((elem, id) => {
       return (
         <div key={id}>
+          {/* Make custom EditableText for focus that uses value props.selectedProject */}
           <EditableText
             question={elem.display}
-            value={this.props[elem.value]}
+            value={this.props.selectedProject[elem.value]}
             textarea={elem.textarea}
           />
           <hr />
@@ -233,13 +222,13 @@ class SelfProjectFocus extends Component<any, any> {
 
     return (
       <div className="SelfProjectFocus">
-        <h3>{this.props.title}</h3>
+        <h3>{this.props.selectedProject.title}</h3>
         <hr />
         {editablePortions}
         <div>
           <h3 style={{ fontSize: "20px", fontWeight: "bold" }}>Departments</h3>
           {/* TODO: Change to a form so circle button is mapped to enter */}
-          <div style={{ display: "flex", alignItems: "center" }}>
+          <div>
             <input
               type="text"
               id="DepartmentInput"
@@ -339,14 +328,22 @@ class SelfProjectFocus extends Component<any, any> {
 
 const mapStateToProps = (state) => {
   return {
-    loading: state.base.loading,
+    selectedProject: state.profile.selectedProject,
   };
 };
 
 const mapDispatchToProps = (dispatch) => {
   return {
-    onLoadingStart: () => loadingStart(),
-    onLoadingEnd: () => loadingEnd(),
+    onUpdateDepartment: (project_id, newDepartments) =>
+      dispatch(updateDepartment(project_id, newDepartments)),
+    onUpdateSkills: (project_id, newSkills) =>
+      dispatch(updateSkills(project_id, newSkills)),
+    onUpdateCourses: (project_id, newCourses) =>
+      dispatch(updateCourses(project_id, newCourses)),
+    onUpdateCategories: (project_id, newCategories) =>
+      dispatch(updateCategories(project_id, newCategories)),
+    onUpdateTags: (project_id, newTags) =>
+      dispatch(updateTags(project_id, newTags)),
   };
 };
 

@@ -4,11 +4,11 @@ const Schema = mongoose.Schema;
 
 const applicationSchema = new Schema({
   owner_id: {
-    type: String,
+    type: Schema.Types.Mixed,
     required: true,
   },
   user_id: {
-    type: String,
+    type: Schema.Types.Mixed,
     required: true,
   },
   project_id: {
