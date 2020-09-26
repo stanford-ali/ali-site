@@ -54,7 +54,9 @@ class SelfProjects extends Component<any, any> {
           <div className="SelfProjectsFocus">
             {!this.props.selfProjectSelected ? (
               this.props.selfProjectApplicationsSelected ? (
-                <SelfProjectApplications />
+                this.props.selfProjectApplications.map((elem, id) => {
+                  return <SelfProjectApplications {...elem} />;
+                })
               ) : (
                 focusFiller
               )
