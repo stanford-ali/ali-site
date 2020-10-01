@@ -10,27 +10,17 @@ interface EditableTextProps {
   questionid?: string;
   question?: string;
   onEdit: Function;
+  onChange: Function;
 }
 
 interface EditableTextState {
   editable: boolean;
-  value: string;
 }
 
 class EditableText extends Component<EditableTextProps, EditableTextState> {
   state: EditableTextState = {
-    value: this.props.value,
     editable: false,
   };
-
-  /*** Fixes MyProjects block page - but renders QnA input uneditable ***/
-  static getDerivedStateFromProps(nextProps, prevState) {
-    if (nextProps.value !== prevState.value) {
-      return { value: nextProps.value };
-    } else {
-      return null;
-    }
-  }
 
   clickEditHandler = () => {
     this.setState({ editable: true });
@@ -44,7 +34,8 @@ class EditableText extends Component<EditableTextProps, EditableTextState> {
   };
 
   inputEditHandler = (event) => {
-    this.setState({ value: event.target.value });
+    // this.setState({ value: event.target.value });
+    this.props.onChange(event.target);
   };
 
   render() {
@@ -53,7 +44,7 @@ class EditableText extends Component<EditableTextProps, EditableTextState> {
         className="editableTextarea"
         onBlur={this.blurEditHandler}
         onChange={this.inputEditHandler}
-        value={this.state.value}
+        value={this.props.value}
         id={this.props.questionid}
         autoFocus
       ></textarea>
@@ -62,7 +53,7 @@ class EditableText extends Component<EditableTextProps, EditableTextState> {
         className="editableInput"
         onBlur={this.blurEditHandler}
         onChange={this.inputEditHandler}
-        value={this.state.value}
+        value={this.props.value}
         id={this.props.questionid}
         type="text"
         autoFocus
@@ -96,7 +87,7 @@ class EditableText extends Component<EditableTextProps, EditableTextState> {
             editableInput
           ) : (
             <span style={{ fontSize: this.props.size }}>
-              {this.state.value}
+              {this.props.value}
             </span>
           )}
         </div>

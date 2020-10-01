@@ -18,7 +18,6 @@ class SelfProjects extends Component<any, any> {
   }
 
   render() {
-    console.log(this.props.selfProjectApplications);
     const focusFiller = (
       <div className="FocusFillerSelfProject">
         <div

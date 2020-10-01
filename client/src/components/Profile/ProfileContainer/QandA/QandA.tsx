@@ -8,10 +8,33 @@ import "./QandA.scss";
 import { AiOutlineUser } from "react-icons/ai";
 
 class QandA extends Component<any, any> {
-  /**
-   * Make user and questions request to backend and populate state
-   * onEdit function for the EditableText on Profile Page
-   */
+  constructor(props) {
+    super(props);
+    this.setQna = this.setQna.bind(this);
+  }
+
+  state = {
+    // QnA state value holds the questions and the answers
+    qna: {},
+  };
+
+  componentWillMount() {
+    this.setQna(this.props.questions);
+  }
+
+  setQna(questions) {
+    let copyQuestions = { ...questions };
+    let newQuestions: any = {};
+    Object.keys(copyQuestions).map((elem) => {
+      let answer = this.props.user[elem];
+
+      let value = { ...copyQuestions[elem], answer };
+      newQuestions[elem] = value;
+    });
+
+    this.setState({ qna: newQuestions });
+  }
+
   render() {
     // Update user's answers
     const updateUser = (input) => {
@@ -27,15 +50,22 @@ class QandA extends Component<any, any> {
         .catch((error) => console.log(error));
     };
 
-    const questions = this.props.questions.map((elem, id) => {
+    const onChangeAnswer = (input) => {
+      let copyQna = { ...this.state.qna };
+      copyQna[input.id].answer = input.value;
+      this.setState({ qna: copyQna });
+    };
+
+    const questions = Object.keys(this.props.questions).map((elem, id) => {
       return (
         <Question
           key={id}
-          question={elem.question}
-          questionid={elem.questionid}
-          value={this.props.user[elem.questionid]}
-          textarea={elem.textarea}
+          question={this.props.questions[elem].question}
+          questionid={elem}
+          value={this.state.qna[elem].answer}
+          textarea={this.props.questions[elem].textarea}
           onEdit={updateUser}
+          onChange={onChangeAnswer}
         />
       );
     });

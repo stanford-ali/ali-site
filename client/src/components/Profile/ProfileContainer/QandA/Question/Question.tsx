@@ -12,6 +12,7 @@ export default function Question(props) {
         questionid={props.questionid}
         question={props.question}
         onEdit={props.onEdit}
+        onChange={props.onChange}
       />
       <hr />
     </div>
