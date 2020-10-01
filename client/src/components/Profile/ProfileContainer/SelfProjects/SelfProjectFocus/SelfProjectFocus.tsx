@@ -10,6 +10,7 @@ import {
   updateCourses,
   updateCategories,
   updateTags,
+  updateProject,
 } from "../../../../../store/profile/profile.actions";
 
 class SelfProjectFocus extends Component<any, any> {
@@ -241,7 +242,6 @@ class SelfProjectFocus extends Component<any, any> {
     });
 
     const onChangeAnswer = (input) => {
-      console.log(input);
       let editableQuestionsCopy = [...this.state.editableQuestions];
       for (let question of editableQuestionsCopy) {
         if (question.questionid === input.id) {
@@ -252,7 +252,13 @@ class SelfProjectFocus extends Component<any, any> {
     };
 
     const onEditAnswer = (input) => {
-      console.log(input);
+      let questionid = input.id;
+      let answer = input.value;
+      this.props.selectedProject[questionid] = answer;
+
+      let body = {};
+      body[questionid] = answer;
+      this.props.onUpdateProject(this.props.selectedProject._id, body);
     };
 
     // EditableText portions
@@ -396,6 +402,8 @@ const mapDispatchToProps = (dispatch) => {
       dispatch(updateCategories(project_id, newCategories)),
     onUpdateTags: (project_id, newTags) =>
       dispatch(updateTags(project_id, newTags)),
+    onUpdateProject: (project_id, body) =>
+      dispatch(updateProject(project_id, body)),
   };
 };
 

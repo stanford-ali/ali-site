@@ -29,6 +29,14 @@ export const clickProject = (project) => (dispatch) => {
   dispatch({ type: CLICK_PROJECT, payload: project });
 };
 
+export const updateProject = (project_id, body) => (dispatch) => {
+  axios
+    .patch(`/projects/${project_id}`, {
+      ...body,
+    })
+    .then((res) => dispatch({ type: UPDATE_PROJECT, payload: res.data }));
+};
+
 export const updateDepartment = (project_id, newDepartments) => (dispatch) => {
   axios
     .patch(`/projects/${project_id}`, {
