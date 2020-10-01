@@ -25,12 +25,12 @@ class QandA extends Component<any, any> {
   setQna(questions) {
     let copyQuestions = { ...questions };
     let newQuestions: any = {};
-    Object.keys(copyQuestions).map((elem) => {
+    for (let elem of Object.keys(copyQuestions)) {
       let answer = this.props.user[elem];
 
       let value = { ...copyQuestions[elem], answer };
       newQuestions[elem] = value;
-    });
+    }
 
     this.setState({ qna: newQuestions });
   }
