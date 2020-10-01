@@ -10,6 +10,7 @@ import {
   updateCourses,
   updateCategories,
   updateTags,
+  updateProject,
 } from "../../../../../store/profile/profile.actions";
 
 class SelfProjectFocus extends Component<any, any> {
@@ -29,12 +30,47 @@ class SelfProjectFocus extends Component<any, any> {
 
   state = {
     editableQuestions: [
-      { value: "description", display: "Descriptions", textarea: true },
-      { value: "timeframe", display: "Timeframe", textarea: false },
-      { value: "website", display: "Website", textarea: true },
+      {
+        questionid: "description",
+        question: "Descriptions",
+        textarea: true,
+        value: "",
+      },
+      {
+        questionid: "timeframe",
+        question: "Timeframe",
+        textarea: false,
+        value: "",
+      },
+      {
+        questionid: "website",
+        question: "Website",
+        textarea: true,
+        value: "",
+      },
     ],
-    project: this.props,
   };
+
+  componentDidMount() {
+    this.updateEditableQuestions();
+  }
+
+  componentDidUpdate(prevProps, prevState) {
+    if (this.props.selectedProject !== prevProps.selectedProject) {
+      this.updateEditableQuestions();
+    }
+  }
+
+  // Updates Editable Questions' values with this.props.selectedProject
+  updateEditableQuestions() {
+    let editableQuestionsCopy = [...this.state.editableQuestions];
+    for (let question of editableQuestionsCopy) {
+      let id = question.questionid;
+      let value = this.props.selectedProject[id];
+      question.value = value;
+    }
+    this.setState({ editableQuestions: editableQuestionsCopy });
+  }
 
   // Add/Delete departments
   addDepartments() {
@@ -205,15 +241,37 @@ class SelfProjectFocus extends Component<any, any> {
       );
     });
 
+    const onChangeAnswer = (input) => {
+      let editableQuestionsCopy = [...this.state.editableQuestions];
+      for (let question of editableQuestionsCopy) {
+        if (question.questionid === input.id) {
+          question.value = input.value;
+        }
+      }
+      this.setState({ editableQuestions: editableQuestionsCopy });
+    };
+
+    const onEditAnswer = (input) => {
+      let questionid = input.id;
+      let answer = input.value;
+      this.props.selectedProject[questionid] = answer;
+
+      let body = {};
+      body[questionid] = answer;
+      this.props.onUpdateProject(this.props.selectedProject._id, body);
+    };
+
     // EditableText portions
     const editablePortions = this.state.editableQuestions.map((elem, id) => {
       return (
         <div key={id}>
-          {/* Make custom EditableText for focus that uses value props.selectedProject */}
           <EditableText
-            question={elem.display}
-            value={this.props.selectedProject[elem.value]}
+            question={elem.question}
+            value={elem.value}
             textarea={elem.textarea}
+            onChange={onChangeAnswer}
+            onEdit={onEditAnswer}
+            questionid={elem.questionid}
           />
           <hr />
         </div>
@@ -344,6 +402,8 @@ const mapDispatchToProps = (dispatch) => {
       dispatch(updateCategories(project_id, newCategories)),
     onUpdateTags: (project_id, newTags) =>
       dispatch(updateTags(project_id, newTags)),
+    onUpdateProject: (project_id, body) =>
+      dispatch(updateProject(project_id, body)),
   };
 };
 

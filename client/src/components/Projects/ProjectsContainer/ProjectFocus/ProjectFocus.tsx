@@ -13,23 +13,28 @@ class ProjectFocus extends Component<any, any> {
   state = {
     application: null,
   };
+
   componentDidMount() {
     this.props.user &&
       axios
         .get(
-          `http://localhost:5000/applications/user/${this.props.user.uid}/project/${this.props._id}`
+          `http://localhost:5000/application/user/${this.props.user.uid}/project/${this.props._id}`
         )
         .then((res) => this.setState({ application: res.data }))
         .catch((error) => console.log(error));
   }
 
-  // Need this to account for if the user is refreshing the Projects page
+  /**
+   * Manages if a user has applied to a project or not
+   * @param prevProps
+   * @param prevState
+   */
   componentDidUpdate(prevProps, prevState) {
     // User is established - see if they have applied to the project
     if (this.props.user !== prevProps.user) {
       axios
         .get(
-          `http://localhost:5000/applications/user/${this.props.user.uid}/project/${this.props._id}`
+          `http://localhost:5000/application/user/${this.props.user.uid}/project/${this.props._id}`
         )
         .then((res) => this.setState({ application: res.data }))
         .catch((error) => console.log(error));
