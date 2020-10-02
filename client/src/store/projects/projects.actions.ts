@@ -6,9 +6,9 @@ import {
 } from "./projects.types";
 import { loadingStart, loadingEnd } from "../base/base.actions";
 
-export const fetchProject = (project_id) => (dispatch) => {
+export const fetchProject = (project_id) => async (dispatch) => {
   dispatch(loadingStart());
-  axios
+  await axios
     .get(`/projects/${project_id}`)
     .then((res) => {
       dispatch({
