@@ -136,7 +136,7 @@ class ProjectsContainer extends Component<any, any> {
       answers.push(inputs[i].value);
     }
 
-    let res = await this.props.onApplyProject(
+    await this.props.onApplyProject(
       this.props.user.uid,
       this.props.current_project._id,
       this.props.current_project.owner,
