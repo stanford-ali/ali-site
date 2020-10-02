@@ -6,51 +6,27 @@ import { connect } from "react-redux";
 import qs from "qs";
 import "./ProjectsContainer.scss";
 import { fetchProject } from "../../../store/projects/projects.actions";
+import { applyProject } from "../../../store/auth/auth.actions";
 import ModalLoader from "../../GlobalUI/ModalLoader/ModalLoader";
+import axios from "axios";
 
 class ProjectsContainer extends Component<any, any> {
   constructor(props) {
     super(props);
     this.changeProjSelected = this.changeProjSelected.bind(this);
+    this.handleSubmit = this.handleSubmit.bind(this);
   }
 
   /**
    * projSelected - whether there is a project chosen to display
-   * projProps - the props for a focused project (title, desc, etc)
+   * applied - whether user has applied or not applied to the selected project
    */
   state = {
     projSelected: false,
-    projectid: "",
+    applied: false,
   };
 
-  // Change so that ProjectFocus component shows
-  changeProjSelected(id) {
-    this.setState({
-      projSelected: true,
-      projectid: id,
-    });
-    this.setQueryString(id);
-    this.props.onFetchProject(id);
-  }
-
-  // Sets the URL's query string when a user selects a project
-  setQueryString(projectid) {
-    let query_string = qs.stringify(
-      {
-        search: projectid,
-      },
-      {
-        encode: false,
-        indices: false,
-      }
-    );
-    if (query_string !== "") {
-      query_string = `?${query_string}`;
-    }
-    window.history.replaceState({}, "", `/projects/${query_string}`);
-  }
-
-  componentDidMount() {
+  async componentDidMount() {
     if (window.location.search) {
       // We have a query param for a project
       let params = qs.parse(window.location.search.substring(1), {
@@ -59,13 +35,14 @@ class ProjectsContainer extends Component<any, any> {
       });
       this.setState({ projSelected: true, projectid: params.search });
 
-      // Update this.props.details so information can be displayed
-      this.props.onFetchProject(params.search);
+      // Update this.props.current_project
+      await this.props.onFetchProject(params.search);
     }
   }
 
   /**
-   * Manages purple highlighting of the boxes when focused
+   * Manages purple highlighting of the boxes when focused and
+   * loading if a user has applied to a project
    * @param prevProps
    * @param prevState
    */
@@ -87,6 +64,84 @@ class ProjectsContainer extends Component<any, any> {
         project.style.border = "1px solid #3246bb";
       }
     }
+
+    // User is established/logged in
+    if (this.props.user !== prevProps.user) {
+      // See if the user has applied to that project
+      axios
+        .get(
+          `/application/user/${this.props.user.uid}/project/${this.props.current_project._id}`
+        )
+        .then((res) =>
+          res.data
+            ? this.setState({ applied: true })
+            : this.setState({ applied: false })
+        )
+        .catch((error) => console.log(error));
+    }
+  }
+
+  // Change so that ProjectFocus component shows
+  async changeProjSelected(id) {
+    this.setState({
+      projSelected: true,
+      projectid: id,
+    });
+    this.setQueryString(id);
+    await this.props.onFetchProject(id);
+
+    // See if the user has applied to that project
+    this.props.user &&
+      (await axios
+        .get(
+          `/application/user/${this.props.user.uid}/project/${this.props.current_project._id}`
+        )
+        .then((res) =>
+          res.data
+            ? this.setState({ applied: true })
+            : this.setState({ applied: false })
+        )
+        .catch((error) => console.log(error)));
+  }
+
+  // Sets the URL's query string when a user selects a project
+  setQueryString(projectid) {
+    let query_string = qs.stringify(
+      {
+        search: projectid,
+      },
+      {
+        encode: false,
+        indices: false,
+      }
+    );
+    if (query_string !== "") {
+      query_string = `?${query_string}`;
+    }
+    window.history.replaceState({}, "", `/projects/${query_string}`);
+  }
+
+  async handleSubmit(event) {
+    event.preventDefault();
+    // If there is no user, alert them that they need to login
+    if (!this.props.user) {
+      alert("Please login to apply to projects!");
+      return;
+    }
+
+    let inputs = event.target.elements;
+    let answers = [];
+    for (let i = 0; i < inputs.length - 1; i++) {
+      answers.push(inputs[i].value);
+    }
+
+    let res = await this.props.onApplyProject(
+      this.props.user.uid,
+      this.props.current_project._id,
+      this.props.current_project.owner,
+      answers
+    );
+    this.setState({ applied: true });
   }
 
   render() {
@@ -113,7 +168,11 @@ class ProjectsContainer extends Component<any, any> {
         </div>
         <div className="ProjectsContainerRight">
           {this.state.projSelected ? (
-            <ProjectFocus {...this.props.current_project} />
+            <ProjectFocus
+              applied={this.state.applied}
+              onSubmit={this.handleSubmit}
+              {...this.props.current_project}
+            />
           ) : (
             focusFiller
           )}
@@ -137,6 +196,8 @@ const mapDispatchToProps = (dispatch) => {
   return {
     // onProjectSelected: (project) => dispatch(selectProject(project)),
     onFetchProject: (projectid) => dispatch(fetchProject(projectid)),
+    onApplyProject: (user_id, project_id, owner_id, answers) =>
+      dispatch(applyProject(user_id, project_id, owner_id, answers)),
   };
 };
 

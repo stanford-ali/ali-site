@@ -7,40 +7,8 @@ import ClipLoader from "react-spinners/ClipLoader";
 import ProjectSkill from "./ProjectSkill/ProjectSkill";
 import "./ProjectFocus.scss";
 import { applyProject } from "../../../../store/auth/auth.actions";
-import axios from "axios";
 
 class ProjectFocus extends Component<any, any> {
-  state = {
-    application: null,
-  };
-
-  componentDidMount() {
-    this.props.user &&
-      axios
-        .get(
-          `http://localhost:5000/application/user/${this.props.user.uid}/project/${this.props._id}`
-        )
-        .then((res) => this.setState({ application: res.data }))
-        .catch((error) => console.log(error));
-  }
-
-  /**
-   * Manages if a user has applied to a project or not
-   * @param prevProps
-   * @param prevState
-   */
-  componentDidUpdate(prevProps, prevState) {
-    // User is established - see if they have applied to the project
-    if (this.props.user !== prevProps.user) {
-      axios
-        .get(
-          `http://localhost:5000/application/user/${this.props.user.uid}/project/${this.props._id}`
-        )
-        .then((res) => this.setState({ application: res.data }))
-        .catch((error) => console.log(error));
-    }
-  }
-
   render() {
     const questions =
       this.props.questions &&
@@ -66,32 +34,31 @@ class ProjectFocus extends Component<any, any> {
       return <ProjectSkill key={id} skill={elem} />;
     });
 
-    const handleSubmit = async (event) => {
-      event.preventDefault();
-      // If there is no user, alert them that they need to login
-      if (!this.props.user) {
-        alert("Please login to apply to projects!");
-        return;
-      }
+    // // Move this to parent
+    // const handleSubmit = async (event) => {
+    //   event.preventDefault();
+    //   // If there is no user, alert them that they need to login
+    //   if (!this.props.user) {
+    //     alert("Please login to apply to projects!");
+    //     return;
+    //   }
 
-      let inputs = event.target.elements;
-      let answers = [];
-      for (let i = 0; i < inputs.length - 1; i++) {
-        answers.push(inputs[i].value);
-      }
+    //   let inputs = event.target.elements;
+    //   let answers = [];
+    //   for (let i = 0; i < inputs.length - 1; i++) {
+    //     answers.push(inputs[i].value);
+    //   }
 
-      let res = await this.props.onApplyProject(
-        this.props.user.uid,
-        this.props._id,
-        this.props.owner,
-        answers
-      );
-
-      console.log(res);
-    };
+    //   let res = await this.props.onApplyProject(
+    //     this.props.user.uid,
+    //     this.props._id,
+    //     this.props.owner,
+    //     answers
+    //   );
+    // };
 
     const questionsForm = (
-      <Form onSubmit={handleSubmit}>
+      <Form onSubmit={this.props.onSubmit}>
         {questions}
         {this.props.loading ? (
           <Button>
@@ -100,7 +67,7 @@ class ProjectFocus extends Component<any, any> {
         ) : (
           <Button
             type="submit"
-            disabled={this.state.application ? true : false} // if there is an application found, applied
+            disabled={this.props.applied ? true : false} // if there is an application found, applied
           >
             Apply
           </Button>
