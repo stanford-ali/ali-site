@@ -67,17 +67,18 @@ class ProjectsContainer extends Component<any, any> {
 
     // User is established/logged in
     if (this.props.user !== prevProps.user) {
-      // See if the user has applied to that project
-      axios
-        .get(
-          `/application/user/${this.props.user.uid}/project/${this.props.current_project._id}`
-        )
-        .then((res) =>
-          res.data
-            ? this.setState({ applied: true })
-            : this.setState({ applied: false })
-        )
-        .catch((error) => console.log(error));
+      // See if the user has applied to that project if there is a current project
+      this.props.current_project &&
+        axios
+          .get(
+            `/application/user/${this.props.user.uid}/project/${this.props.current_project._id}`
+          )
+          .then((res) =>
+            res.data
+              ? this.setState({ applied: true })
+              : this.setState({ applied: false })
+          )
+          .catch((error) => console.log(error));
     }
   }
 
