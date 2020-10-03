@@ -6,7 +6,6 @@ userRoute.use((req, res, next) => {
   // User authentication middleware
   const { token } = req.headers;
   // const { pathname } = new URL(req.url);
-  // console.log("hello");
   admin
     .auth()
     .verifyIdToken(token as string)

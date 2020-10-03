@@ -10,7 +10,7 @@ import {
 const initialState: IBaseState = {
   loading: false,
   redirect: "/",
-  error: null,
+  error: false,
 };
 
 const base: Reducer<any> = (state: any = initialState, action) => {
@@ -33,7 +33,7 @@ const base: Reducer<any> = (state: any = initialState, action) => {
     case THROW_ERROR:
       return {
         ...state,
-        error: action.payload,
+        error: true,
       };
     default:
       return state;

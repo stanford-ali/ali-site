@@ -13,6 +13,7 @@ import "./App.scss";
 import { fetchUser, logout, loadUser } from "./store/auth/auth.actions";
 import { setRedirect } from "./store/base/base.actions";
 import axios from "axios";
+import ModalError from "./components/GlobalUI/ModalError/ModalError";
 
 // Helper that creates the user in the DB
 const createUser = async (user) => {
@@ -44,6 +45,7 @@ const createUser = async (user) => {
 const App = () => {
   // Get user from redux
   const user = useSelector((state) => state.auth.user);
+  const error = useSelector((state) => state.base.error);
   const dispatch = useDispatch();
 
   // Dispatch action creators from redux
@@ -83,6 +85,7 @@ const App = () => {
 
   return (
     <ConnectedRouter history={history}>
+      {error ? <ModalError /> : null}
       <Switch>
         <Route exact path="/" component={Home} />
         <Route exact path="/projects" component={Projects} />

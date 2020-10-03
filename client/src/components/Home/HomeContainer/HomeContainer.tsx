@@ -6,6 +6,7 @@ import { Button } from "react-bootstrap";
 import { useHistory } from "react-router-dom";
 
 import "./HomeContainer.scss";
+import ModalError from "../../GlobalUI/ModalError/ModalError";
 export default function HomeContainer() {
   const history = useHistory();
 

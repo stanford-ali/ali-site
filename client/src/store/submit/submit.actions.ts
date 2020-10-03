@@ -1,5 +1,6 @@
 import axios from "axios";
 import { START_NEW_PROJECT, SUBMIT_PROJECT, SET_SCHEMA } from "./submit.types";
+import { throwError } from "../base/base.actions";
 import store from "../../store";
 
 export const startNewProject = () => ({
@@ -66,6 +67,6 @@ export const submitProject = (owner, formData) => (dispatch) => {
       });
     })
     .catch((error) => {
-      console.log(error);
+      dispatch(throwError(error));
     });
 };

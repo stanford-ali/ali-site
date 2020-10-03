@@ -6,5 +6,5 @@ export const THROW_ERROR: string = "THROW_ERROR";
 export interface IBaseState {
   loading: boolean;
   redirect: string;
-  error: any;
+  error: boolean;
 }
