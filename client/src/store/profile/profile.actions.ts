@@ -5,7 +5,7 @@ import {
   UPDATE_PROJECT,
   GET_APPLICATIONS,
 } from "./profile.types";
-import { loadingStart, loadingEnd } from "../base/base.actions";
+import { loadingStart, loadingEnd, throwError } from "../base/base.actions";
 
 export const loadProjects = (user_id) => (dispatch) => {
   dispatch(loadingStart());
@@ -18,7 +18,7 @@ export const loadProjects = (user_id) => (dispatch) => {
       });
     })
     .catch((error) => {
-      console.log(error);
+      dispatch(throwError(error));
     })
     .then(() => {
       dispatch(loadingEnd());
@@ -34,7 +34,8 @@ export const updateProject = (project_id, body) => (dispatch) => {
     .patch(`/projects/${project_id}`, {
       ...body,
     })
-    .then((res) => dispatch({ type: UPDATE_PROJECT, payload: res.data }));
+    .then((res) => dispatch({ type: UPDATE_PROJECT, payload: res.data }))
+    .catch((error) => dispatch(throwError(error)));
 };
 
 export const updateDepartment = (project_id, newDepartments) => (dispatch) => {
@@ -42,7 +43,8 @@ export const updateDepartment = (project_id, newDepartments) => (dispatch) => {
     .patch(`/projects/${project_id}`, {
       departments: newDepartments,
     })
-    .then((res) => dispatch({ type: UPDATE_PROJECT, payload: res.data }));
+    .then((res) => dispatch({ type: UPDATE_PROJECT, payload: res.data }))
+    .catch((error) => dispatch(throwError(error)));
 };
 
 export const updateSkills = (project_id, newSkills) => (dispatch) => {
@@ -50,7 +52,8 @@ export const updateSkills = (project_id, newSkills) => (dispatch) => {
     .patch(`/projects/${project_id}`, {
       skills: newSkills,
     })
-    .then((res) => dispatch({ type: UPDATE_PROJECT, payload: res.data }));
+    .then((res) => dispatch({ type: UPDATE_PROJECT, payload: res.data }))
+    .catch((error) => dispatch(throwError(error)));
 };
 
 export const updateCourses = (project_id, newCourses) => (dispatch) => {
@@ -58,7 +61,8 @@ export const updateCourses = (project_id, newCourses) => (dispatch) => {
     .patch(`/projects/${project_id}`, {
       courses: newCourses,
     })
-    .then((res) => dispatch({ type: UPDATE_PROJECT, payload: res.data }));
+    .then((res) => dispatch({ type: UPDATE_PROJECT, payload: res.data }))
+    .catch((error) => dispatch(throwError(error)));
 };
 
 export const updateCategories = (project_id, newCategories) => (dispatch) => {
@@ -66,7 +70,8 @@ export const updateCategories = (project_id, newCategories) => (dispatch) => {
     .patch(`/projects/${project_id}`, {
       categories: newCategories,
     })
-    .then((res) => dispatch({ type: UPDATE_PROJECT, payload: res.data }));
+    .then((res) => dispatch({ type: UPDATE_PROJECT, payload: res.data }))
+    .catch((error) => dispatch(throwError(error)));
 };
 
 export const updateTags = (project_id, newTags) => (dispatch) => {
@@ -74,11 +79,13 @@ export const updateTags = (project_id, newTags) => (dispatch) => {
     .patch(`/projects/${project_id}`, {
       tags: newTags,
     })
-    .then((res) => dispatch({ type: UPDATE_PROJECT, payload: res.data }));
+    .then((res) => dispatch({ type: UPDATE_PROJECT, payload: res.data }))
+    .catch((error) => dispatch(throwError(error)));
 };
 
 export const getApplications = (project_id, user_id) => (dispatch) => {
   axios
     .get(`/applications/user/${user_id}/selfproject/${project_id}`)
-    .then((res) => dispatch({ type: GET_APPLICATIONS, payload: res.data }));
+    .then((res) => dispatch({ type: GET_APPLICATIONS, payload: res.data }))
+    .catch((error) => dispatch(throwError(error)));
 };

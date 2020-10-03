@@ -1,81 +1,50 @@
-.modal-confirm {
-  color: #434e65;
-  width: 525px;
+.Error {
+  position: fixed;
+  z-index: 500;
+  background-color: white;
+  width: 30%;
+  border-radius: 10px;
+  box-shadow: 0 6px 30px rgba(0, 0, 0, 0.4);
+  // padding: 16px;
+  left: 35%;
+  top: 30%;
+  box-sizing: border-box;
+  transition: all 0.3s ease-out;
+  display: flex;
+  justify-content: center;
+  // align-items: center;
+  flex-flow: column;
 }
-.modal-confirm .modal-content {
+
+.ErrorTop {
+  border-top-left-radius: 10px;
+  border-top-right-radius: 10px;
+  height: 50%;
+  background-color: #e85e6c;
+  text-align: center;
   padding: 20px;
-  font-size: 16px;
-  border-radius: 5px;
-  border: none;
+  margin-bottom: 10px;
 }
-.modal-confirm .modal-header {
-  background: #e85e6c;
-  border-bottom: none;
-  position: relative;
+
+.ErrorBottom {
+  height: 50%;
   text-align: center;
-  margin: -20px -20px 0;
-  border-radius: 5px 5px 0 0;
-  padding: 35px;
+  margin-bottom: 10px;
 }
-.modal-confirm h4 {
-  text-align: center;
-  font-size: 36px;
-  margin: 10px 0;
+
+.Backdrop {
+  width: 100vw;
+  height: 100vh;
+  position: fixed;
+  z-index: 100;
+  left: 0;
+  top: 0;
+  background-color: rgba(0, 0, 0, 0.5);
 }
-.modal-confirm .form-control,
-.modal-confirm .btn {
-  min-height: 40px;
-  border-radius: 3px;
-}
-.modal-confirm .close {
-  position: absolute;
-  top: 15px;
-  right: 15px;
-  color: #fff;
-  text-shadow: none;
-  opacity: 0.5;
-}
-.modal-confirm .close:hover {
-  opacity: 0.8;
-}
-.modal-confirm .icon-box {
-  color: #fff;
-  width: 95px;
-  height: 95px;
-  display: inline-block;
-  border-radius: 50%;
-  z-index: 9;
-  border: 5px solid #fff;
-  padding: 15px;
-  text-align: center;
-}
-.modal-confirm .icon-box i {
-  font-size: 58px;
-  margin: -2px 0 0 -2px;
-}
-.modal-confirm.modal-dialog {
-  margin-top: 80px;
-}
-.modal-confirm .btn,
-.modal-confirm .btn:active {
-  color: #fff;
-  border-radius: 4px;
-  background: #eeb711 !important;
-  text-decoration: none;
-  transition: all 0.4s;
-  line-height: normal;
-  border-radius: 30px;
-  margin-top: 10px;
-  padding: 6px 20px;
-  min-width: 150px;
-  border: none;
-}
-.modal-confirm .btn:hover,
-.modal-confirm .btn:focus {
-  background: #eda645 !important;
-  outline: none;
-}
-.trigger-btn {
-  display: inline-block;
-  margin: 100px auto;
+
+@media (min-width: 600px) {
+  .Loader {
+    width: 100px;
+    left: calc(50% - 50px);
+  }
 }

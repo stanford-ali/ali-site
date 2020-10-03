@@ -4,7 +4,7 @@ import {
   FETCH_PROJECTS,
   // SUBMIT_APPLICATION,
 } from "./projects.types";
-import { loadingStart, loadingEnd } from "../base/base.actions";
+import { loadingStart, loadingEnd, throwError } from "../base/base.actions";
 
 export const fetchProject = (project_id) => async (dispatch) => {
   dispatch(loadingStart());
@@ -17,7 +17,7 @@ export const fetchProject = (project_id) => async (dispatch) => {
       });
     })
     .catch((error) => {
-      console.log(error);
+      dispatch(throwError(error));
     })
     .then(() => {
       dispatch(loadingEnd());
@@ -35,7 +35,7 @@ export const fetchProjects = () => (dispatch) => {
       });
     })
     .catch((error) => {
-      console.log(error);
+      dispatch(throwError(error));
     })
     .then(() => {
       dispatch(loadingEnd());

@@ -1,36 +1,6 @@
 import axios from "axios";
-import { loadingStart, loadingEnd } from "../base/base.actions";
+import { loadingStart, loadingEnd, throwError } from "../base/base.actions";
 import { LOAD_USER, UPDATE_USER, SIGN_OUT } from "./auth.types";
-
-// NOT NEEDED ANYMORE BECAUSE FIREBASEUI HANDLES IT //
-export const signup = (user) => {
-  return (dispatch) => {
-    // Modify user here to store in database here
-    const newUser = {
-      firebaseid: user.user.uid,
-      email: user.user.email,
-      firstname: user.firstName,
-      lastname: user.lastName,
-      image: "",
-      qna: {},
-      applications: [],
-      following: [],
-    };
-
-    // Axios request to signup
-    axios
-      .post("/students", newUser)
-      .then((res) => dispatch(loadUser(res.data[0])))
-      .catch((error) => console.log(error));
-  };
-};
-
-// ALSO HANDLED BY FIREBASE UI //
-export const login = (user) => {
-  return (dispatch) => {
-    axios.get("/student").then((user) => dispatch(loadUser(user)));
-  };
-};
 
 export const signOut = () => {
   return {
@@ -87,7 +57,7 @@ export const followProject = (projectid, user) => {
       })
       .then(() => dispatch(updateUser(user)))
       .catch((error) => {
-        console.log(error);
+        dispatch(throwError(error));
       });
   };
 };
@@ -105,7 +75,7 @@ export const unfollowProject = (projectid, user) => {
       })
       .then(() => dispatch(updateUser(user)))
       .catch((error) => {
-        console.log(error);
+        dispatch(throwError(error));
       });
   };
 };
@@ -121,7 +91,7 @@ export const applyProject = (user_id, project_id, owner_id, answers) => {
       })
       .then((res) => {})
       .catch((error) => {
-        console.log(error);
+        dispatch(throwError(error));
       })
       .finally(() => dispatch(loadingEnd()));
   };
