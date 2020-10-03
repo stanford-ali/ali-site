@@ -10,6 +10,7 @@ class ProjectsList extends Component<any, any> {
   };
 
   componentDidMount() {
+    // Get all the projects - TODO: make redux action so we can have a loader
     axios
       .get(`http://localhost:5000/projects`, { params: { verify: false } })
       .then((res) =>
