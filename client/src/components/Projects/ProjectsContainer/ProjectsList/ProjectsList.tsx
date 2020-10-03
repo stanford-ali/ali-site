@@ -3,39 +3,30 @@ import ProjectList from "./ProjectList/ProjectList";
 // import Loader from "../../../GlobalUI/ModalLoader/ModalLoader";
 import axios from "axios";
 import { connect } from "react-redux";
+import { fetchProjects } from "../../../../store/projects/projects.actions";
 
 class ProjectsList extends Component<any, any> {
-  state = {
-    projects: [],
-  };
-
   componentDidMount() {
-    axios
-      .get(`http://localhost:5000/projects`, { params: { verify: false } })
-      .then((res) =>
-        this.setState({
-          ...this.state,
-          projects: res.data,
-        })
-      )
-      .catch((error) => console.log(error));
+    this.props.onFetchProjects();
   }
 
   render() {
-    const projects = this.state.projects.map((elem, id) => {
-      return (
-        <ProjectList
-          key={id}
-          projectid={elem._id}
-          title={elem.title}
-          departments={elem.departments}
-          desc={elem.description}
-          categ={elem.categories.join(" | ")}
-          faculty={elem.faculty_designed}
-          click={this.props.click}
-        />
-      );
-    });
+    const projects =
+      this.props.projects &&
+      this.props.projects.map((elem, id) => {
+        return (
+          <ProjectList
+            key={id}
+            projectid={elem._id}
+            title={elem.title}
+            departments={elem.departments}
+            desc={elem.description}
+            categ={elem.categories.join(" | ")}
+            faculty={elem.faculty_designed}
+            click={this.props.click}
+          />
+        );
+      });
     return <div>{projects}</div>;
   }
 }
@@ -43,7 +34,14 @@ class ProjectsList extends Component<any, any> {
 const mapStateToProps = (state) => {
   return {
     user: state.auth.user,
+    projects: state.project.projects,
   };
 };
 
-export default connect(mapStateToProps, null)(ProjectsList);
+const mapDispatchToProps = (dispatch) => {
+  return {
+    onFetchProjects: () => dispatch(fetchProjects()),
+  };
+};
+
+export default connect(mapStateToProps, mapDispatchToProps)(ProjectsList);
