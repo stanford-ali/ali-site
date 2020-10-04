@@ -41,7 +41,6 @@ function SelfProject(props) {
         </OverlayTrigger>
       </div>
       <p>Created: {date.toDateString()}</p>
-      <p>Applications: </p>
     </div>
   );
 }

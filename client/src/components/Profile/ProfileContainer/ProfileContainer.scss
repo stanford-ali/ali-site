@@ -4,6 +4,12 @@
   margin: auto;
 }
 
-.ProfileContainerTop {
-  display: flex;
+// .ProfileContainerTop {
+//   display: flex;
+// }
+
+@media only screen and (min-width: 768px) {
+  .ProfileContainerTop {
+    display: flex;
+  }
 }

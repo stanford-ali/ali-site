@@ -34,29 +34,6 @@ class ProjectFocus extends Component<any, any> {
       return <ProjectSkill key={id} skill={elem} />;
     });
 
-    // // Move this to parent
-    // const handleSubmit = async (event) => {
-    //   event.preventDefault();
-    //   // If there is no user, alert them that they need to login
-    //   if (!this.props.user) {
-    //     alert("Please login to apply to projects!");
-    //     return;
-    //   }
-
-    //   let inputs = event.target.elements;
-    //   let answers = [];
-    //   for (let i = 0; i < inputs.length - 1; i++) {
-    //     answers.push(inputs[i].value);
-    //   }
-
-    //   let res = await this.props.onApplyProject(
-    //     this.props.user.uid,
-    //     this.props._id,
-    //     this.props.owner,
-    //     answers
-    //   );
-    // };
-
     const questionsForm = (
       <Form onSubmit={this.props.onSubmit}>
         {questions}

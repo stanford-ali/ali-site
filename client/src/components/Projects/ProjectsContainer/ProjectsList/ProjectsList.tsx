@@ -1,7 +1,5 @@
 import React, { Component } from "react";
 import ProjectList from "./ProjectList/ProjectList";
-// import Loader from "../../../GlobalUI/ModalLoader/ModalLoader";
-import axios from "axios";
 import { connect } from "react-redux";
 import { fetchProjects } from "../../../../store/projects/projects.actions";
 

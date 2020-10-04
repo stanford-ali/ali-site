@@ -9,6 +9,7 @@ import { fetchProject } from "../../../store/projects/projects.actions";
 import { applyProject } from "../../../store/auth/auth.actions";
 import ModalLoader from "../../GlobalUI/ModalLoader/ModalLoader";
 import axios from "axios";
+import { throwError } from "../../../store/base/base.actions";
 
 class ProjectsContainer extends Component<any, any> {
   constructor(props) {
@@ -78,7 +79,7 @@ class ProjectsContainer extends Component<any, any> {
               ? this.setState({ applied: true })
               : this.setState({ applied: false })
           )
-          .catch((error) => console.log(error));
+          .catch((error) => this.props.onThrowError(error));
     }
   }
 
@@ -102,7 +103,7 @@ class ProjectsContainer extends Component<any, any> {
             ? this.setState({ applied: true })
             : this.setState({ applied: false })
         )
-        .catch((error) => console.log(error)));
+        .catch((error) => this.props.onThrowError(error)));
   }
 
   // Sets the URL's query string when a user selects a project
@@ -199,6 +200,7 @@ const mapDispatchToProps = (dispatch) => {
     onFetchProject: (projectid) => dispatch(fetchProject(projectid)),
     onApplyProject: (user_id, project_id, owner_id, answers) =>
       dispatch(applyProject(user_id, project_id, owner_id, answers)),
+    onThrowError: (error) => dispatch(throwError(error)),
   };
 };
 
