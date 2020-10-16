@@ -8,7 +8,6 @@ import BarLoader from "react-spinners/BarLoader";
 
 const Navbar = (props) => (
   <section id="navbar">
-    {/* SHOULD BE LOADING {!props.user ? <ModalLoader /> : null} */}
     <div>
       <nav id="navbar">
         <div className="navbar">

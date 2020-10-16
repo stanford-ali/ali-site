@@ -3,7 +3,7 @@ $h1-gray-font: #7a7a7a;
 $logo-color: #c4c4c4;
 
 .HomeContainer {
-  display: flex;
+  // display: flex;
   padding: 10vh 7vw;
   max-width: 1500px;
   margin: auto;
@@ -13,7 +13,7 @@ $logo-color: #c4c4c4;
   }
 
   .LeftContainer {
-    width: 50%;
+    // width: 50%;
     margin-right: 20px;
     position: relative;
   }
@@ -88,5 +88,15 @@ $logo-color: #c4c4c4;
       left: -20px;
       top: 100px;
     }
+  }
+}
+
+@media only screen and (min-width: 768px) {
+  .LeftContainer {
+    width: 50%;
+  }
+
+  .HomeContainer {
+    display: flex;
   }
 }

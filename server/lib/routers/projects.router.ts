@@ -17,7 +17,7 @@ export default class ProjectRouter {
 
     app.get(
       "/projects/pending",
-      adminRoute,
+      userRoute,
       this.projectController.getPendingProjects
     );
     app.get(

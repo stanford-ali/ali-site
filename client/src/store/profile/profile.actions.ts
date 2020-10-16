@@ -25,6 +25,17 @@ export const loadProjects = (user_id) => (dispatch) => {
     });
 };
 
+export const getPendingProjects = () => (dispatch) => {
+  dispatch(loadingStart());
+  axios.get(`/projects/pending`)
+    .then(res => console.log(res))
+    .catch(error => dispatch(throwError(error)))
+    .then(() => {
+      dispatch(loadingEnd())
+    });
+}
+
+
 export const clickProject = (project) => (dispatch) => {
   dispatch({ type: CLICK_PROJECT, payload: project });
 };
@@ -89,3 +100,4 @@ export const getApplications = (project_id, user_id) => (dispatch) => {
     .then((res) => dispatch({ type: GET_APPLICATIONS, payload: res.data }))
     .catch((error) => dispatch(throwError(error)));
 };
+
