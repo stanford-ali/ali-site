@@ -13,13 +13,15 @@ export default class ProjectRouter {
       userRoute,
       this.projectController.updateProject
     );
-    app.get("/projects/:project_id", this.projectController.getProjectByID);
 
     app.get(
       "/projects/pending",
       userRoute,
       this.projectController.getPendingProjects
     );
+
+    app.get("/projects/:project_id", this.projectController.getProjectByID);
+
     app.get(
       "/projects/owner/:user_id",
       this.projectController.getProjectsByOwner
