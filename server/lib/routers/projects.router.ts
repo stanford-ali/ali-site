@@ -8,20 +8,17 @@ export default class ProjectRouter {
   public routes(app: Application): void {
     app.get("/projects", this.projectController.getProjects);
     app.post("/projects", this.projectController.addProject);
-    app.patch(
-      "/projects/:project_id",
-      userRoute,
-      this.projectController.updateProject
-    );
-
     app.get(
       "/projects/pending",
       userRoute,
       this.projectController.getPendingProjects
     );
-
+    app.patch(
+      "/projects/:project_id",
+      userRoute,
+      this.projectController.updateProject
+    );
     app.get("/projects/:project_id", this.projectController.getProjectByID);
-
     app.get(
       "/projects/owner/:user_id",
       this.projectController.getProjectsByOwner

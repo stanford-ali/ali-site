@@ -1,15 +1,18 @@
 import React, { Component } from "react";
 import FollowProject from "./FollowProject/FollowProject";
 import AppliedProject from "./AppliedProject/AppliedProject";
+import ApproveProject from "./ApproveProject/ApproveProject";
 import { connect } from "react-redux";
 import "./Following.scss";
 import axios from "axios";
+import { updateProject } from "../../../../store/profile/profile.actions";
 
 class Following extends Component<any, any> {
   state = {
     rightDisplay: "following",
     followingProjects: [],
     appliedProjects: [],
+    approveProjects: [],
   };
 
   async componentDidMount() {
@@ -29,6 +32,13 @@ class Following extends Component<any, any> {
     await axios
       .get(`http://localhost:5000/applications/user/${this.props.user.uid}`)
       .then((res) => this.setState({ appliedProjects: res.data }))
+      .then((res) => console.log(res))
+      .catch((error) => console.log(error));
+
+    // Get approval projects
+    await axios
+      .get(`http://localhost:5000/projects/pending`)
+      .then((res) => this.setState({ approveProjects: res.data }))
       .catch((error) => console.log(error));
   }
 
@@ -68,6 +78,39 @@ class Following extends Component<any, any> {
       );
     });
 
+    // Approve the project
+    const approveProject = (event, project_id, key) => {
+      event.preventDefault();
+      let body = {};
+      body["approved"] = true;
+      this.props.onUpdateProject(project_id, body);
+
+      // Update the backend and update state if successful
+      axios
+        .patch(`/projects/${project_id}`, {
+          ...body,
+        })
+        .then((res) => {
+          let copyApproveProjects = [...this.state.approveProjects];
+          copyApproveProjects.splice(key, 1);
+          this.setState({
+            approveProjects: copyApproveProjects,
+          });
+        })
+        .catch((error) => console.log(error));
+    };
+
+    const approve = this.state.approveProjects.map((elem, id) => {
+      return (
+        <ApproveProject
+          approve={approveProject}
+          key={id}
+          index={id}
+          {...elem}
+        />
+      );
+    });
+
     const selectedStyle = { color: "#303030" };
 
     return (
@@ -87,12 +130,29 @@ class Following extends Component<any, any> {
           >
             Applied
           </button>
+          <button
+            onClick={() => this.onRightDisplayChange("approve")}
+            style={this.state.rightDisplay === "approve" ? selectedStyle : null}
+          >
+            Approve
+          </button>
         </div>
-        {this.state.rightDisplay === "following" ? following : applied}
+        {this.state.rightDisplay === "following"
+          ? following
+          : this.state.rightDisplay === "applied"
+          ? applied
+          : approve}
       </div>
     );
   }
 }
+
+const mapDispatchToProps = (dispatch) => {
+  return {
+    onUpdateProject: (project_id, body) =>
+      dispatch(updateProject(project_id, body)),
+  };
+};
 
 const mapStateToProps = (state) => {
   return {
@@ -100,4 +160,4 @@ const mapStateToProps = (state) => {
   };
 };
 
-export default connect(mapStateToProps, null)(Following);
+export default connect(mapStateToProps, mapDispatchToProps)(Following);
