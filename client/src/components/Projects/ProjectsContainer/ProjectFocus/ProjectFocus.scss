@@ -12,11 +12,13 @@
 
 .SkillsContainer {
   display: flex;
+  flex-wrap: wrap;
   margin-bottom: 1rem;
 }
 
 .TimeframeContainer {
   display: flex;
+  flex-wrap: wrap;
   margin-bottom: 1rem;
 }
 

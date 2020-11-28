@@ -80,6 +80,7 @@ export const unfollowProject = (projectid, user) => {
   };
 };
 
+// I don't think we use this anymore
 export const applyProject = (user_id, project_id, owner_id, answers) => {
   return (dispatch) => {
     dispatch(loadingStart());

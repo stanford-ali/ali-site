@@ -85,6 +85,7 @@ export default class ProjectController {
         for (const property in req.body) {
           data[property] = req.body[property];
         }
+        console.log(data);
         data.save();
         res.json(data);
       }

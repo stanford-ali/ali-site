@@ -8,18 +8,18 @@ export default class ProjectRouter {
   public routes(app: Application): void {
     app.get("/projects", this.projectController.getProjects);
     app.post("/projects", this.projectController.addProject);
+    // Aprove projects endpoint - needs to be admin guarded
+    app.get(
+      "/projects/pending",
+      userRoute,
+      this.projectController.getPendingProjects
+    );
     app.patch(
       "/projects/:project_id",
       userRoute,
       this.projectController.updateProject
     );
     app.get("/projects/:project_id", this.projectController.getProjectByID);
-
-    app.get(
-      "/projects/pending",
-      adminRoute,
-      this.projectController.getPendingProjects
-    );
     app.get(
       "/projects/owner/:user_id",
       this.projectController.getProjectsByOwner
