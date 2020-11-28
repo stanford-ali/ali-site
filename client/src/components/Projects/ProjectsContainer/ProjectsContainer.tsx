@@ -71,7 +71,7 @@ class ProjectsContainer extends Component<any, any> {
       this.props.current_project &&
         axios
           .get(
-            `/application/user/${this.props.user.uid}/project/${this.props.current_project._id}`
+            `/applications/user/${this.props.user.uid}/project/${this.props.current_project._id}`
           )
           .then((res) =>
             res.data
@@ -95,7 +95,7 @@ class ProjectsContainer extends Component<any, any> {
     this.props.user &&
       (await axios
         .get(
-          `/application/user/${this.props.user.uid}/project/${this.props.current_project._id}`
+          `/applications/user/${this.props.user.uid}/project/${this.props.current_project._id}`
         )
         .then((res) =>
           res.data
