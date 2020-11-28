@@ -19,7 +19,7 @@ class Following extends Component<any, any> {
     // Get followed projects
     for (let project of this.props.user.following) {
       await axios
-        .get(`http://localhost:5000/projects/${project}`)
+        .get(`/projects/${project}`)
         .then((res) =>
           this.setState({
             followingProjects: [...this.state.followingProjects, res.data[0]],
@@ -30,14 +30,14 @@ class Following extends Component<any, any> {
 
     // Get applied projects
     await axios
-      .get(`http://localhost:5000/applications/user/${this.props.user.uid}`)
+      .get(`/applications/user/${this.props.user.uid}`)
       .then((res) => this.setState({ appliedProjects: res.data }))
       .then((res) => console.log(res))
       .catch((error) => console.log(error));
 
     // Get approval projects
     await axios
-      .get(`http://localhost:5000/projects/pending`)
+      .get(`/projects/pending`)
       .then((res) => this.setState({ approveProjects: res.data }))
       .catch((error) => console.log(error));
   }
