@@ -1,40 +1,15 @@
-import { Application } from "express";
 import ApplicationController from "../controllers/applications.controller";
 import { userRoute, adminRoute } from "../routes/index";
+import { Router } from "express";
 
-export default class ApplicationRouter {
-  public applicationController: ApplicationController = new ApplicationController();
+let applicationRouter: Router = Router();
+let applicationController: ApplicationController = new ApplicationController();
 
-  public routes(app: Application): void {
-    app.get(
-      "/applications",
-      adminRoute,
-      this.applicationController.getApplications
-    );
-    app.get(
-      "/applications/user/:user_id",
-      userRoute,
-      this.applicationController.getApplicationsByUser
-    );
-    app.get(
-      "/applications/owner/:user_id",
-      userRoute,
-      this.applicationController.getApplicationsByOwner
-    );
-    app.get(
-      "/application/user/:user_id/project/:project_id",
-      userRoute,
-      this.applicationController.getApplication
-    );
-    app.get(
-      "/applications/user/:user_id/selfproject/:project_id/",
-      userRoute,
-      this.applicationController.getSelfProjectApplications
-    );
-    app.post(
-      "/applications/user/:user_id/project/:project_id",
-      userRoute,
-      this.applicationController.addApplication
-    );
-  }
-}
+applicationRouter.get("/", userRoute, adminRoute, applicationController.getApplications);
+applicationRouter.get("/user/:user_id", userRoute, applicationController.getApplicationsByUser);
+applicationRouter.get("/owner/:user_id", userRoute, applicationController.getApplicationsByOwner);
+applicationRouter.get("/user/:user_id/project/:project_id", userRoute, applicationController.getApplication);
+applicationRouter.get("/user/:user_id/selfproject/:project_id/", userRoute, applicationController.getSelfProjectApplications);
+applicationRouter.post("/user/:user_id/project/:project_id", userRoute, applicationController.addApplication);
+
+export default applicationRouter;
