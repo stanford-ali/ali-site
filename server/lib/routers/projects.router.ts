@@ -8,12 +8,13 @@ export default class ProjectRouter {
   public routes(app: Application): void {
     app.get("/projects", this.projectController.getProjects);
     app.post("/projects", this.projectController.addProject);
-    // Aprove projects endpoint - needs to be admin guarded
     app.get(
       "/projects/pending",
-      userRoute,
+      adminRoute,
       this.projectController.getPendingProjects
     );
+    // IMPORTANT: might need admin protection or a separate route 
+    // to prevent owners from patching "approved: true" and approving their own projects
     app.patch(
       "/projects/:project_id",
       userRoute,

@@ -21,24 +21,12 @@ userRoute.use((req, res, next) => {
         .catch(() => {
           res
             .status(400)
-            .send("[oauth] the user with the ID does not exist in firebase");
+            .send("[oauth] The user with that ID does not exist.");
         });
     })
     .catch((error) => {
-      res.status(401).send("authentication failed");
+      res.status(401).send("Authentication failed.");
     });
-
-  // admin
-  //   .auth()
-  //   .verifyIdToken(token as string)
-  //   .then((decodedToken) => {
-  //     console.log(decodedToken.uid);
-  //     res.locals.userid = decodedToken.uid;
-  //     next();
-  //   })
-  //   .catch(() => {
-  //     res.status(401).send("authentication failed");
-  //   });
 });
 
 export default userRoute;
