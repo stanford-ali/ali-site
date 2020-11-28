@@ -3,7 +3,6 @@ import QandA from "./QandA/QandA";
 import Following from "./Following/Following";
 import "./ProfileContainer.scss";
 import SelfProjects from "./SelfProjects/SelfProjects";
-import Approve from "./Approve/Approve";
 
 export default function ProfileContainer() {
   return (
@@ -13,7 +12,6 @@ export default function ProfileContainer() {
         <Following />
       </div>
       <SelfProjects />
-      <Approve/>
     </div>
   );
 }

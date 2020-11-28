@@ -130,12 +130,16 @@ class Following extends Component<any, any> {
           >
             Applied
           </button>
-          <button
-            onClick={() => this.onRightDisplayChange("approve")}
-            style={this.state.rightDisplay === "approve" ? selectedStyle : null}
-          >
-            Approve
-          </button>
+          {this.props.user.admin && (
+            <button
+              onClick={() => this.onRightDisplayChange("approve")}
+              style={
+                this.state.rightDisplay === "approve" ? selectedStyle : null
+              }
+            >
+              Approve
+            </button>
+          )}
         </div>
         {this.state.rightDisplay === "following"
           ? following
