@@ -1,21 +1,22 @@
 import React from "react";
+import { Container, Row, Col } from "react-bootstrap";
 import "./Footer.scss";
 export default function Footer() {
   const date = new Date();
   const year = date.getFullYear();
 
   return (
-    <footer className="pt-4 my-md-3 pt-md-5 border-top">
-      <div className="FooterRow">
-        <div className="col-6 col-md">
+    <Container fluid className="pt-4 my-md-3 pt-md-5 border-top">
+      <Row className="FooterRow">
+        <Col md={3}>
           <h5>Contact Us</h5>
           <p className="text-muted">
             If you have a question or suggestion, or want to work with us, we'd
             love to hear from you!
           </p>
           <small className="text-muted">&copy; {year}</small>
-        </div>
-        <div className="col-6">
+        </Col>
+        <Col md={6}>
           <h5>Partners</h5>
           <ul className="list-unstyled text-small">
             <li>
@@ -39,15 +40,15 @@ export default function Footer() {
               </a>
             </li>
           </ul>
-        </div>
-        <div className="col-6 col-md">
+        </Col>
+        <Col md={3}>
           <h5>People</h5>
           <ul className="list-unstyled text-small">
             <li className="text-muted">Alix Cui</li>
             <li className="text-muted"></li>
           </ul>
-        </div>
-      </div>
-    </footer>
+        </Col>
+      </Row>
+    </Container>
   );
 }
