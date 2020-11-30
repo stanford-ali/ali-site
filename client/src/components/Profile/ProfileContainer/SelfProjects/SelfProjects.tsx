@@ -33,15 +33,18 @@ class SelfProjects extends Component<any, any> {
       </div>
     );
 
-    const selfProjects = this.props.ownedProjects.map((elem, id) => {
-      return (
-        <SelfProject
-          key={id}
-          click={() => this.props.onClickProject(elem)}
-          {...elem}
-        />
-      );
-    });
+    const selfProjects = this.props.ownedProjects
+      .slice(0)
+      .reverse()
+      .map((elem, id) => {
+        return (
+          <SelfProject
+            key={id}
+            click={() => this.props.onClickProject(elem)}
+            {...elem}
+          />
+        );
+      });
 
     return (
       <div className="SelfProjects">
