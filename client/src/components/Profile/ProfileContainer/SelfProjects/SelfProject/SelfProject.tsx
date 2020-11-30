@@ -41,7 +41,13 @@ function SelfProject(props) {
         </OverlayTrigger>
       </div>
       <p>Created: {date.toDateString()}</p>
-      <p>Applications: </p>
+      <p>
+        {props.approved ? (
+          <p style={{ color: "green" }}>Approved</p>
+        ) : (
+          <p style={{ color: "#FF8988" }}>Pending Approval</p>
+        )}
+      </p>
     </div>
   );
 }
