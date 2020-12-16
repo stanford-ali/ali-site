@@ -31,7 +31,7 @@ Now, the code (specifically the <code>dotenv</code> package as used in <code>ser
 
 # Installing Node Dependencies
 
-Both the front end and the back end require specific node modules that are listed in the "dependencies" attribute in <code>package.json</code>. Before running the project, you can install all of the front end dependencies by running the following commands from the main project directory:
+Both the front end and the back end require specific node modules that are listed in the "dependencies" attribute in their respective <code>package.json</code> files. Before running the project, you can install all of the front end dependencies by running the following commands from the main project directory:
 
 ```
 cd client
@@ -45,11 +45,31 @@ cd server
 npm install
 ```
 
+Or you can install all packages for the front end and back end by running this command from the main project directory:
+
+```
+npm install
+```
+
 As long as you have NPM installed, this should properly configure all of the node modules in both the front end and the back end.
 
 # Running the Application
 
-To run the application, use the commands listed below to first run the back end server and then run the front end.
+To run the application, you can use the following command to run both the front end and the back end concurrently:
+
+```
+npm run prod
+```
+
+This will build and then start both the front end and back end applications. If you would like to run both without building, you can use:
+
+```
+npm start
+```
+
+from the root directory.
+
+Alternatively, you can use the commands listed below to first run the back end server and then run the front end.
 
 ## Run Back End Server
 
