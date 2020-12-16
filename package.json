@@ -1,0 +1,24 @@
+{
+  "name": "ali-site",
+  "version": "1.0.0",
+  "description": "Applied Learning Initiative",
+  "scripts": {
+    "build:frontend": "cd client && npm run build",
+    "build:backend": "cd server && npm run build",
+    "build": "npm run build:backend && npm run build:frontend",
+    "start:frontend": "cd client && npm start",
+    "start:backend": "cd server && npm start",
+    "start": "npm run start:backend & npm run start:frontend",
+    "prod": "npm run build && npm start",
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/stanford-ali/ali-site.git"
+  },
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/stanford-ali/ali-site/issues"
+  },
+  "homepage": "https://github.com/stanford-ali/ali-site#readme"
+}
