@@ -12,15 +12,15 @@ export interface IProject {
   title: string;
   description: string;
   timeframe: string;
-  questions: [string];
+  questions: string[];
   user: string;
   university: string;
-  departments: [string];
+  departments: string[];
   website: string;
-  skills: [string];
-  courses: [string];
-  categories: [string];
-  tags: [string];
+  skills: string[];
+  courses: string[];
+  categories: string[];
+  tags: string[];
   faculty_designed: boolean;
   self_designed: boolean;
 }

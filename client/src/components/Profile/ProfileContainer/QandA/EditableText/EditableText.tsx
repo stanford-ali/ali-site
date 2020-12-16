@@ -9,20 +9,16 @@ interface EditableTextProps {
   textarea?: boolean;
   questionid?: string;
   question?: string;
-  header?: boolean;
-  userid: string;
-  user: any; // TODO: Update to user type later
   onEdit: Function;
+  onChange: Function;
 }
 
 interface EditableTextState {
   editable: boolean;
-  value: string;
 }
 
 class EditableText extends Component<EditableTextProps, EditableTextState> {
   state: EditableTextState = {
-    value: this.props.value,
     editable: false,
   };
 
@@ -38,7 +34,8 @@ class EditableText extends Component<EditableTextProps, EditableTextState> {
   };
 
   inputEditHandler = (event) => {
-    this.setState({ value: event.target.value });
+    // this.setState({ value: event.target.value });
+    this.props.onChange(event.target);
   };
 
   render() {
@@ -47,7 +44,7 @@ class EditableText extends Component<EditableTextProps, EditableTextState> {
         className="editableTextarea"
         onBlur={this.blurEditHandler}
         onChange={this.inputEditHandler}
-        value={this.state.value}
+        value={this.props.value}
         id={this.props.questionid}
         autoFocus
       ></textarea>
@@ -56,7 +53,7 @@ class EditableText extends Component<EditableTextProps, EditableTextState> {
         className="editableInput"
         onBlur={this.blurEditHandler}
         onChange={this.inputEditHandler}
-        value={this.state.value}
+        value={this.props.value}
         id={this.props.questionid}
         type="text"
         autoFocus
@@ -89,8 +86,8 @@ class EditableText extends Component<EditableTextProps, EditableTextState> {
           {this.state.editable ? (
             editableInput
           ) : (
-            <span style={{ fontSize: this.props.size, marginLeft: "20px" }}>
-              {this.state.value}
+            <span style={{ fontSize: this.props.size }}>
+              {this.props.value}
             </span>
           )}
         </div>

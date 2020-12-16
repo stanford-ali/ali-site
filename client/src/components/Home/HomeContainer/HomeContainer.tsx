@@ -3,11 +3,13 @@ import ProjectsImage from "../../../assets/projects.png";
 import ALIlogo from "./HomeLogo/HomeLogo";
 import Typed from "react-typed";
 import { Button } from "react-bootstrap";
-
+import { useHistory } from "react-router-dom";
 import "./HomeContainer.scss";
 export default function HomeContainer() {
+  const history = useHistory();
+
   const viewProjects = () => {
-    window.history.pushState({}, "", `/projects`);
+    history.push(`/projects`);
   };
 
   return (

@@ -13,6 +13,7 @@ import "./App.scss";
 import { fetchUser, logout, loadUser } from "./store/auth/auth.actions";
 import { setRedirect } from "./store/base/base.actions";
 import axios from "axios";
+import ModalError from "./components/GlobalUI/ModalError/ModalError";
 
 // Helper that creates the user in the DB
 const createUser = async (user) => {
@@ -36,7 +37,7 @@ const createUser = async (user) => {
 
   // Create new user in database
   await axios
-    .post(`http://localhost:5000/users/${user.uid}`, newUser)
+    .post(`/users/${user.uid}`, newUser)
     .then(() => console.log("post is done"))
     .catch((error) => console.log(error));
 };
@@ -44,6 +45,7 @@ const createUser = async (user) => {
 const App = () => {
   // Get user from redux
   const user = useSelector((state) => state.auth.user);
+  const error = useSelector((state) => state.base.error);
   const dispatch = useDispatch();
 
   // Dispatch action creators from redux
@@ -66,7 +68,7 @@ const App = () => {
       if (user) {
         // See if we need to create the user or fetch the user
         await axios
-          .get(`http://localhost:5000/users/${user.uid}`)
+          .get(`/users/${user.uid}`)
           .catch(() =>
             // Create the user in the DB
             createUser(user)
@@ -83,6 +85,7 @@ const App = () => {
 
   return (
     <ConnectedRouter history={history}>
+      {error ? <ModalError /> : null}
       <Switch>
         <Route exact path="/" component={Home} />
         <Route exact path="/projects" component={Projects} />

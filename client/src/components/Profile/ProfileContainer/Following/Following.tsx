@@ -1,22 +1,25 @@
 import React, { Component } from "react";
 import FollowProject from "./FollowProject/FollowProject";
 import AppliedProject from "./AppliedProject/AppliedProject";
+import ApproveProject from "./ApproveProject/ApproveProject";
 import { connect } from "react-redux";
 import "./Following.scss";
 import axios from "axios";
+import { updateProject } from "../../../../store/profile/profile.actions";
 
 class Following extends Component<any, any> {
   state = {
     rightDisplay: "following",
     followingProjects: [],
     appliedProjects: [],
+    approveProjects: [],
   };
 
   async componentDidMount() {
     // Get followed projects
     for (let project of this.props.user.following) {
       await axios
-        .get(`http://localhost:5000/projects/${project}`)
+        .get(`/projects/${project}`)
         .then((res) =>
           this.setState({
             followingProjects: [...this.state.followingProjects, res.data[0]],
@@ -27,8 +30,15 @@ class Following extends Component<any, any> {
 
     // Get applied projects
     await axios
-      .get(`http://localhost:5000/applications/user/${this.props.user.uid}`)
+      .get(`/applications/user/${this.props.user.uid}`)
       .then((res) => this.setState({ appliedProjects: res.data }))
+      .then((res) => console.log(res))
+      .catch((error) => console.log(error));
+
+    // Get approval projects
+    await axios
+      .get(`/projects/pending`)
+      .then((res) => this.setState({ approveProjects: res.data }))
       .catch((error) => console.log(error));
   }
 
@@ -48,6 +58,7 @@ class Following extends Component<any, any> {
           faculty={elem.project_id.faculty_designed}
           owner={elem.project_id.owner}
           questions={elem.project_id.questions}
+          projectid={elem.project_id._id}
           answers={elem.answers}
         />
       );
@@ -61,7 +72,41 @@ class Following extends Component<any, any> {
           title={elem.title}
           department={elem.departments}
           category={elem.categories}
+          faculty={elem.faculty_designed}
           projectid={elem._id}
+        />
+      );
+    });
+
+    // Approve the project
+    const approveProject = (event, project_id, key) => {
+      event.preventDefault();
+      let body = {};
+      body["approved"] = true;
+      this.props.onUpdateProject(project_id, body);
+
+      // Update the backend and update state if successful
+      axios
+        .patch(`/projects/${project_id}`, {
+          ...body,
+        })
+        .then((res) => {
+          let copyApproveProjects = [...this.state.approveProjects];
+          copyApproveProjects.splice(key, 1);
+          this.setState({
+            approveProjects: copyApproveProjects,
+          });
+        })
+        .catch((error) => console.log(error));
+    };
+
+    const approve = this.state.approveProjects.map((elem, id) => {
+      return (
+        <ApproveProject
+          approve={approveProject}
+          key={id}
+          index={id}
+          {...elem}
         />
       );
     });
@@ -85,12 +130,33 @@ class Following extends Component<any, any> {
           >
             Applied
           </button>
+          {this.props.user.admin && (
+            <button
+              onClick={() => this.onRightDisplayChange("approve")}
+              style={
+                this.state.rightDisplay === "approve" ? selectedStyle : null
+              }
+            >
+              Approve
+            </button>
+          )}
         </div>
-        {this.state.rightDisplay === "following" ? following : applied}
+        {this.state.rightDisplay === "following"
+          ? following
+          : this.state.rightDisplay === "applied"
+          ? applied
+          : approve}
       </div>
     );
   }
 }
+
+const mapDispatchToProps = (dispatch) => {
+  return {
+    onUpdateProject: (project_id, body) =>
+      dispatch(updateProject(project_id, body)),
+  };
+};
 
 const mapStateToProps = (state) => {
   return {
@@ -98,4 +164,4 @@ const mapStateToProps = (state) => {
   };
 };
 
-export default connect(mapStateToProps, null)(Following);
+export default connect(mapStateToProps, mapDispatchToProps)(Following);

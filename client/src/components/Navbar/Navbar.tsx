@@ -8,7 +8,6 @@ import BarLoader from "react-spinners/BarLoader";
 
 const Navbar = (props) => (
   <section id="navbar">
-    {/* SHOULD BE LOADING {!props.user ? <ModalLoader /> : null} */}
     <div>
       <nav id="navbar">
         <div className="navbar">
@@ -33,6 +32,14 @@ const Navbar = (props) => (
             activeClassName="active"
           >
             Projects
+          </NavLink>
+          <NavLink
+            to="/submit"
+            exact
+            className="navbar-item page"
+            activeClassName="active"
+          >
+            Submit Project
           </NavLink>
           {props.loading ? (
             <BarLoader color="white" />

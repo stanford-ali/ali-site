@@ -5,28 +5,24 @@ const initialState = {
   user: null,
   signedIn: false,
   loading: false,
-  questions: [
-    {
+  questions: {
+    university: {
       question: "What university do you attend?",
-      questionid: "university",
       textarea: false,
     },
-    {
+    year: {
       question: "What year in school are you?",
-      questionid: "year",
       textarea: false,
     },
-    {
+    skills: {
       question: "List general skills you have",
-      questionid: "skills",
       textarea: true,
     },
-    {
+    programming: {
       question: "What programming languages do you have experience in?",
-      questionid: "programming",
       textarea: true,
     },
-  ],
+  },
 };
 
 const auth: Reducer<any> = (state: any = initialState, action): any => {

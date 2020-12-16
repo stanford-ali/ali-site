@@ -4,12 +4,12 @@ import {
   FETCH_PROJECTS,
   // SUBMIT_APPLICATION,
 } from "./projects.types";
-import { loadingStart, loadingEnd } from "../base/base.actions";
+import { loadingStart, loadingEnd, throwError } from "../base/base.actions";
 
-export const fetchProject = (project_id) => (dispatch) => {
+export const fetchProject = (project_id) => async (dispatch) => {
   dispatch(loadingStart());
-  axios
-    .get(`http://localhost:5000/projects/${project_id}`)
+  await axios
+    .get(`/projects/${project_id}`)
     .then((res) => {
       dispatch({
         type: FETCH_PROJECT,
@@ -17,7 +17,7 @@ export const fetchProject = (project_id) => (dispatch) => {
       });
     })
     .catch((error) => {
-      console.log(error);
+      dispatch(throwError(error));
     })
     .then(() => {
       dispatch(loadingEnd());
@@ -27,7 +27,7 @@ export const fetchProject = (project_id) => (dispatch) => {
 export const fetchProjects = () => (dispatch) => {
   dispatch(loadingStart());
   axios
-    .get("http://localhost:5000/projects?approved=true")
+    .get("/projects")
     .then((res) => {
       dispatch({
         type: FETCH_PROJECTS,
@@ -35,7 +35,7 @@ export const fetchProjects = () => (dispatch) => {
       });
     })
     .catch((error) => {
-      console.log(error);
+      dispatch(throwError(error));
     })
     .then(() => {
       dispatch(loadingEnd());

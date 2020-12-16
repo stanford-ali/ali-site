@@ -1,5 +1,6 @@
 import axios from "axios";
 import { START_NEW_PROJECT, SUBMIT_PROJECT, SET_SCHEMA } from "./submit.types";
+import { throwError } from "../base/base.actions";
 import store from "../../store";
 
 export const startNewProject = () => ({
@@ -59,13 +60,13 @@ const parseFormData = (owner, formData) => {
 export const submitProject = (owner, formData) => (dispatch) => {
   const data = parseFormData(owner, formData);
   axios
-    .post("http://localhost:5000/projects", data)
+    .post("/projects", data)
     .then((res) => {
       dispatch({
         type: SUBMIT_PROJECT,
       });
     })
     .catch((error) => {
-      console.log(error);
+      dispatch(throwError(error));
     });
 };

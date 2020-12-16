@@ -1,9 +1,10 @@
 .QandA {
-  width: 50%;
+  // width: 50%;
   height: 650px;
   overflow: auto;
   background-color: rgba(242, 242, 242, 0.8);
   margin: 10px;
+  border: 1px solid #adadad80;
 
   .ProfileLeftHead {
     color: #f2f2f2;
@@ -12,5 +13,11 @@
     padding: 10px;
     box-shadow: 0 20px 15px -15px gray;
     margin-bottom: 20px;
+  }
+}
+
+@media only screen and (min-width: 768px) {
+  .QandA {
+    width: 50%;
   }
 }

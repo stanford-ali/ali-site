@@ -1,0 +1,50 @@
+.Error {
+  position: fixed;
+  z-index: 500;
+  background-color: white;
+  width: 30%;
+  border-radius: 10px;
+  box-shadow: 0 6px 30px rgba(0, 0, 0, 0.4);
+  // padding: 16px;
+  left: 35%;
+  top: 30%;
+  box-sizing: border-box;
+  transition: all 0.3s ease-out;
+  display: flex;
+  justify-content: center;
+  // align-items: center;
+  flex-flow: column;
+}
+
+.ErrorTop {
+  border-top-left-radius: 10px;
+  border-top-right-radius: 10px;
+  height: 50%;
+  background-color: #e85e6c;
+  text-align: center;
+  padding: 20px;
+  margin-bottom: 10px;
+}
+
+.ErrorBottom {
+  height: 50%;
+  text-align: center;
+  margin-bottom: 10px;
+}
+
+.Backdrop {
+  width: 100vw;
+  height: 100vh;
+  position: fixed;
+  z-index: 100;
+  left: 0;
+  top: 0;
+  background-color: rgba(0, 0, 0, 0.5);
+}
+
+@media (min-width: 600px) {
+  .Loader {
+    width: 100px;
+    left: calc(50% - 50px);
+  }
+}

@@ -1,0 +1,79 @@
+@import "../../global";
+
+$bg-dark-gradient-1: rgb(50, 70, 187) 0%;
+$bg-dark-gradient-2: rgb(94, 109, 200) 40%;
+$bg-dark-gradient-3: rgb(200, 204, 232) 100%;
+$offset-angle: 0deg;
+
+.whole-container {
+  display: flex;
+  flex-direction: column;
+  height: 100vh;
+}
+
+.login-container {
+  display: flex;
+  flex-direction: row;
+  padding: 5vh;
+  margin: auto;
+  height: 100%;
+  width: 100%;
+  background: -webkit-linear-gradient(
+    $offset-angle,
+    $bg-dark-gradient-1,
+    $bg-dark-gradient-2,
+    $bg-dark-gradient-3
+  );
+  background: -o-linear-gradient(
+    $offset-angle,
+    $bg-dark-gradient-1,
+    $bg-dark-gradient-2,
+    $bg-dark-gradient-3
+  );
+  background: linear-gradient(
+    $offset-angle + 90deg,
+    $bg-dark-gradient-1,
+    $bg-dark-gradient-2,
+    $bg-dark-gradient-3
+  );
+
+  .login-left-container {
+    width: 50%;
+    padding: 0 3vw;
+
+    .login-image {
+      padding: 40px 0px;
+      width: 100%;
+    }
+  }
+
+  .login-right-container {
+    width: 50%;
+    padding: 8vh 0;
+
+    .login-title {
+      margin: auto;
+      margin-bottom: 8vh;
+      text-align: center;
+
+      h1 {
+        color: $base-light;
+        margin: 0;
+        font-family: $title-font-family;
+        font-size: 40px;
+        font-weight: 800;
+      }
+    }
+
+    #firebaseui_container {
+      li {
+        margin-bottom: 20px;
+
+        button {
+          width: 100%;
+          padding: 15px;
+        }
+      }
+    }
+  }
+}

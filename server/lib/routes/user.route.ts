@@ -1,12 +1,8 @@
-import * as express from "express";
 import * as admin from "firebase-admin";
-import { URL } from "url";
-const userRoute = express.Router();
-userRoute.use((req, res, next) => {
-  // User authentication middleware
+import { Request, Response, NextFunction } from "express";
+
+let userRoute = (req: Request, res: Response, next: NextFunction) => {
   const { token } = req.headers;
-  // const { pathname } = new URL(req.url);
-  // console.log("hello");
   admin
     .auth()
     .verifyIdToken(token as string)
@@ -16,30 +12,21 @@ userRoute.use((req, res, next) => {
         .auth()
         .getUser(decodedToken.uid)
         .then((user) => {
-          res.locals.userid = user.uid;
-          next();
+          // check that the request and firebase IDs are the same
+          if (req.params.user_id !== undefined && req.params.user_id !== user.uid) {
+            res.status(401).send("The user in the header does not have access to the user passed in the request parameters.")
+          } else {
+            res.locals.userid = user.uid;
+            next();
+          }
         })
         .catch(() => {
-          res
-            .status(400)
-            .send("[oauth] the user with the ID does not exist in firebase");
+          res.status(400).send("[oauth] The user with that ID does not exist.");
         });
     })
     .catch((error) => {
-      res.status(401).send("authentication failed");
+      res.status(401).send("Authentication failed.");
     });
-
-  // admin
-  //   .auth()
-  //   .verifyIdToken(token as string)
-  //   .then((decodedToken) => {
-  //     console.log(decodedToken.uid);
-  //     res.locals.userid = decodedToken.uid;
-  //     next();
-  //   })
-  //   .catch(() => {
-  //     res.status(401).send("authentication failed");
-  //   });
-});
+};
 
 export default userRoute;

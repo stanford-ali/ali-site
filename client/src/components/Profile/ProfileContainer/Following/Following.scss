@@ -1,9 +1,9 @@
 .Following {
-  width: 50%;
   background-color: rgba(242, 242, 242, 0.8);
   margin: 10px;
   height: 650px;
   overflow: auto;
+  border: 1px solid #adadad80;
 
   .FollowingHead {
     color: #f2f2f2;
@@ -25,5 +25,11 @@
         color: #303030;
       }
     }
+  }
+}
+
+@media only screen and (min-width: 768px) {
+  .Following {
+    width: 50%;
   }
 }

@@ -1,20 +1,16 @@
-import { Application } from "express";
 import ProjectController from "../controllers/projects.controller";
-import { adminRoute } from "../routes";
+import { userRoute, adminRoute } from "../routes";
+import { Router } from "express";
 
-export default class ProjectRouter {
-  public projectController: ProjectController = new ProjectController();
+let projectRouter: Router = Router();
+let projectController: ProjectController = new ProjectController();
 
-  public routes(app: Application): void {
-    app.get("/projects", this.projectController.getProjects);
-    app.post("/projects", this.projectController.addProject);
+projectRouter.get("/", projectController.getProjects);
+projectRouter.post("/", projectController.addProject);
+projectRouter.get("/pending", userRoute, adminRoute, projectController.getPendingProjects);
+// IMPORTANT: might need admin protection or a separate route to prevent owners from patching "approved: true" and approving their own projects
+projectRouter.patch("/:project_id", userRoute, projectController.updateProject);
+projectRouter.get("/:project_id", projectController.getProjectByID);
+projectRouter.get("/owner/:user_id", projectController.getProjectsByOwner);
 
-    app.get("/projects/:project_id", this.projectController.getProjectByID);
-
-    app.get(
-      "/projects/pending",
-      adminRoute,
-      this.projectController.getPendingProjects
-    );
-  }
-}
+export default projectRouter;

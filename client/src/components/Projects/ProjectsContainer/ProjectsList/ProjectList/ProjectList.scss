@@ -11,8 +11,8 @@ $outline: #3246bb;
   margin-bottom: 10px;
 
   &:hover {
-    border: 1px solid;
-    border-color: $outline;
+    border: 1px solid !important;
+    border-color: $outline !important;
   }
 }
 

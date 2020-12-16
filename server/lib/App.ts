@@ -2,7 +2,7 @@ import * as express from "express";
 import * as cors from "cors";
 import * as mongoose from "mongoose";
 import * as dotenv from "dotenv";
-import { UserRouter, ProjectRouter, ApplicationRouter } from "./routers";
+import { userRouter, projectRouter, applicationRouter } from "./routers";
 import serviceAccount from "./serviceAccount";
 import * as admin from "firebase-admin";
 
@@ -12,23 +12,15 @@ class App {
   public app: express.Application;
   public MONGODB_URI: string = process.env.MONGODB_URI;
 
-  // routers
-  public userRouter: UserRouter = new UserRouter();
-  public projectRouter: ProjectRouter = new ProjectRouter();
-  public applicationRouter: ApplicationRouter = new ApplicationRouter();
-
-  // route protection
-  public authenticatedRoute: express.Router = express.Router();
-
   constructor() {
     this.app = express();
     this.config();
     this.setupMongo();
 
     // add all router routes to express app
-    this.userRouter.routes(this.app);
-    this.projectRouter.routes(this.app);
-    this.applicationRouter.routes(this.app);
+    this.app.use("/users", userRouter);
+    this.app.use("/projects", projectRouter);
+    this.app.use("/applications", applicationRouter);
   }
 
   private config(): void {

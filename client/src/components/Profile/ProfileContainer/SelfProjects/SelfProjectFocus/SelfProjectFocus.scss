@@ -1,0 +1,29 @@
+.SelfProjectFocus {
+  background-color: white;
+  border-radius: 15px;
+  padding: 20px 20px;
+  border: 1px solid #e7e7e7;
+
+  h3 {
+    font-family: "Lato", sans-serif;
+    color: #5f574f;
+  }
+}
+
+.SelfProjectEdit {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+}
+
+.FocusInput {
+  margin-bottom: 10px;
+  border-radius: 15px;
+  padding: 5px 15px;
+  border: 1px solid #5f574f;
+  margin-right: 10px;
+
+  &:focus {
+    outline: none;
+  }
+}

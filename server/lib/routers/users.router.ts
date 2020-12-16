@@ -1,27 +1,16 @@
-import { Application } from "express";
 import UserController from "../controllers/users.controller";
 import { userRoute, adminRoute } from "../routes";
+import { Router } from "express";
 
-export default class UserRouter {
-  public userController: UserController = new UserController();
+let userRouter: Router = Router();
+let userController: UserController = new UserController();
 
-  public routes(app: Application): void {
-    app.get("/users", adminRoute, this.userController.getUsers);
+userRouter.get("/", userRoute, adminRoute, userController.getUsers);
+userRouter.get("/:user_id", userRoute, userController.getUserByID);
+userRouter.post("/:user_id", userRoute, userController.addUser);
+userRouter.patch("/:user_id", userRoute, userController.updateUser);
+userRouter.delete("/:user_id", userRoute, userController.removeUser);
+userRouter.patch("/:user_id/follow/project/:project_id", userRoute, userController.followProject);
+userRouter.patch("/:user_id/unfollow/project/:project_id", userRoute, userController.unfollowProject);
 
-    app.get("/users/:user_id", userRoute, this.userController.getUserByID);
-    app.post("/users/:user_id", userRoute, this.userController.addUser);
-    app.patch("/users/:user_id", userRoute, this.userController.updateUser);
-    app.delete("/users/:user_id", userRoute, this.userController.removeUser);
-
-    app.patch(
-      "/users/:user_id/follow/project/:project_id",
-      userRoute,
-      this.userController.followProject
-    );
-    app.patch(
-      "/users/:user_id/unfollow/project/:project_id",
-      userRoute,
-      this.userController.unfollowProject
-    );
-  }
-}
+export default userRouter;

@@ -77,6 +77,33 @@ export default class ApplicationController {
     );
   }
 
+  public getSelfProjectApplications(
+    req: Request,
+    res: Response,
+    next: NextFunction
+  ) {
+    Application.find(
+      {
+        project_id: req.params.project_id,
+      },
+      async (error, data) => {
+        for (let app of data) {
+          let project = await Project.find({ _id: app.project_id });
+          let owner = await Users.find({ uid: app.owner_id });
+          console.log(owner);
+          app.project_id = project[0];
+          app.owner_id = owner[0];
+        }
+        if (error) {
+          next(error);
+          return;
+        }
+
+        res.json(data);
+      }
+    );
+  }
+
   public addApplication(req: Request, res: Response, next: NextFunction) {
     Application.create(
       {
