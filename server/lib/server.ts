@@ -11,7 +11,6 @@ const httpsOptions = {
 
 // use https.createServer(httpsOptions, app).listen() instead of app.listen
 */
-
 const PORT = process.env.PORT;
 
 app.listen(PORT, () => {
