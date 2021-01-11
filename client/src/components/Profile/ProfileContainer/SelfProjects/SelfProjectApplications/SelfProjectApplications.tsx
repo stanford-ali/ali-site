@@ -6,7 +6,7 @@ export default function SelfProjectApplications(props) {
   // Applicant's answers to the project's questions
   const qna = props.answers.map((elem, id) => {
     return (
-      <div className="SelfProjectAppQna">
+      <div key={id} className="SelfProjectAppQna">
         <h4>{props.project_id.questions[id]}</h4> <p>{elem}</p>
       </div>
     );

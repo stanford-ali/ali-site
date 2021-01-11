@@ -7,9 +7,10 @@ import store from "./store";
 import App from "./App";
 import axios from "axios";
 
-// axios.defaults.baseURL = "https://applied-learning-initiat-dfcfe.web.app/";
-// axios.defaults.baseURL = "http://localhost:5000";
-axios.defaults.baseURL = "https://appliedlearninginitiative.herokuapp.com";
+// THIS IS PROD BASE URL:
+// axios.defaults.baseURL = "https://appliedlearninginitiative.herokuapp.com";
+
+axios.defaults.baseURL = "http://localhost:5000";
 
 ReactDOM.render(
   <Provider store={store}>
