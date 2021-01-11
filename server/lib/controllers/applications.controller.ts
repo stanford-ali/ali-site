@@ -87,12 +87,14 @@ export default class ApplicationController {
         project_id: req.params.project_id,
       },
       async (error, data) => {
+        console.log(data);
         for (let app of data) {
           let project = await Project.find({ _id: app.project_id });
           let owner = await Users.find({ uid: app.owner_id });
-          console.log(owner);
+          let userApplying = await Users.find({uid: app.user_id});
           app.project_id = project[0];
           app.owner_id = owner[0];
+          app.user_id = userApplying[0];
         }
         if (error) {
           next(error);

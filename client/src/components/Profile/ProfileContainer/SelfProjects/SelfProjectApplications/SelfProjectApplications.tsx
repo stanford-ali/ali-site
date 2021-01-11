@@ -12,6 +12,8 @@ export default function SelfProjectApplications(props) {
     );
   });
 
+  console.log(props);
+
   return (
     <Accordion>
       <Card
@@ -28,11 +30,11 @@ export default function SelfProjectApplications(props) {
         >
           <div className="SelfProjectApplicationsFocus">
             <h3>
-              {props.owner_id.firstname} {props.owner_id.lastname}
+              {props.user_id.firstname} {props.user_id.lastname}
             </h3>
             <p style={{ marginBottom: "0" }}>
-              {props.owner_id.university} {props.owner_id.year} <br />
-              {props.owner_id.email} <br />
+              {props.user_id.university} {props.user_id.year} <br />
+              {props.user_id.email} <br />
               Insert Resume
             </p>
           </div>
