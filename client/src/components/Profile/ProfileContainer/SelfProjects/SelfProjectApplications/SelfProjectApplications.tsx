@@ -12,8 +12,6 @@ export default function SelfProjectApplications(props) {
     );
   });
 
-  console.log(props);
-
   return (
     <Accordion>
       <Card
