@@ -84,6 +84,7 @@ const App = () => {
 
   return (
     <ConnectedRouter history={history}>
+      {/* If Redux error state is True, return the ModalError */}
       {error ? <ModalError /> : null}
       <Switch>
         <Route exact path="/" component={Home} />
