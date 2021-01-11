@@ -38,7 +38,6 @@ const createUser = async (user) => {
   // Create new user in database
   await axios
     .post(`/users/${user.uid}`, newUser)
-    .then(() => console.log("post is done"))
     .catch((error) => console.log(error));
 };
 

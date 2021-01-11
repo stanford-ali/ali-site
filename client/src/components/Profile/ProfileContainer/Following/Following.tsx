@@ -32,7 +32,6 @@ class Following extends Component<any, any> {
     await axios
       .get(`/applications/user/${this.props.user.uid}`)
       .then((res) => this.setState({ appliedProjects: res.data }))
-      .then((res) => console.log(res))
       .catch((error) => console.log(error));
 
     // Get approval projects
