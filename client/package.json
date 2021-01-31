@@ -33,7 +33,7 @@
     "react-redux-firebase": "^3.10.0",
     "react-router-dom": "^5.2.0",
     "react-scripts": "4.0.1",
-    "react-spinners": "^0.9.0",
+    "react-spinners": "^0.10.4",
     "react-typed": "^1.2.0",
     "redux": "^4.0.5",
     "redux-devtools-extension": "^2.13.8",
