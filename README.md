@@ -1,12 +1,10 @@
-# Navigation
+# Contents
 
 - [Setting Up the Database](#Setting-Up-the-Database)
   - [MongoDB Atlas](#MongoDB-Atlas)
   - [Environment Variables](#Environment-Variables)
-- [Installing Node Dependencies](#Installing-Node-Dependencies)
+- [Installing Dependencies](#Installing-Dependencies)
 - [Running the Application](#Running-the-Application)
-  - [Run Back End Server](#Run-Back-End-Server)
-  - [Run Front End](#Run-Front-End)
 
 # Setting Up the Database
 
@@ -20,82 +18,24 @@ There are other ways to set up the MongoDB database, such as through [MongoDB Co
 
 ## Environment Variables
 
-Once you have the URI, the last step is to create a file called <code>server/.env</code>. (This type of file generally contains sensitive information, e.g. the username and password to the database in your URI). Place the two following lines of code in the file to create environment variable for the program to read:
+To set environment variables, create a copy of <code>client/sample.env</code> and <code>server/sample.env</code>. You can paste your MongoDB URI from above into <code>server/sample.env</code>, and the remainder of the variables come from Firebase.
 
-```
-PORT=5000
-MONGODB_URI=<insert_your_uri_here>
-```
+# Installing Dependencies
 
-Now, the code (specifically the <code>dotenv</code> package as used in <code>server/lib/App.ts</code>) will read your environment variables and connect to the MongoDB Atlas cluster.
-
-# Installing Node Dependencies
-
-Both the front end and the back end require specific node modules that are listed in the "dependencies" attribute in their respective <code>package.json</code> files. Before running the project, you can install all of the front end dependencies by running the following commands from the main project directory:
-
-```
-cd client
-npm install
-```
-
-Similary, you can install all of the back end dependencies by running the following commands from the main project directory:
-
-```
-cd server
-npm install
-```
-
-Or you can install all packages for the front end and back end by running this command from the main project directory:
+Install all dependencies with the following:
 
 ```
 npm install
 ```
 
-As long as you have NPM installed, this should properly configure all of the node modules in both the front end and the back end.
+This will install packages for both the front end and back end.
 
 # Running the Application
 
-To run the application, you can use the following command to run both the front end and the back end concurrently:
-
-```
-npm run prod
-```
-
-This will build and then start both the front end and back end applications. If you would like to run both without building, you can use:
+To run the entire application, use the following command:
 
 ```
 npm start
 ```
 
 from the root directory.
-
-Alternatively, you can use the commands listed below to first run the back end server and then run the front end.
-
-## Run Back End Server
-
-To run the back end in a development environment, you can use the following commands from the main project directory:
-
-```
-cd server
-npm run dev
-```
-
-If you would like to run this in a production environment, use the following commands instead:
-
-```
-cd server
-npm run prod
-```
-
-This will translate all of the TypeScript files in <code>server/lib/</code> into Javascript files located in <code>server/dist/</code> based on the compiler options in <code>server/lib/tsconfig.json</code>.
-
-## Run Front End
-
-To run the front end, you can use the following commands from the main project directory:
-
-```
-cd client
-npm start
-```
-
-This should automatically open a browser tab with the application running.
