@@ -3,7 +3,7 @@ import { ConnectedRouter } from "connected-react-router";
 import { Switch, Route, Redirect } from "react-router-dom";
 import history from "./history";
 import { useSelector, useDispatch } from "react-redux";
-import { auth } from "./config/fbConfig";
+import { auth } from "./firebase";
 import Home from "./components/Home/Home";
 import Login from "./components/Login/Login";
 import Profile from "./components/Profile/Profile";

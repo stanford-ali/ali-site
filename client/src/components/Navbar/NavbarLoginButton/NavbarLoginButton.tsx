@@ -2,7 +2,7 @@ import React from "react";
 import { connect } from "react-redux";
 import { Dropdown, DropdownButton } from "react-bootstrap";
 import { Link } from "react-router-dom";
-import { auth } from "../../../config/fbConfig";
+import { auth } from "../../../firebase";
 import { logout } from "../../../store/auth/auth.actions";
 
 const NavbarLoginButton = (props) => {
