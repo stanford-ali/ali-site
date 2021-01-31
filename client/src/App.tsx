@@ -37,7 +37,7 @@ const createUser = async (user) => {
 
   // Create new user in database
   await axios
-    .post(`/users/${user.uid}`, newUser)
+    .post(`/api/users/${user.uid}`, newUser)
     .catch((error) => console.log(error));
 };
 
@@ -67,7 +67,7 @@ const App = () => {
       if (user) {
         // See if we need to create the user or fetch the user
         await axios
-          .get(`/users/${user.uid}`)
+          .get(`/api/users/${user.uid}`)
           .catch(() =>
             // Create the user in the DB
             createUser(user)

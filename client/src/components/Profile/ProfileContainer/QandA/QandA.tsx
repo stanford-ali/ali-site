@@ -46,7 +46,7 @@ class QandA extends Component<any, any> {
       let body = {};
       body[questionid] = answer;
       axios
-        .patch(`/users/${userid}`, body)
+        .patch(`/api/users/${userid}`, body)
         .catch((error) => console.log(error));
     };
 
