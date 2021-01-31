@@ -2,13 +2,13 @@
   "name": "server",
   "version": "1.0.0",
   "description": "",
-  "main": "index.js",
+  "main": "server.ts",
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1",
     "build": "tsc --outDir dist",
     "start": "concurrently --kill-others \"tsc --watch --outDir dist\" \"nodemon ./dist/server.js\"",
-    "dev": "nodemon ./lib/server.ts",
-    "prod": "npm run build && npm start"
+    "start:dev": "nodemon ./server.ts",
+    "start:prod": "node ./dist/server.js"
   },
   "keywords": [],
   "author": "",
