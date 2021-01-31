@@ -3,6 +3,7 @@ on:
   pull_request:
     branches:
       - preproduction
+      - master
 jobs:
   install-and-build:
     runs-on: ubuntu-latest
