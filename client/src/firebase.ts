@@ -1,15 +1,18 @@
 import firebase from "firebase/app";
 import "firebase/auth";
+import * as dotenv from "dotenv";
+
+dotenv.config();
 
 const firebaseConfig = {
-  apiKey: process.env.REACT_APP_FIREBASE_APIKEY || "AIzaSyDtJgb1-EaiakmzlNbVcDhHwzHMwwCkwkE",
-  authDomain: process.env.REACT_APP_AUTHDOMAIN || "applied-learning-initiat-dfcfe.firebaseapp.com",
-  databaseURL: process.env.REACT_APP_DATABASEURL || "https://applied-learning-initiat-dfcfe.firebaseio.com",
-  projectId: process.env.REACT_APP_PROJECTID || "applied-learning-initiat-dfcfe",
-  storageBucket: process.env.REACT_APP_STORAGEBUCKET || "applied-learning-initiat-dfcfe.appspot.com",
-  messagingSenderId: process.env.REACT_APP_MESSAGINGSENDERID || "859859235960",
-  appId: process.env.REACT_APP_APPID || "1:859859235960:web:c8dc4ee862b84ffd4ea98d",
-  measurementId: process.env.REACT_APP_MEASUREMENTID || "G-VGGMVZL8Q1",
+  apiKey: process.env.REACT_APP_API_KEY || "",
+  authDomain: process.env.REACT_APP_AUTH_DOMAIN || "",
+  databaseURL: process.env.REACT_APP_DATABASE_URL || "",
+  projectId: process.env.REACT_APP_PROJECT_ID || "",
+  storageBucket: process.env.REACT_APP_STORAGE_BUCKET || "",
+  messagingSenderId: process.env.REACT_APP_MESSAGING_SENDER_ID || "",
+  appId: process.env.REACT_APP_APP_ID || "",
+  measurementId: process.env.REACT_APP_MEASUREMENT_ID || "",
 };
 
 export const uiConfig = {

@@ -12,7 +12,7 @@ class ProjectsList extends Component<any, any> {
   componentDidMount() {
     // Get all the projects - TODO: make redux action so we can have a loader
     axios
-      .get(`/projects`, { params: { verify: false } })
+      .get(`/api/projects`, { params: { verify: false } })
       .then((res) =>
         this.setState({
           ...this.state,

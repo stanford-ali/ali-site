@@ -1,12 +1,10 @@
 import * as express from "express";
 import * as cors from "cors";
 import * as mongoose from "mongoose";
-import * as dotenv from "dotenv";
-import { userRouter, projectRouter, applicationRouter } from "./routers";
+import * as path from "path";
+import backendRouter from "./routers";
 import serviceAccount from "./serviceAccount";
 import * as admin from "firebase-admin";
-
-dotenv.config();
 
 class App {
   public app: express.Application;
@@ -17,10 +15,14 @@ class App {
     this.config();
     this.setupMongo();
 
-    // add all router routes to express app
-    this.app.use("/users", userRouter);
-    this.app.use("/projects", projectRouter);
-    this.app.use("/applications", applicationRouter);
+    this.app.use('/api', backendRouter);
+    if (process.env.NODE_ENV === 'production') {
+      // __dirname == /server/dist/
+      this.app.use(express.static(path.join(__dirname, '../../client/build/')));
+      this.app.get('*', (req, res) => {
+        res.sendFile(path.join(__dirname, '../../client/build/'))
+      })
+    }
   }
 
   private config(): void {

@@ -1,5 +1,5 @@
 import axios from "axios";
-import { auth } from "./config/fbConfig";
+import { auth } from "./firebase";
 
 // Axios interceptor that adds the JWT header to each axios request
 axios.interceptors.request.use(

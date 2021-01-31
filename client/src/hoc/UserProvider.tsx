@@ -1,6 +1,6 @@
 import React, { useEffect } from "react";
 import { connect } from "react-redux";
-import { auth } from "../config/fbConfig";
+import { auth } from "../firebase";
 import { fetchUser, logout } from "../store/auth/auth.actions";
 
 const UserProvider = (props) => {
