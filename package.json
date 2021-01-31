@@ -2,18 +2,20 @@
   "name": "ali-site",
   "version": "1.0.0",
   "description": "Applied Learning Initiative",
+  "engines": {
+    "node": "12.18.3"
+  },
   "scripts": {
-    "install:frontend": "cd client && npm install",
+    "install": "npm run install:backend & npm run install:frontend",
     "install:backend": "cd server && npm install",
-    "install": "npm run install:backend && npm run install:frontend",
-    "build:frontend": "cd client && npm run build",
+    "install:frontend": "cd client && npm install",
+    "build": "npm run build:backend & npm run build:frontend",
     "build:backend": "cd server && npm run build",
-    "build": "npm run build:backend && npm run build:frontend",
-    "start:frontend": "cd client && npm start",
-    "start:backend": "cd server && npm start",
+    "build:frontend": "cd client && npm run build",
     "start": "npm run start:backend & npm run start:frontend",
-    "prod": "npm run build && npm start",
-    "test": "echo \"Error: no test specified\" && exit 1"
+    "start:backend": "cd server && npm start",
+    "start:frontend": "cd client && npm start",
+    "start:prod": "cd server && npm run start:prod"
   },
   "repository": {
     "type": "git",

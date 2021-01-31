@@ -5,11 +5,6 @@ import "./axios-interceptors";
 import "firebase/auth";
 import store from "./store";
 import App from "./App";
-import axios from "axios";
-
-// axios.defaults.baseURL = "https://applied-learning-initiat-dfcfe.web.app/";
-// axios.defaults.baseURL = "http://localhost:5000";
-axios.defaults.baseURL = "https://appliedlearninginitiative.herokuapp.com";
 
 ReactDOM.render(
   <Provider store={store}>

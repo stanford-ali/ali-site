@@ -7,9 +7,17 @@ import history from "./history";
 
 const middleware = [thunkMiddleware, routerMiddleware(history)];
 
-const store = createStore(
-  createRootReducer(history),
-  composeWithDevTools(applyMiddleware(...middleware))
-);
+let store;
+if (process.env.NODE_ENV === 'production') {
+  store = createStore(
+    createRootReducer(history),
+    applyMiddleware(...middleware)
+  );
+} else {
+  store = createStore(
+    createRootReducer(history),
+    composeWithDevTools(applyMiddleware(...middleware))
+  );
+}
 
 export default store;

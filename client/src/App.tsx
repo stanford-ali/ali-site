@@ -3,7 +3,7 @@ import { ConnectedRouter } from "connected-react-router";
 import { Switch, Route, Redirect } from "react-router-dom";
 import history from "./history";
 import { useSelector, useDispatch } from "react-redux";
-import { auth } from "./config/fbConfig";
+import { auth } from "./firebase";
 import Home from "./components/Home/Home";
 import Login from "./components/Login/Login";
 import Profile from "./components/Profile/Profile";
@@ -37,8 +37,7 @@ const createUser = async (user) => {
 
   // Create new user in database
   await axios
-    .post(`/users/${user.uid}`, newUser)
-    .then(() => console.log("post is done"))
+    .post(`/api/users/${user.uid}`, newUser)
     .catch((error) => console.log(error));
 };
 
@@ -68,7 +67,7 @@ const App = () => {
       if (user) {
         // See if we need to create the user or fetch the user
         await axios
-          .get(`/users/${user.uid}`)
+          .get(`/api/users/${user.uid}`)
           .catch(() =>
             // Create the user in the DB
             createUser(user)

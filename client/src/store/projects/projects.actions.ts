@@ -9,7 +9,7 @@ import { loadingStart, loadingEnd, throwError } from "../base/base.actions";
 export const fetchProject = (project_id) => async (dispatch) => {
   dispatch(loadingStart());
   await axios
-    .get(`/projects/${project_id}`)
+    .get(`/api/projects/${project_id}`)
     .then((res) => {
       dispatch({
         type: FETCH_PROJECT,
@@ -27,7 +27,7 @@ export const fetchProject = (project_id) => async (dispatch) => {
 export const fetchProjects = () => (dispatch) => {
   dispatch(loadingStart());
   axios
-    .get("/projects")
+    .get("/api/projects")
     .then((res) => {
       dispatch({
         type: FETCH_PROJECTS,
