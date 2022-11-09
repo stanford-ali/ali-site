@@ -21,7 +21,7 @@
     "emailjs-com": "^2.6.4",
     "firebase": "^7.24.0",
     "firebase-admin": "^9.4.2",
-    "node-sass": "^4.14.1",
+    "node-sass": "^8.0.0",
     "qs": "^6.9.6",
     "react": "^16.14.0",
     "react-bootstrap": "^1.4.3",
